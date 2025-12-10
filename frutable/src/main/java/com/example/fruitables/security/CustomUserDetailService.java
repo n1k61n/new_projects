@@ -2,6 +2,7 @@ package com.example.fruitables.security;
 
 
 
+import com.example.fruitables.models.User;
 import com.example.fruitables.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -19,7 +20,7 @@ public class CustomUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        com.example.fruitables.models.User findUser = userRepository.findByEmail(username);
+        User findUser = userRepository.findByEmail(username);
         if (findUser != null) {
             return  new org.springframework.security.core.userdetails.User(
                     findUser.getEmail(),

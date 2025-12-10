@@ -16,7 +16,7 @@ public class AboutController {
 
     @GetMapping("/about")
     public String about(Model model) {
-        AboutResponceDTO aboutResponceDTO = aboutService.getAboutInfo(1l);
+        AboutResponceDTO aboutResponceDTO = aboutService.getAboutInfo();
         model.addAttribute("aboutInfo", aboutResponceDTO);
         return "about";
     }

@@ -6177,3 +6177,234 @@ java.lang.IllegalStateException: Neither BindingResult nor plain target object f
 2025-12-10T14:22:44.239+04:00  INFO 648 --- [ecomerce] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2025-12-10T14:22:44.254+04:00  INFO 648 --- [ecomerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2025-12-10T14:22:44.270+04:00  INFO 648 --- [ecomerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-12-10T14:42:25.855+04:00  INFO 4976 --- [ecomerce] [main] c.e.fruitables.EcomerceApplication       : Starting EcomerceApplication using Java 21.0.9 with PID 4976 (C:\Users\Lenovo\Desktop\_Gihub_Projects\lahiyeler\frutable\target\classes started by Lenovo in C:\Users\Lenovo\Desktop\_Gihub_Projects\lahiyeler\frutable)
+2025-12-10T14:42:25.865+04:00 DEBUG 4976 --- [ecomerce] [main] c.e.fruitables.EcomerceApplication       : Running with Spring Boot v4.0.0, Spring v7.0.1
+2025-12-10T14:42:25.867+04:00  INFO 4976 --- [ecomerce] [main] c.e.fruitables.EcomerceApplication       : No active profile set, falling back to 1 default profile: "default"
+2025-12-10T14:42:28.129+04:00  INFO 4976 --- [ecomerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-12-10T14:42:28.132+04:00  INFO 4976 --- [ecomerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2025-12-10T14:42:28.211+04:00  INFO 4976 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.CartItemRrepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T14:42:28.213+04:00  INFO 4976 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.CartRrepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T14:42:28.216+04:00  INFO 4976 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.CashbackRrepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T14:42:28.218+04:00  INFO 4976 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.CategoryRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T14:42:28.220+04:00  INFO 4976 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.CommnetRrepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T14:42:28.223+04:00  INFO 4976 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.CouponRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T14:42:28.226+04:00  INFO 4976 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.OrderItemRrepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T14:42:28.228+04:00  INFO 4976 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.OrderRrepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T14:42:28.231+04:00  INFO 4976 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.ProductRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T14:42:28.234+04:00  INFO 4976 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.UserRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T14:42:28.236+04:00  INFO 4976 --- [ecomerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 89 ms. Found 0 JDBC repository interfaces.
+2025-12-10T14:42:28.262+04:00  INFO 4976 --- [ecomerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-12-10T14:42:28.263+04:00  INFO 4976 --- [ecomerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-10T14:42:28.465+04:00  INFO 4976 --- [ecomerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 191 ms. Found 10 JPA repository interfaces.
+2025-12-10T14:42:29.802+04:00  INFO 4976 --- [ecomerce] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2025-12-10T14:42:29.856+04:00  INFO 4976 --- [ecomerce] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-10T14:42:29.867+04:00  INFO 4976 --- [ecomerce] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-10T14:42:30.118+04:00  INFO 4976 --- [ecomerce] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 3449 ms
+2025-12-10T14:42:30.771+04:00  INFO 4976 --- [ecomerce] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-10T14:42:30.998+04:00  INFO 4976 --- [ecomerce] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-10T14:42:33.416+04:00  INFO 4976 --- [ecomerce] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-10T14:42:33.482+04:00  INFO 4976 --- [ecomerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-12-10T14:42:33.972+04:00  INFO 4976 --- [ecomerce] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5a06eeef
+2025-12-10T14:42:33.975+04:00  INFO 4976 --- [ecomerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-12-10T14:42:34.073+04:00  WARN 4976 --- [ecomerce] [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-10T14:42:34.133+04:00  INFO 4976 --- [ecomerce] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/fruitabledb]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 17.6
+	Default catalog/schema: fruitabledb/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-10T14:42:42.052+04:00  INFO 4976 --- [ecomerce] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-10T14:42:42.989+04:00  INFO 4976 --- [ecomerce] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-10T14:42:44.208+04:00  INFO 4976 --- [ecomerce] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-10T14:42:45.369+04:00  INFO 4976 --- [ecomerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailService
+2025-12-10T14:42:45.807+04:00  INFO 4976 --- [ecomerce] [main] o.s.b.w.a.WelcomePageHandlerMapping      : Adding welcome page template: index
+2025-12-10T14:42:47.089+04:00  INFO 4976 --- [ecomerce] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2025-12-10T14:42:47.101+04:00  INFO 4976 --- [ecomerce] [main] c.e.fruitables.EcomerceApplication       : Started EcomerceApplication in 23.355 seconds (process running for 24.948)
+2025-12-10T14:44:45.959+04:00  INFO 4976 --- [ecomerce] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-10T14:44:45.966+04:00  INFO 4976 --- [ecomerce] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-12-10T14:44:46.001+04:00  INFO 4976 --- [ecomerce] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 33 ms
+2025-12-10T15:05:23.122+04:00  INFO 4976 --- [ecomerce] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-10T15:05:23.200+04:00  INFO 4976 --- [ecomerce] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2025-12-10T15:05:23.235+04:00  INFO 4976 --- [ecomerce] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-10T15:05:23.276+04:00  INFO 4976 --- [ecomerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-12-10T15:05:23.289+04:00  INFO 4976 --- [ecomerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-12-10T15:06:48.536+04:00  INFO 9472 --- [ecomerce] [main] c.e.fruitables.EcomerceApplication       : Starting EcomerceApplication using Java 21.0.9 with PID 9472 (C:\Users\Lenovo\Desktop\_Gihub_Projects\lahiyeler\frutable\target\classes started by Lenovo in C:\Users\Lenovo\Desktop\_Gihub_Projects\lahiyeler\frutable)
+2025-12-10T15:06:48.605+04:00 DEBUG 9472 --- [ecomerce] [main] c.e.fruitables.EcomerceApplication       : Running with Spring Boot v4.0.0, Spring v7.0.1
+2025-12-10T15:06:48.607+04:00  INFO 9472 --- [ecomerce] [main] c.e.fruitables.EcomerceApplication       : No active profile set, falling back to 1 default profile: "default"
+2025-12-10T15:06:51.565+04:00  INFO 9472 --- [ecomerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-12-10T15:06:51.569+04:00  INFO 9472 --- [ecomerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2025-12-10T15:06:51.713+04:00  INFO 9472 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.CartItemRrepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T15:06:51.717+04:00  INFO 9472 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.CartRrepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T15:06:51.727+04:00  INFO 9472 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.CashbackRrepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T15:06:51.730+04:00  INFO 9472 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.CategoryRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T15:06:51.733+04:00  INFO 9472 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.CommnetRrepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T15:06:51.736+04:00  INFO 9472 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.CouponRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T15:06:51.740+04:00  INFO 9472 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.OrderItemRrepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T15:06:51.743+04:00  INFO 9472 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.OrderRrepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T15:06:51.747+04:00  INFO 9472 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.ProductRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T15:06:51.751+04:00  INFO 9472 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.UserRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T15:06:51.753+04:00  INFO 9472 --- [ecomerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 165 ms. Found 0 JDBC repository interfaces.
+2025-12-10T15:06:51.796+04:00  INFO 9472 --- [ecomerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-12-10T15:06:51.798+04:00  INFO 9472 --- [ecomerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-10T15:06:52.432+04:00  INFO 9472 --- [ecomerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 578 ms. Found 10 JPA repository interfaces.
+2025-12-10T15:06:55.236+04:00  INFO 9472 --- [ecomerce] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2025-12-10T15:06:55.282+04:00  INFO 9472 --- [ecomerce] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-10T15:06:55.283+04:00  INFO 9472 --- [ecomerce] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-10T15:06:55.460+04:00  INFO 9472 --- [ecomerce] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 5907 ms
+2025-12-10T15:06:56.008+04:00  INFO 9472 --- [ecomerce] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-10T15:06:56.222+04:00  INFO 9472 --- [ecomerce] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-10T15:07:02.221+04:00  INFO 9472 --- [ecomerce] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-10T15:07:02.392+04:00  INFO 9472 --- [ecomerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-12-10T15:07:03.145+04:00  INFO 9472 --- [ecomerce] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@38ba8b45
+2025-12-10T15:07:03.149+04:00  INFO 9472 --- [ecomerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-12-10T15:07:03.289+04:00  WARN 9472 --- [ecomerce] [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-10T15:07:03.400+04:00  INFO 9472 --- [ecomerce] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/fruitabledb]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 17.6
+	Default catalog/schema: fruitabledb/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-10T15:07:07.424+04:00  INFO 9472 --- [ecomerce] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-10T15:07:08.103+04:00  INFO 9472 --- [ecomerce] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-10T15:07:08.390+04:00  INFO 9472 --- [ecomerce] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-10T15:07:09.454+04:00  INFO 9472 --- [ecomerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailService
+2025-12-10T15:07:10.027+04:00  INFO 9472 --- [ecomerce] [main] o.s.b.w.a.WelcomePageHandlerMapping      : Adding welcome page template: index
+2025-12-10T15:07:12.391+04:00  INFO 9472 --- [ecomerce] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2025-12-10T15:07:12.423+04:00  INFO 9472 --- [ecomerce] [main] c.e.fruitables.EcomerceApplication       : Started EcomerceApplication in 25.692 seconds (process running for 68.374)
+2025-12-10T15:07:14.143+04:00  INFO 9472 --- [ecomerce] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-10T15:07:14.148+04:00  INFO 9472 --- [ecomerce] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-12-10T15:07:14.155+04:00  INFO 9472 --- [ecomerce] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
+2025-12-10T15:07:53.653+04:00  WARN 9472 --- [ecomerce] [http-nio-8080-exec-4] o.a.c.util.SessionIdGeneratorBase        : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [185] milliseconds.
+2025-12-10T15:07:53.655+04:00  WARN 9472 --- [ecomerce] [http-nio-8080-exec-5] o.a.c.util.SessionIdGeneratorBase        : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [183] milliseconds.
+2025-12-10T15:07:53.654+04:00  WARN 9472 --- [ecomerce] [http-nio-8080-exec-8] o.a.c.util.SessionIdGeneratorBase        : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [179] milliseconds.
+2025-12-10T15:14:32.424+04:00  INFO 9472 --- [ecomerce] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-10T15:14:32.594+04:00  INFO 9472 --- [ecomerce] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2025-12-10T15:14:32.721+04:00  INFO 9472 --- [ecomerce] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-10T15:14:32.862+04:00  INFO 9472 --- [ecomerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-12-10T15:14:32.961+04:00  INFO 9472 --- [ecomerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-12-10T15:22:18.319+04:00  INFO 2992 --- [ecomerce] [main] c.e.fruitables.EcomerceApplication       : Starting EcomerceApplication using Java 21.0.9 with PID 2992 (C:\Users\Lenovo\Desktop\_Gihub_Projects\lahiyeler\frutable\target\classes started by Lenovo in C:\Users\Lenovo\Desktop\_Gihub_Projects\lahiyeler\frutable)
+2025-12-10T15:22:18.341+04:00 DEBUG 2992 --- [ecomerce] [main] c.e.fruitables.EcomerceApplication       : Running with Spring Boot v4.0.0, Spring v7.0.1
+2025-12-10T15:22:18.347+04:00  INFO 2992 --- [ecomerce] [main] c.e.fruitables.EcomerceApplication       : No active profile set, falling back to 1 default profile: "default"
+2025-12-10T15:22:21.500+04:00  INFO 2992 --- [ecomerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-12-10T15:22:21.504+04:00  INFO 2992 --- [ecomerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2025-12-10T15:22:21.780+04:00  INFO 2992 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.CartItemRrepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T15:22:21.784+04:00  INFO 2992 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.CartRrepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T15:22:21.789+04:00  INFO 2992 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.CashbackRrepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T15:22:21.793+04:00  INFO 2992 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.CategoryRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T15:22:21.798+04:00  INFO 2992 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.CommnetRrepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T15:22:21.804+04:00  INFO 2992 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.CouponRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T15:22:21.811+04:00  INFO 2992 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.OrderItemRrepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T15:22:21.816+04:00  INFO 2992 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.OrderRrepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T15:22:21.821+04:00  INFO 2992 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.ProductRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T15:22:21.826+04:00  INFO 2992 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.UserRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T15:22:21.828+04:00  INFO 2992 --- [ecomerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 276 ms. Found 0 JDBC repository interfaces.
+2025-12-10T15:22:21.863+04:00  INFO 2992 --- [ecomerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-12-10T15:22:21.865+04:00  INFO 2992 --- [ecomerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-10T15:22:22.111+04:00  INFO 2992 --- [ecomerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 230 ms. Found 10 JPA repository interfaces.
+2025-12-10T15:22:32.693+04:00  INFO 2992 --- [ecomerce] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2025-12-10T15:22:33.459+04:00  INFO 2992 --- [ecomerce] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-10T15:22:33.463+04:00  INFO 2992 --- [ecomerce] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-10T15:22:33.888+04:00  INFO 2992 --- [ecomerce] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 14644 ms
+2025-12-10T15:22:35.113+04:00  INFO 2992 --- [ecomerce] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-10T15:22:35.474+04:00  INFO 2992 --- [ecomerce] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-10T15:22:37.166+04:00  INFO 2992 --- [ecomerce] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-10T15:22:37.500+04:00  INFO 2992 --- [ecomerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-12-10T15:22:38.383+04:00  INFO 2992 --- [ecomerce] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1f19d423
+2025-12-10T15:22:38.388+04:00  INFO 2992 --- [ecomerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-12-10T15:22:38.584+04:00  WARN 2992 --- [ecomerce] [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-10T15:22:38.668+04:00  INFO 2992 --- [ecomerce] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/fruitabledb]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 17.6
+	Default catalog/schema: fruitabledb/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-10T15:22:41.396+04:00  INFO 2992 --- [ecomerce] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-10T15:22:42.899+04:00  INFO 2992 --- [ecomerce] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-10T15:22:43.480+04:00  INFO 2992 --- [ecomerce] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-10T15:22:44.537+04:00  INFO 2992 --- [ecomerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailService
+2025-12-10T15:22:48.947+04:00  INFO 2992 --- [ecomerce] [main] o.s.b.w.a.WelcomePageHandlerMapping      : Adding welcome page template: index
+2025-12-10T15:22:50.345+04:00  INFO 2992 --- [ecomerce] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2025-12-10T15:22:50.356+04:00  INFO 2992 --- [ecomerce] [main] c.e.fruitables.EcomerceApplication       : Started EcomerceApplication in 33.904 seconds (process running for 35.295)
+2025-12-10T15:22:50.503+04:00  INFO 2992 --- [ecomerce] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-10T15:22:50.505+04:00  INFO 2992 --- [ecomerce] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-12-10T15:22:50.516+04:00  INFO 2992 --- [ecomerce] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 11 ms
+2025-12-10T15:27:00.648+04:00  INFO 2992 --- [ecomerce] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-10T15:27:00.660+04:00  INFO 2992 --- [ecomerce] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2025-12-10T15:27:00.670+04:00  INFO 2992 --- [ecomerce] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-10T15:27:00.676+04:00  INFO 2992 --- [ecomerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-12-10T15:27:00.704+04:00  INFO 2992 --- [ecomerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-12-10T16:09:04.798+04:00  INFO 9108 --- [ecomerce] [main] c.e.fruitables.EcomerceApplication       : Starting EcomerceApplication using Java 21.0.9 with PID 9108 (C:\Users\Lenovo\Desktop\_Gihub_Projects\lahiyeler\frutable\target\classes started by Lenovo in C:\Users\Lenovo\Desktop\_Gihub_Projects\lahiyeler\frutable)
+2025-12-10T16:09:04.809+04:00 DEBUG 9108 --- [ecomerce] [main] c.e.fruitables.EcomerceApplication       : Running with Spring Boot v4.0.0, Spring v7.0.1
+2025-12-10T16:09:04.813+04:00  INFO 9108 --- [ecomerce] [main] c.e.fruitables.EcomerceApplication       : No active profile set, falling back to 1 default profile: "default"
+2025-12-10T16:09:09.665+04:00  INFO 9108 --- [ecomerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-12-10T16:09:09.669+04:00  INFO 9108 --- [ecomerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2025-12-10T16:09:09.822+04:00  INFO 9108 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.CartItemRrepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T16:09:09.825+04:00  INFO 9108 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.CartRrepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T16:09:09.829+04:00  INFO 9108 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.CashbackRrepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T16:09:09.831+04:00  INFO 9108 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.CategoryRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T16:09:09.834+04:00  INFO 9108 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.CommnetRrepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T16:09:09.837+04:00  INFO 9108 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.CouponRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T16:09:09.840+04:00  INFO 9108 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.OrderItemRrepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T16:09:09.843+04:00  INFO 9108 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.OrderRrepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T16:09:09.852+04:00  INFO 9108 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.ProductRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T16:09:09.856+04:00  INFO 9108 --- [ecomerce] [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.example.fruitables.repositories.UserRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-12-10T16:09:09.858+04:00  INFO 9108 --- [ecomerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 172 ms. Found 0 JDBC repository interfaces.
+2025-12-10T16:09:09.935+04:00  INFO 9108 --- [ecomerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-12-10T16:09:09.939+04:00  INFO 9108 --- [ecomerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-10T16:09:10.459+04:00  INFO 9108 --- [ecomerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 499 ms. Found 10 JPA repository interfaces.
+2025-12-10T16:09:14.407+04:00  INFO 9108 --- [ecomerce] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2025-12-10T16:09:14.451+04:00  INFO 9108 --- [ecomerce] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-10T16:09:14.452+04:00  INFO 9108 --- [ecomerce] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-10T16:09:14.679+04:00  INFO 9108 --- [ecomerce] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 8449 ms
+2025-12-10T16:09:15.429+04:00  INFO 9108 --- [ecomerce] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-10T16:09:15.586+04:00  INFO 9108 --- [ecomerce] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-10T16:09:18.613+04:00  INFO 9108 --- [ecomerce] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-10T16:09:21.307+04:00  INFO 9108 --- [ecomerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-12-10T16:09:22.407+04:00  INFO 9108 --- [ecomerce] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@104bc677
+2025-12-10T16:09:22.444+04:00  INFO 9108 --- [ecomerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-12-10T16:09:23.322+04:00  WARN 9108 --- [ecomerce] [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-10T16:09:23.448+04:00  INFO 9108 --- [ecomerce] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/fruitabledb]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 17.6
+	Default catalog/schema: fruitabledb/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-10T16:09:27.294+04:00  INFO 9108 --- [ecomerce] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-10T16:09:27.868+04:00  INFO 9108 --- [ecomerce] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-10T16:09:28.053+04:00  INFO 9108 --- [ecomerce] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-10T16:09:29.222+04:00  INFO 9108 --- [ecomerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailService
+2025-12-10T16:09:29.770+04:00  INFO 9108 --- [ecomerce] [main] o.s.b.w.a.WelcomePageHandlerMapping      : Adding welcome page template: index
+2025-12-10T16:09:31.335+04:00  INFO 9108 --- [ecomerce] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2025-12-10T16:09:31.347+04:00  INFO 9108 --- [ecomerce] [main] c.e.fruitables.EcomerceApplication       : Started EcomerceApplication in 30.792 seconds (process running for 34.096)
+2025-12-10T16:09:34.180+04:00  INFO 9108 --- [ecomerce] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-10T16:09:34.181+04:00  INFO 9108 --- [ecomerce] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-12-10T16:09:34.183+04:00  INFO 9108 --- [ecomerce] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-12-10T16:10:27.131+04:00  INFO 9108 --- [ecomerce] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-10T16:10:27.143+04:00  INFO 9108 --- [ecomerce] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2025-12-10T16:10:27.155+04:00  INFO 9108 --- [ecomerce] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-10T16:10:27.172+04:00  INFO 9108 --- [ecomerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-12-10T16:10:27.220+04:00  INFO 9108 --- [ecomerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

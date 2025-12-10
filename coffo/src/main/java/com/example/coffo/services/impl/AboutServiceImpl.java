@@ -21,15 +21,13 @@ public class AboutServiceImpl implements AboutService {
 
 
     @Override
-    public AboutResponceDTO getAboutInfo(long id) {
-        Optional<About> aboutOptional = aboutRepository.findById(id);
-        if (aboutOptional.isPresent()) {
-            About aboutEntity = aboutOptional.get();
-            return modelMapper.map(aboutEntity, AboutResponceDTO.class);
+    public AboutResponceDTO getAboutInfo() {
+        About about = aboutRepository.findAll().stream().findFirst().orElse(null);
+        if(about != null){
+            return modelMapper.map(about, AboutResponceDTO.class);
+        }else {
+            return null;
         }
-        return null;
-
-
     }
 
     @Override
@@ -45,9 +43,12 @@ public class AboutServiceImpl implements AboutService {
 
     @Override
     public AboutResponceDTO updateAboutInfo(long id, AboutResponceDTO aboutResponceDTO) {
-        About  about = modelMapper.map(aboutResponceDTO, About.class);
-        about.setId(id);
-        About savedAbout = aboutRepository.save(about);
+        About existingAbout = aboutRepository.findById(id).orElse(null);
+        if (existingAbout == null) {
+            return null;
+        }
+        modelMapper.map(aboutResponceDTO, existingAbout);
+        About savedAbout = aboutRepository.save(existingAbout);
         return modelMapper.map(savedAbout, AboutResponceDTO.class);
     }
 
