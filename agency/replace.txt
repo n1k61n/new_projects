@@ -1,0 +1,11 @@
+-Configure
+	WebSocketConfig
+		/chat - /ws - /chat
+		/topic - /user
+
+-Model
+	MessageModel - ChatMessage
+
+
+-Controller
+	MessageController - ChatController

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{dashboard/layout}" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>SB Admin 2 - Contacts</title>
+</head>
+
+<body id="page-top">
+
+<div id="wrapper">
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+
+            <div layout:fragment="content" class="container-fluid">
+
+                <a class="btn btn-primary mb-3" href="/dashboard/contact/create.html">Create</a>
+                <div class="card mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Contacts</h6>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                            <tr style="background-color: black; color: white;">
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                            <tr th:each="contact, i: ${contacts}">
+                                <td th:text="${i.index+1}">1</td>
+                                <td th:text="${contact.name}">Mark</td>
+                                <td th:text="${contact.email}">mark@example.com</td>
+                                <td th:text="${contact.phone}">0501234567</td>
+                                <td>
+                                    <a class="btn btn-primary btn-sm" th:href="'/dashboard/contact/update/' + ${contact.id}">Edit</a>
+
+                                    <a class="btn btn-danger btn-sm"
+                                       th:data-id="${contact.id}"
+                                       th:data-name="${contact.name}"
+                                       onclick="deleteContact(this)">
+                                        Delete
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
