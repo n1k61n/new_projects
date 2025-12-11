@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:layout="http://www.w3.org/1999/xhtml"
-      layout:decorate="~{layout}">
+      layout:decorate="~{layout}" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <!-- basic -->
     <meta charset="utf-8">
@@ -27,22 +27,13 @@
                 </div>
             </div>
             <div class="blog_section_2">
-                <div class="row">
-                    <div class="col-md-6">
+                <div class="row" >
+                    <div class="col-md-6" th:each="blog : ${blogs}">
                         <div class="blog_box">
-                            <div class="blog_img"><img src="/front/images/blog-img1.png"></div>
-                            <h4 class="date_text">05 April</h4>
-                            <h4 class="prep_text">PREP TECHNIQUES Coffee</h4>
-                            <p class="lorem_text">distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a moredistracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more</p>
-                        </div>
-                        <div class="read_btn"><a href="#">Read More</a></div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="blog_box">
-                            <div class="blog_img"><img src="/front/images/blog-img2.png"></div>
-                            <h4 class="date_text">05 April</h4>
-                            <h4 class="prep_text">Enjoy Best Coffee</h4>
-                            <p class="lorem_text">distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a moredistracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more</p>
+                            <div class="blog_img"><img th:src="${blog.imageUrl}"></div>
+                            <h4 class="date_text" th:text="${blog.createdAt}">05 April</h4>
+                            <h4 class="prep_text" th:text="${blog.title}">PREP TECHNIQUES Coffee</h4>
+                            <p class="lorem_text" th:text="${blog.description}">distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a moredistracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more</p>
                         </div>
                         <div class="read_btn"><a href="#">Read More</a></div>
                     </div>

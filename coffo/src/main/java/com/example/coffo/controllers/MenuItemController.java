@@ -3,6 +3,7 @@ package com.example.coffo.controllers;
 import com.example.coffo.services.MenuItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
@@ -11,7 +12,8 @@ public class MenuItemController {
     private final MenuItemService menuItemService;
 
     @GetMapping("/coffees")
-    public String coffees() {
+    public String coffees(Model model) {
+        model.addAttribute("menuItems", menuItemService.menuItems());
         return "coffees";
     }
 

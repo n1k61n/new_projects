@@ -11,10 +11,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.lang.model.element.ModuleElement;
+
+
 @Controller
 @RequiredArgsConstructor
 public class AuthController {
     private final UserService userService;
+
 
     @GetMapping("/login")
     public String login(){
@@ -30,8 +34,9 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String register(@Valid  RegisterDto registerDto, BindingResult result){
+    public String register(@Valid  RegisterDto registerDto, BindingResult result, Model model){
         if (result.hasErrors()){
+            model.addAttribute("registerDto", registerDto);
             return "/auth/register";
         }
 
@@ -43,7 +48,7 @@ public class AuthController {
 
     @GetMapping("/forgot-password")
     public String forgot(){
-        return "/auth/forgot.html";
+        return "/auth/forgot-password";
     }
 
 }

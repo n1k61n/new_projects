@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -54,6 +55,12 @@ public class BlogServiceImpl implements BlogService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public List<BlogResponceDTO> getAllBlogs() {
+        return blogRepository.findAll().stream().map(blog ->
+                        modelMapper.map(blog, BlogResponceDTO.class)).toList();
     }
 }
 

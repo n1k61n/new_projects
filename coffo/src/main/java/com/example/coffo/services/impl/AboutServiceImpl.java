@@ -51,7 +51,7 @@ public class AboutServiceImpl implements AboutService {
     public AboutResponceDTO updateAboutInfo(long id, AboutResponceDTO aboutResponceDTO) {
         About existingAbout = aboutRepository.findById(id).orElse(null);
         if (existingAbout == null) {
-            return createAboutInfo(aboutResponceDTO);
+            return null;
         }
         existingAbout.setDescription(aboutResponceDTO.getDescription());
         existingAbout.setImageUrl(aboutResponceDTO.getImageUrl());

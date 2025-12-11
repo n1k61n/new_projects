@@ -22,13 +22,10 @@ public class Blog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String title;
-
     private String description;
     @Column(name="image_url")
     private String imageUrl;
-    @Column(name="created_at")
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
-
 }

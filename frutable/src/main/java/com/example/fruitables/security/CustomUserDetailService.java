@@ -4,6 +4,7 @@ package com.example.fruitables.security;
 import com.example.fruitables.models.User;
 import com.example.fruitables.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CustomUserDetailService implements UserDetailsService {
 
+    @Autowired
     private final UserRepository userRepository;
 
     @Override
@@ -32,4 +34,7 @@ public class CustomUserDetailService implements UserDetailsService {
         }
         throw new UsernameNotFoundException("User not found with username: " + username);
     }
+
+
+
 }
