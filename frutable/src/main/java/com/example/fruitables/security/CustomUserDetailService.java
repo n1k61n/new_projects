@@ -1,16 +1,13 @@
 package com.example.fruitables.security;
 
 
-
 import com.example.fruitables.models.User;
 import com.example.fruitables.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
 
 @Service
 @RequiredArgsConstructor
@@ -22,7 +19,7 @@ public class CustomUserDetailService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User findUser = userRepository.findByEmail(username);
         if (findUser != null) {
-            return  new org.springframework.security.core.userdetails.User(
+            org.springframework.security.core.userdetails.User loggedUser =  new org.springframework.security.core.userdetails.User(
                     findUser.getEmail(),
                     findUser.getPassword(),
                     findUser.isEnabled(),
@@ -31,6 +28,7 @@ public class CustomUserDetailService implements UserDetailsService {
                     findUser.isAccountNonLocked(),
                     findUser.getAuthorities()
             );
+            return loggedUser;
         }
         throw new UsernameNotFoundException("User not found with username: " + username);
     }

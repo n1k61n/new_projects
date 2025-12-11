@@ -41,10 +41,9 @@ public class BlogServiceImpl implements BlogService {
         if (existingBlog == null) {
             return null;
         }
-
         modelMapper.map(blogResponceDTO, existingBlog);
+        existingBlog.setId(id);
         Blog savedBlog = blogRepository.save(existingBlog);
-
         return modelMapper.map(savedBlog, BlogResponceDTO.class);
     }
 
