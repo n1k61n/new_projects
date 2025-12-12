@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -68,5 +69,20 @@ public class MenuItemServiceImpl implements MenuItemService {
     public List<MenuItemResponceDTO> getAllItems() {
         return repository.findAll().stream().map(menuItem ->
                 modelMapper.map(menuItem, MenuItemResponceDTO.class)).toList();
+    }
+
+    @Override
+    public  List<List<MenuItemResponceDTO>> getAllItems(int size) {
+        List<List<MenuItemResponceDTO>> groupedLists = new ArrayList<>();
+        if (size <= 0) {
+            return groupedLists;
+        }
+
+        for(int i = 0; i < getAllItems().size(); i += size){
+            int endIndex = i + size;//Math.min(i + size, getAllItems().size());
+            List<MenuItemResponceDTO> chunk = getAllItems().subList(i, endIndex);
+            groupedLists.add(chunk);
+        }
+        return  groupedLists;
     }
 }

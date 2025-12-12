@@ -29,11 +29,6 @@ public class HomeController {
         model.addAttribute("testimonials", testimonialResponceDTOS);
         return "index";
     }
-
-
-
-
-
 }
 
 
