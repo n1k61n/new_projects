@@ -11,4 +11,7 @@ public interface MenuItemService {
     MenuItemResponceDTO updateMenuItem(Long id, MenuItemResponceDTO menuItemResponceDTO);
     boolean deleteMenuItem(Long id);
     MenuItemResponceDTO getMenuItemById(Long id);
+
+
+    List<MenuItemResponceDTO> getAllItems();
 }

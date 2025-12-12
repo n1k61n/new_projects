@@ -63,4 +63,10 @@ public class MenuItemServiceImpl implements MenuItemService {
         }
         return modelMapper.map(menuItem, MenuItemResponceDTO.class);
     }
+
+    @Override
+    public List<MenuItemResponceDTO> getAllItems() {
+        return repository.findAll().stream().map(menuItem ->
+                modelMapper.map(menuItem, MenuItemResponceDTO.class)).toList();
+    }
 }

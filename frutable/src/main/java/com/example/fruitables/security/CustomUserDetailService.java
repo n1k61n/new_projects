@@ -17,23 +17,51 @@ public class CustomUserDetailService implements UserDetailsService {
     @Autowired
     private final UserRepository userRepository;
 
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        User findUser = userRepository.findByEmail(username);
+//        if (findUser != null) {
+//            org.springframework.security.core.userdetails.User loggedUser =  new org.springframework.security.core.userdetails.User(
+//                    findUser.getEmail(),
+//                    findUser.getPassword(),
+//                    findUser.isEnabled(),
+//                    findUser.isAccountNonExpired(),
+//                    findUser.isCredentialsNonExpired(),
+//                    findUser.isAccountNonLocked(),
+//                    findUser.getAuthorities()
+//            );
+//            return loggedUser;
+//        }
+//        throw new UsernameNotFoundException("User not found with username: " + username);
+//    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User findUser = userRepository.findByEmail(username);
-        if (findUser != null) {
-            org.springframework.security.core.userdetails.User loggedUser =  new org.springframework.security.core.userdetails.User(
-                    findUser.getEmail(),
-                    findUser.getPassword(),
-                    findUser.isEnabled(),
-                    findUser.isAccountNonExpired(),
-                    findUser.isCredentialsNonExpired(),
-                    findUser.isAccountNonLocked(),
-                    findUser.getAuthorities()
-            );
-            return loggedUser;
+
+        User user = userRepository.findByEmail(username);
+
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found: " + username);
         }
-        throw new UsernameNotFoundException("User not found with username: " + username);
+
+        if (user.getRoles() == null || user.getRoles().isEmpty()) {
+            throw new IllegalArgumentException("User has no roles assigned");
+        }
+
+        return org.springframework.security.core.userdetails.User
+                .withUsername(user.getEmail())
+                .password(user.getPassword())
+                .authorities(user.getAuthorities())
+                .accountExpired(!user.isAccountNonExpired())
+                .accountLocked(!user.isAccountNonLocked())
+                .credentialsExpired(!user.isCredentialsNonExpired())
+                .disabled(!user.isEnabled())
+                .build();
     }
+
+
+
+
 
 
 

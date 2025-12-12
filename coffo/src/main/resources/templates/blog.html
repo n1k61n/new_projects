@@ -31,7 +31,7 @@
                     <div class="col-md-6" th:each="blog : ${blogs}">
                         <div class="blog_box">
                             <div class="blog_img"><img th:src="${blog.imageUrl}"></div>
-                            <h4 class="date_text" th:text="${blog.createdAt}">05 April</h4>
+                            <h4 class="date_text" th:text="${#temporals.format(blog.createdAt,'dd-MMM', new java.util.Locale('en'))}">05 April</h4>
                             <h4 class="prep_text" th:text="${blog.title}">PREP TECHNIQUES Coffee</h4>
                             <p class="lorem_text" th:text="${blog.description}">distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a moredistracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more</p>
                         </div>

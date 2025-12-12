@@ -22,7 +22,7 @@ public class AuthController {
 
     @GetMapping("/login")
     public String login(){
-        return "/auth/login";
+        return "auth/login";
     }
 
 
@@ -37,7 +37,7 @@ public class AuthController {
     public String register(@Valid  RegisterDto registerDto, BindingResult result, Model model){
         if (result.hasErrors()){
             model.addAttribute("registerDto", registerDto);
-            return "/auth/register";
+            return "auth/register";
         }
 
         userService.registerUser(registerDto);
@@ -48,7 +48,7 @@ public class AuthController {
 
     @GetMapping("/forgot-password")
     public String forgot(){
-        return "/auth/forgot-password";
+        return "auth/forgot-password";
     }
 
 }
