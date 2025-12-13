@@ -14,54 +14,27 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CustomUserDetailService implements UserDetailsService {
 
-    @Autowired
     private final UserRepository userRepository;
-
-//    @Override
-//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        User findUser = userRepository.findByEmail(username);
-//        if (findUser != null) {
-//            org.springframework.security.core.userdetails.User loggedUser =  new org.springframework.security.core.userdetails.User(
-//                    findUser.getEmail(),
-//                    findUser.getPassword(),
-//                    findUser.isEnabled(),
-//                    findUser.isAccountNonExpired(),
-//                    findUser.isCredentialsNonExpired(),
-//                    findUser.isAccountNonLocked(),
-//                    findUser.getAuthorities()
-//            );
-//            return loggedUser;
-//        }
-//        throw new UsernameNotFoundException("User not found with username: " + username);
-//    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-        User user = userRepository.findByEmail(username);
-
-        if (user == null) {
+        User findUser = userRepository.findByEmail(username).orElse(null);
+        if (findUser == null) {
             throw new UsernameNotFoundException("User not found: " + username);
         }
-
-        if (user.getRoles() == null || user.getRoles().isEmpty()) {
+        if (findUser.getRoles() == null || findUser.getRoles().isEmpty()) {
             throw new IllegalArgumentException("User has no roles assigned");
         }
 
-        return org.springframework.security.core.userdetails.User
-                .withUsername(user.getEmail())
-                .password(user.getPassword())
-                .authorities(user.getAuthorities())
-                .accountExpired(!user.isAccountNonExpired())
-                .accountLocked(!user.isAccountNonLocked())
-                .credentialsExpired(!user.isCredentialsNonExpired())
-                .disabled(!user.isEnabled())
-                .build();
+        return new org.springframework.security.core.userdetails.User(
+                findUser.getEmail(),
+                findUser.getPassword(),
+                findUser.isEnabled(),
+                findUser.isAccountNonExpired(),
+                findUser.isCredentialsNonExpired(),
+                findUser.isAccountNonLocked(),
+                findUser.getAuthorities());
     }
-
-
-
-
 
 
 

@@ -30,6 +30,7 @@ public class ChatMessage {
     @Column(name = "timestamp")
     private Date timestamp;
     @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private MessageStatus status;
 
 }

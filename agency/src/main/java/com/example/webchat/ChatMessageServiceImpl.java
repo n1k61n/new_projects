@@ -6,11 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class ChatMessageServiceImpl implements ChatRoomService {
+public class ChatMessageServiceImpl implements ChatMessageService {
 
     @Autowired
     private ChatMessageRepository repository;
@@ -18,17 +17,20 @@ public class ChatMessageServiceImpl implements ChatRoomService {
     private ChatRoomService chatRoomService;
 
 
+    @Override
     public ChatMessage save(ChatMessage chatMessage) {
         chatMessage.setStatus(MessageStatus.RECEIVED);
         repository.save(chatMessage);
         return chatMessage;
     }
 
-    public long countNewMessages(String senderId, String recipientId) {
+    @Override
+    public Long countNewMessages(String senderId, String recipientId) {
         return repository.countBySenderIdAndRecipientIdAndStatus(
                 senderId, recipientId, MessageStatus.RECEIVED);
     }
 
+    @Override
     public List<ChatMessage> findChatMessages(String senderId, String recipientId) {
         var chatId = chatRoomService.getChatId(senderId, recipientId, false);
 
@@ -42,6 +44,7 @@ public class ChatMessageServiceImpl implements ChatRoomService {
         return messages;
     }
 
+    @Override
     public ChatMessage findById(String id) {
         return repository
                 .findById(id)
@@ -50,9 +53,10 @@ public class ChatMessageServiceImpl implements ChatRoomService {
                     return repository.save(chatMessage);
                 })
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("can't find message (" + id + ")"));
+                        new ResourceNotFoundException("Event cant find message (" + id + ")"));
     }
 
+    @Override
     public boolean updateStatuses(String senderId, String recipientId, MessageStatus status) {
         var chatId = chatRoomService.getChatId(senderId, recipientId, false);
 
@@ -64,8 +68,30 @@ public class ChatMessageServiceImpl implements ChatRoomService {
         return false;
     }
 
+
+    // Inside your Service class
+    public void updateStatus(Long id, String newStatus) {
+        repository.findById(String.valueOf(id)).ifPresent(message -> {
+            message.setStatus(MessageStatus.valueOf(newStatus));
+            repository.save(message); // Spring handles the update automatically
+        });
+    }
+
     @Override
-    public Optional<String> getChatId(String senderId, String recipientId, boolean createIfNotExist) {
-        return chatRoomService.getChatId(senderId, recipientId, createIfNotExist);
+    public List<String> findChatUsers(String adminId) {
+        // Find all unique senderId's where recipientId is adminId
+        List<String> senderIds = repository.findDistinctSenderIdByRecipientId(adminId);
+        // Find all unique recipientId's where senderId is adminId
+        List<String> recipientIds = repository.findDistinctRecipientIdBySenderId(adminId);
+
+        // Combine and get unique user IDs, excluding the admin's own ID
+        List<String> chatUsers = new ArrayList<>();
+        chatUsers.addAll(senderIds);
+        chatUsers.addAll(recipientIds);
+
+        return chatUsers.stream()
+                .distinct()
+                .filter(id -> !id.equals(adminId))
+                .collect(java.util.stream.Collectors.toList());
     }
 }

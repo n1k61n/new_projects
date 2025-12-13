@@ -7,8 +7,9 @@ import com.example.agency.repositories.EventRepository;
 import com.example.agency.services.EventService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
 
-
+@Service
 @RequiredArgsConstructor
 public class EventServiceImpl implements EventService {
     private final EventRepository repository;
@@ -22,7 +23,7 @@ public class EventServiceImpl implements EventService {
     public EventResponceDTO getEventById(Long id) {
         // ID ile veritabanından varlığı (entity) getir
         Event entity = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Event", "id", id));
+                .orElseThrow(() -> new ResourceNotFoundException("can't find message (" + id + ")"));
 
         // Varlığı DTO'ya dönüştür ve döndür
         return modelMapper.map(entity, EventResponceDTO.class);
@@ -52,7 +53,7 @@ public class EventServiceImpl implements EventService {
     public EventResponceDTO updateEvent(Long id, EventResponceDTO dto) {
         // Güncellenecek mevcut varlığı ID ile bul
         Event existingEntity = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Event", "id", id));
+                .orElseThrow(() -> new ResourceNotFoundException("Event not found with id: (" + id + ")"));
 
         // Gelen DTO'daki alanları mevcut varlığa aktar (ModelMapper burada yardımcı olur)
         // ID'yi korumak önemlidir. ModelMapper genellikle hedef nesneye (existingEntity) map yapar.

@@ -1,0 +1,155 @@
+#chatWidget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+#chatToggleBtn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s;
+}
+
+#chatToggleBtn i {
+    color: white;
+    font-size: 24px;
+}
+
+#chatWindow {
+    display: none;
+    position: absolute;
+    bottom: 80px;
+    right: 0;
+    width: 350px;
+    height: 500px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 40px rgba(0,0,0,0.16);
+    overflow: hidden;
+    flex-direction: column;
+}
+
+#userNameForm {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#userNameForm div {
+    text-align: center;
+}
+
+#userNameForm h5 {
+    margin: 0 0 10px 0;
+    color: #667eea;
+}
+
+#userNameForm p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+}
+
+#userNameInput {
+    padding: 12px 15px;
+    border: 2px solid #667eea;
+    border-radius: 8px;
+    outline: none;
+    font-size: 14px;
+}
+
+#startChatBtn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#chatInterface {
+    display: none;
+    flex-direction: column;
+    height: 100%;
+}
+
+#chatInterface > div:first-child {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#chatInterface h5 {
+    margin: 0;
+    font-size: 18px;
+}
+
+#chatInterface small {
+    opacity: 0.9;
+}
+
+#chatCloseBtn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+}
+
+#chatMessages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background: #f5f5f5;
+}
+
+#chatMessages > div:first-child {
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+#chatInput {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    outline: none;
+    font-size: 14px;
+}
+
+#chatSendBtn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#chatSendBtn i {
+    color: white;
+}

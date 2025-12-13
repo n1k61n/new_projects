@@ -4,14 +4,18 @@ import com.example.fruitables.dtos.auth.RegisterDto;
 import com.example.fruitables.models.User;
 import com.example.fruitables.repositories.UserRepository;
 import com.example.fruitables.services.UserService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-@Service
-@RequiredArgsConstructor
+import java.util.Optional;
 
+@Service
+@Transactional
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -20,19 +24,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean registerUser(RegisterDto registerDto) {
-        try {
-            User findUser = userRepository.findByEmail(registerDto.getEmail());
-            if (findUser == null) {
-                User user = new User();
-                user.setName(registerDto.getName());
-                user.setSurname(registerDto.getSurname());
-                user.setEmail(registerDto.getEmail());
-                user.setPassword(passwordEncoder.encode(registerDto.getPassword()));
-                userRepository.save(user);
-                return true;
-            }
+        Optional<User> existingUser = userRepository.findByEmail(registerDto.getEmail());
+        if (existingUser.isPresent()) {
             return false;
-        }catch (Exception e) {
+        }
+        User newUser = modelMapper.map(registerDto, User.class);
+        String encodedPassword = passwordEncoder.encode(registerDto.getPassword());
+        newUser.setPassword(encodedPassword);
+        try {
+            userRepository.save(newUser);
+            return true;
+        } catch (DataIntegrityViolationException e) {
+            System.err.println("Qeydiyyat zamanı məlumat bazası bütövlüyü pozuntusu: " + e.getMessage());
+            return false;
+        } catch (Exception e) {
+            System.err.println("Gözlənilməyən xəta: " + e.getMessage());
             return false;
         }
     }

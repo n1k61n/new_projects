@@ -46,8 +46,8 @@
 
                         <div class="input-area">
                             <input type="text" id="messageInput" class="message-input" placeholder="Mesajınızı yazın...">
-                            <input type="hidden" id="senderId" value="user1">
-                            <input type="hidden" id="senderName" value="Current User">
+                            <input type="hidden" id="senderId" value="admin">
+                            <input type="hidden" id="senderName" value="Admin">
                             <input type="hidden" id="recipientId" value="">
                             <button class="send-button" id="sendButton" type="button">SEND</button>
                         </div>
@@ -77,13 +77,20 @@
                             console.log('Connected: ' + frame);
 
                             // Subscribe to receive messages
-                            const senderId = document.getElementById('senderId').value;
+                            const senderId = document.getElementById('senderId').value; // This is the admin's ID
                             stompClient.subscribe('/user/' + senderId + '/queue/messages', function(message) {
                                 console.log('Received message:', message.body);
                                 const chatMessage = JSON.parse(message.body);
-                                // Only show if it's from the current chat recipient
-                                if (currentRecipientId && chatMessage.senderId === currentRecipientId) {
-                                    showMessage(chatMessage, false);
+                                const adminId = document.getElementById('senderId').value;
+
+                                // If the message is for the admin
+                                if (chatMessage.recipientId === adminId) {
+                                    showMessage(chatMessage, false); // Always display message for the admin
+
+                                    // If the message is from a user not currently selected, refresh the user list
+                                    if (chatMessage.senderId !== currentRecipientId) {
+                                        loadChatUsers(); // Refresh user list to potentially highlight new message
+                                    }
                                 }
                             });
 
@@ -173,28 +180,36 @@
                         }
                     });
 
-                    // Sample users (replace with actual user list from backend)
-                    const sampleUsers = [
-                        { id: 'user2', name: 'İstifadəçi A' },
-                        { id: 'user3', name: 'İstifadəçi B' },
-                        { id: 'user4', name: 'İstifadəçi C' }
+                    function loadChatUsers() {
+                        const adminId = document.getElementById('senderId').value; // Should be 'admin'
+                        fetch(`/chat/users/${adminId}`)
+                            .then(response => response.json())
+                            .then(userIds => {
+                                const userList = document.getElementById('userList');
+                                userList.innerHTML = ''; // Clear existing static users
+                                userIds.forEach(userId => {
+                                    const li = document.createElement('li');
+                                    li.textContent = userId; // Display the user ID, or fetch user details if available
+                                    li.style.cursor = 'pointer';
+                                    li.onclick = function() { selectUser(userId, userId); }; // Using userId as userName for now
+                                    userList.appendChild(li);
+                                });
 
-
-                    ];
-
-
-                    // Populate user list
-                    const userList = document.getElementById('userList');
-                    sampleUsers.forEach(user => {
-                        const li = document.createElement('li');
-                        li.textContent = user.name;
-                        li.style.cursor = 'pointer';
-                        li.onclick = function() { selectUser(user.id, user.name); };
-                        userList.appendChild(li);
-                    });
+                                // Automatically select the first user if available
+                                if (userIds.length > 0) {
+                                    selectUser(userIds[0], userIds[0]);
+                                    // Highlight the first user in the list visually
+                                    if (userList.firstElementChild) {
+                                        userList.firstElementChild.style.backgroundColor = '#e0e0e0';
+                                    }
+                                }
+                            })
+                            .catch(error => console.error('Error loading chat users:', error));
+                    }
 
                     // Connect on page load
                     connect();
+                    loadChatUsers();
                 </script>
 
             </div>

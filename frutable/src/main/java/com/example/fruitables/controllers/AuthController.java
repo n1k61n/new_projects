@@ -17,6 +17,8 @@ import javax.lang.model.element.ModuleElement;
 @Controller
 @RequiredArgsConstructor
 public class AuthController {
+
+
     private final UserService userService;
 
 
@@ -24,8 +26,6 @@ public class AuthController {
     public String login(){
         return "auth/login";
     }
-
-
 
     @GetMapping("/register")
     public String register(Model model){
@@ -39,7 +39,6 @@ public class AuthController {
             model.addAttribute("registerDto", registerDto);
             return "auth/register";
         }
-
         userService.registerUser(registerDto);
         return "redirect:/login";
     }

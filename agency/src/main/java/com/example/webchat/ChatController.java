@@ -1,7 +1,5 @@
 package com.example.webchat;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -10,6 +8,8 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.List;
 
 @Controller
 public class ChatController {
@@ -53,5 +53,10 @@ public class ChatController {
     public ResponseEntity<?> findMessage ( @PathVariable String id) {
         return ResponseEntity
                 .ok(chatMessageService.findById(id));
+    }
+
+    @GetMapping("/chat/users/{adminId}")
+    public ResponseEntity<List<String>> findChatUsers(@PathVariable String adminId) {
+        return ResponseEntity.ok(chatMessageService.findChatUsers(adminId));
     }
 }

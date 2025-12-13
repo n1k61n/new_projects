@@ -14,5 +14,7 @@ public interface ChatMessageService {
 
     boolean updateStatuses(String senderId, String recipientId, MessageStatus status);
 
+    List<String> findChatUsers(String adminId);
+
 
 }
