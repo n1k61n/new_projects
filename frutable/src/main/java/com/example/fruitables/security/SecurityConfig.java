@@ -27,8 +27,7 @@ public class SecurityConfig {
             "/login",
             "/register",
             "/forgot-password",
-            "/front/**",
-            "/dashboard/**"
+            "/front/**"
     };
 
     @Bean
@@ -40,25 +39,14 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(PUBLIC_URLS).permitAll()
-                        .requestMatchers("/dashboard/**").hasRole(User.withUsername("admin").toString())
-                        .anyRequest().authenticated()
-                )
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/dashboard")
-                        .failureUrl("/login?error=true")
-                        .permitAll()
-                )
-                .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/login")
-                        .invalidateHttpSession(true)
-                        .deleteCookies("JSESSIONID")
-                )
-                .build();
+                .authorizeHttpRequests(auth -> {
+                    auth.requestMatchers("/dashboard/**").authenticated();
+                    auth.anyRequest().permitAll();
+                })
+                .formLogin(form -> {
+                    form.loginPage("/login");
+                }).build();
+
     }
 
 }
