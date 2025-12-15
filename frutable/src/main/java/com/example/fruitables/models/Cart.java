@@ -8,11 +8,11 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Entity
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 @Table(name = "carts")
 public class Cart {
     @Id

@@ -14,14 +14,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-<<<<<<< Updated upstream
 
-=======
-import javax.lang.model.element.ModuleElement;
 import java.util.Objects;
 
 @Slf4j
->>>>>>> Stashed changes
+
 @Controller
 @RequiredArgsConstructor
 public class AuthController {
