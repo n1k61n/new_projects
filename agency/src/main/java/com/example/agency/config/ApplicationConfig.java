@@ -1,4 +1,4 @@
-package com.example.agency.configure;
+package com.example.agency.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

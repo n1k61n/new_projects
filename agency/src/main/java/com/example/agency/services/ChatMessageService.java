@@ -1,4 +1,7 @@
-package com.example.webchat;
+package com.example.agency.services;
+
+import com.example.agency.models.ChatMessage;
+import com.example.agency.enums.MessageStatus;
 
 import java.util.List;
 

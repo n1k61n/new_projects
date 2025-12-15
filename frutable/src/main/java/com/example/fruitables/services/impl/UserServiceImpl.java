@@ -8,15 +8,17 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
@@ -41,5 +43,24 @@ public class UserServiceImpl implements UserService {
             System.err.println("Gözlənilməyən xəta: " + e.getMessage());
             return false;
         }
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User findUser = userRepository.findByEmail(email).orElse(null);
+        if (findUser == null) {
+            throw new UsernameNotFoundException("User not found with email: " + email);
+        }
+        if (findUser.getRoles() == null || findUser.getRoles().isEmpty()) {
+            throw new IllegalArgumentException("User has no roles assigned");
+        }
+        return new org.springframework.security.core.userdetails.User(
+                findUser.getEmail(),
+                findUser.getPassword(),
+                findUser.isEnabled(),
+                findUser.isAccountNonExpired(),
+                findUser.isCredentialsNonExpired(),
+                findUser.isAccountNonLocked(),
+                findUser.getAuthorities());
     }
 }

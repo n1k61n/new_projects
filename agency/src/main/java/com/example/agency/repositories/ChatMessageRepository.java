@@ -1,7 +1,9 @@
-package com.example.webchat;
+package com.example.agency.repositories;
 
 
 
+import com.example.agency.models.ChatMessage;
+import com.example.agency.enums.MessageStatus;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

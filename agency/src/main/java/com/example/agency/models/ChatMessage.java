@@ -1,5 +1,6 @@
-package com.example.webchat;
+package com.example.agency.models;
 
+import com.example.agency.enums.MessageStatus;
 import jakarta.persistence.*;
 import lombok.*;
 

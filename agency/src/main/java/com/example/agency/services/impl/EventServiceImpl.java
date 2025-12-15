@@ -1,7 +1,7 @@
 package com.example.agency.services.impl;
 
 import com.example.agency.dtos.responce.EventResponceDTO;
-import com.example.webchat.ResourceNotFoundException;
+import com.example.agency.exceptions.ResourceNotFoundException;
 import com.example.agency.models.Event;
 import com.example.agency.repositories.EventRepository;
 import com.example.agency.services.EventService;

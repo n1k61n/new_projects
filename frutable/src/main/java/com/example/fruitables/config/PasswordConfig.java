@@ -11,6 +11,6 @@ public class PasswordConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(); // Strong hashing
+        return new BCryptPasswordEncoder();
     }
 }

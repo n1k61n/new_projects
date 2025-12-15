@@ -11,8 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.lang.model.element.ModuleElement;
-
 
 @Controller
 @RequiredArgsConstructor
@@ -23,19 +21,19 @@ public class AuthController {
 
 
     @GetMapping("/login")
-    public String login(){
+    public String login() {
         return "auth/login";
     }
 
     @GetMapping("/register")
-    public String register(Model model){
+    public String register(Model model) {
         model.addAttribute("registerDto", new RegisterDto());
         return "auth/register";
     }
 
     @PostMapping("/register")
-    public String register(@Valid  RegisterDto registerDto, BindingResult result, Model model){
-        if (result.hasErrors()){
+    public String register(@Valid RegisterDto registerDto, BindingResult result, Model model) {
+        if (result.hasErrors()) {
             model.addAttribute("registerDto", registerDto);
             return "auth/register";
         }
@@ -43,10 +41,8 @@ public class AuthController {
         return "redirect:/login";
     }
 
-
-
     @GetMapping("/forgot-password")
-    public String forgot(){
+    public String forgot() {
         return "auth/forgot-password";
     }
 

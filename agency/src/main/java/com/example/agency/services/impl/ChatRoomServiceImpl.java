@@ -1,6 +1,9 @@
-package com.example.webchat;
+package com.example.agency.services.impl;
 
 
+import com.example.agency.repositories.ChatRoomRepository;
+import com.example.agency.services.ChatRoomService;
+import com.example.agency.models.ChatRoom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

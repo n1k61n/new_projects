@@ -1,6 +1,7 @@
-package com.example.webchat;
+package com.example.agency.repositories;
 
 
+import com.example.agency.models.ChatRoom;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
