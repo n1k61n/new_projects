@@ -2,6 +2,7 @@ package com.example.coffo.services.impl;
 
 
 import com.example.coffo.DTOs.request.AboutRequestDTO;
+
 import com.example.coffo.DTOs.responce.AboutResponceDTO;
 import com.example.coffo.models.About;
 import com.example.coffo.repositories.AboutRepository;
@@ -10,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+
 
 
 @Service
@@ -25,38 +26,37 @@ public class AboutServiceImpl implements AboutService {
     public AboutResponceDTO getAboutInfo() {
         About about = aboutRepository.findAll().stream().findFirst().orElse(null);
         if(about != null) {
-            AboutResponceDTO dto = new AboutResponceDTO();
+            AboutRequestDTO dto = new AboutRequestDTO();
             dto.setDescription(about.getDescription());
             dto.setImageUrl(about.getImageUrl());
             dto.setMainTitle(about.getMainTitle());
             dto.setSubTitle(about.getSubTitle());
-            dto.setId(about.getId());
-            return dto;
+            return modelMapper.map(dto, AboutResponceDTO.class);
         }
         return null;
     }
 
     @Override
-    public AboutResponceDTO createAboutInfo(AboutResponceDTO aboutResponceDTO) {
+    public AboutResponceDTO createAboutInfo(AboutRequestDTO aboutRequestDTO) {
         About  about = new About();
-        about.setDescription(aboutResponceDTO.getDescription());
-        about.setImageUrl(aboutResponceDTO.getImageUrl());
-        about.setMainTitle(aboutResponceDTO.getMainTitle());
-        about.setSubTitle(aboutResponceDTO.getSubTitle());
+        about.setDescription(aboutRequestDTO.getDescription());
+        about.setImageUrl(aboutRequestDTO.getImageUrl());
+        about.setMainTitle(aboutRequestDTO.getMainTitle());
+        about.setSubTitle(aboutRequestDTO.getSubTitle());
         About savedAbout = aboutRepository.save(about);
-        return aboutResponceDTO;
+        return modelMapper.map(savedAbout, AboutResponceDTO.class);
     }
 
     @Override
-    public AboutResponceDTO updateAboutInfo(long id, AboutResponceDTO aboutResponceDTO) {
+    public AboutResponceDTO updateAboutInfo(long id, AboutRequestDTO aboutRequestDTO) {
         About existingAbout = aboutRepository.findById(id).orElse(null);
         if (existingAbout == null) {
             return null;
         }
-        existingAbout.setDescription(aboutResponceDTO.getDescription());
-        existingAbout.setImageUrl(aboutResponceDTO.getImageUrl());
-        existingAbout.setMainTitle(aboutResponceDTO.getMainTitle());
-        existingAbout.setSubTitle(aboutResponceDTO.getSubTitle());
+        existingAbout.setDescription(aboutRequestDTO.getDescription());
+        existingAbout.setImageUrl(aboutRequestDTO.getImageUrl());
+        existingAbout.setMainTitle(aboutRequestDTO.getMainTitle());
+        existingAbout.setSubTitle(aboutRequestDTO.getSubTitle());
         existingAbout.setId(id);
         About savedAbout = aboutRepository.save(existingAbout);
         return modelMapper.map(savedAbout, AboutResponceDTO.class);

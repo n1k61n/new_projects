@@ -10,6 +10,4 @@ import java.util.Optional;
 public interface UserService {
     boolean registerUser(RegisterDto registerDto);
 
-    Optional<User> getUserByEmail( String email);
-
 }

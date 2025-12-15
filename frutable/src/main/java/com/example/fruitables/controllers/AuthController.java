@@ -33,20 +33,7 @@ public class AuthController {
     }
 
 
-    @PostMapping("/login")
-    public String login(@ModelAttribute RegisterDto registerDto, Model model){
-        try {
-            User user = userService.getUserByEmail(registerDto.getEmail()).orElse(null);
-            if (Objects.equals(user.getPassword(), registerDto.getPassword())) {
-                return "redirect:/dashboard";
-            }
-            model.addAttribute("error", "Invalid email or password");
-            return "redirect:/login?error";
-        }catch (Exception e){
-            model.addAttribute("error", "Login failed. Please try again.");
-            return "login";
-        }
-    }
+
 
     @GetMapping("/register")
     public String register(Model model) {
@@ -65,6 +52,8 @@ public class AuthController {
         model.addAttribute("msg", "User register successfully!");
         return "redirect:/login";
     }
+
+
 
     @GetMapping("/forgot-password")
     public String forgot() {
