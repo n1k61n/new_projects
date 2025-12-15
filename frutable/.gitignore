@@ -28,8 +28,11 @@ target/
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
+/logs/
+/target/
 
 ### VS Code ###
 .vscode/
+.idea/
 
 .env

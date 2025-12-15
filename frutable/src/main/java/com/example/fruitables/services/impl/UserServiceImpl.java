@@ -24,6 +24,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
 
+
+
     @Override
     public boolean registerUser(RegisterDto registerDto) {
         Optional<User> existingUser = userRepository.findByEmail(registerDto.getEmail());
@@ -46,6 +48,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+<<<<<<< Updated upstream
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User findUser = userRepository.findByEmail(email).orElse(null);
         if (findUser == null) {
@@ -62,5 +65,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
                 findUser.isCredentialsNonExpired(),
                 findUser.isAccountNonLocked(),
                 findUser.getAuthorities());
+=======
+    public Optional<User> getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+>>>>>>> Stashed changes
     }
 }
