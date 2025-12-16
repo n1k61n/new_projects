@@ -39,6 +39,7 @@
                     <tr style="background-color: black; color: white;">
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
+                        <th scope="col">Description</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -46,6 +47,7 @@
                         <tr th:each="category, i : ${categories}">
                             <th scope="row" th:text="${i.index+1}"></th>
                             <td th:text="${category.name}"></td>
+                            <td th:text="${category.description}"></td>
                             <td>
                                 <a class="btn btn-primary" th:href="'/dashboard/category/update/'+${category.id}">Edit</a>
                                 <a class="btn btn-primary" th:onclick="'removeCategory('+${category.id} + ')'">Delete</a>

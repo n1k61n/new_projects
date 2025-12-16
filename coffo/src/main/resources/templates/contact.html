@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:layout="http://www.w3.org/1999/xhtml"
-      layout:decorate="~{layout}">
+      layout:decorate="~{layout}" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <!-- basic -->
     <meta charset="utf-8">
@@ -37,7 +37,9 @@
                                 <input type="text" class="mail_text" placeholder="Your Email" name="email">
                                 <input type="text" class="mail_text" placeholder="Your Phone" name="phone">
                                 <textarea class="massage-bt" placeholder="Massage" rows="5" id="comment" name="message"></textarea>
-                                <div class="send_bt"><button type="submit">Send</button></div>
+                                <div class="send_bt">
+                                    <button class="btn btn-danger"  type="submit">Send</button>
+                                </div>
                             </form>
                         </div>
                     </div>

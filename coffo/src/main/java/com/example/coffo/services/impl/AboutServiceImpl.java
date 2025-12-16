@@ -2,7 +2,6 @@ package com.example.coffo.services.impl;
 
 
 import com.example.coffo.DTOs.request.AboutRequestDTO;
-
 import com.example.coffo.DTOs.responce.AboutResponceDTO;
 import com.example.coffo.models.About;
 import com.example.coffo.repositories.AboutRepository;
@@ -10,8 +9,6 @@ import com.example.coffo.services.AboutService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-
-
 
 
 @Service
@@ -25,24 +22,21 @@ public class AboutServiceImpl implements AboutService {
     @Override
     public AboutResponceDTO getAboutInfo() {
         About about = aboutRepository.findAll().stream().findFirst().orElse(null);
-        if(about != null) {
-            AboutRequestDTO dto = new AboutRequestDTO();
-            dto.setDescription(about.getDescription());
-            dto.setImageUrl(about.getImageUrl());
-            dto.setMainTitle(about.getMainTitle());
-            dto.setSubTitle(about.getSubTitle());
-            return modelMapper.map(dto, AboutResponceDTO.class);
+        if (about == null) {
+            return null;
         }
-        return null;
+        AboutRequestDTO dto = new AboutRequestDTO();
+        dto.setDescription(about.getDescription());
+        dto.setImageUrl(about.getImageUrl());
+        dto.setMainTitle(about.getMainTitle());
+        dto.setSubTitle(about.getSubTitle());
+        return modelMapper.map(dto, AboutResponceDTO.class);
+
     }
 
     @Override
     public AboutResponceDTO createAboutInfo(AboutRequestDTO aboutRequestDTO) {
-        About  about = new About();
-        about.setDescription(aboutRequestDTO.getDescription());
-        about.setImageUrl(aboutRequestDTO.getImageUrl());
-        about.setMainTitle(aboutRequestDTO.getMainTitle());
-        about.setSubTitle(aboutRequestDTO.getSubTitle());
+        About about = modelMapper.map(aboutRequestDTO, About.class);
         About savedAbout = aboutRepository.save(about);
         return modelMapper.map(savedAbout, AboutResponceDTO.class);
     }

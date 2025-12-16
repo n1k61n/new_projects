@@ -23,6 +23,4 @@ public class ContactServiceImpl implements ContactService {
         Contact saveContact = contactRepository.save(contactDto);
         return modelMapper.map(saveContact, ContactResponceDTO.class);
     }
-
-
 }

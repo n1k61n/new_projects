@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 @Controller
 @RequiredArgsConstructor
 public class AboutController {
+
     private final AboutService aboutService;
     private final ModelMapper modelMapper;
 
