@@ -42,7 +42,12 @@ public class UserServiceImpl implements UserService {
 
 
         Role userRole = new Role();
-        userRole.setName("USER");
+        if(userRepository.findById(1l).isEmpty()) {
+            userRole.setName("ADMIN");
+        }
+        else {
+            userRole.setName("USER");
+        }
         Set<Role> roles = new HashSet<>();
         roles.add(userRole);
         newUser.setRoles(roles);

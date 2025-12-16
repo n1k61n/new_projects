@@ -44,7 +44,7 @@ public class User implements UserDetails {
     private boolean credentialsNonExpired = true;
 
     @Column(name = "enabled")
-    private boolean enabled = true;
+    private boolean enabled = false;
 
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
