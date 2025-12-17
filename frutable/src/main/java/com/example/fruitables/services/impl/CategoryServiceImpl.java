@@ -2,6 +2,7 @@ package com.example.fruitables.services.impl;
 
 import com.example.fruitables.dtos.category.CategoryCreateDto;
 import com.example.fruitables.dtos.category.CategoryDto;
+import com.example.fruitables.dtos.category.CategoryPinnedDto;
 import com.example.fruitables.dtos.category.CategoryUpdateDto;
 import com.example.fruitables.exceptions.ResourceNotFoundException;
 import com.example.fruitables.models.Category;
@@ -82,6 +83,15 @@ public class CategoryServiceImpl implements CategoryService {
     public Category getCategoryById(Long categoryId) {
         return categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new ResourceNotFoundException("Category", categoryId));
+    }
+
+    @Override
+    public List<CategoryPinnedDto> getPinnedCategory() {
+        List<Category> categories = categoryRepository.findByPinnedTrue();
+        if(!categories.isEmpty()){
+            return categories.stream().map(category -> modelMapper.map(category, CategoryPinnedDto.class)).toList();
+        }
+        return List.of();
     }
 }
 

@@ -3,6 +3,7 @@ package com.example.fruitables.services;
 import com.example.fruitables.dtos.product.ProductCreateDto;
 import com.example.fruitables.dtos.product.ProductDashboardDto;
 import com.example.fruitables.dtos.product.ProductUpdateDto;
+import com.example.fruitables.models.Product;
 
 import java.util.List;
 
@@ -16,5 +17,7 @@ public interface ProductService {
     boolean updateProduct(Long id, ProductUpdateDto productUpdateDto);
 
     boolean removeCategory(Long id);
+
+    List<Product> getAllProducts();
 }
 

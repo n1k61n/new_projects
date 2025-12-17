@@ -1,9 +1,9 @@
 package com.example.fruitables.controllers;
 
 
-import com.example.fruitables.dtos.product.ProductDashboardDto;
-import com.example.fruitables.models.Product;
-import com.example.fruitables.repositories.ProductRepository;
+import com.example.fruitables.dtos.category.CategoryPinnedDto;
+import com.example.fruitables.services.CategoryService;
+import com.example.fruitables.services.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,13 +17,17 @@ import java.util.List;
 public class HomeController {
 
 
-    private final ProductRepository productRepository;
+    private final ProductService productService;
+    private final CategoryService categoryService;
 
 
     @GetMapping("/")
     public String home(Model model){
-        List<Product> productList = productRepository.findAll();
-        model.addAttribute("products", productList);
+        List<CategoryPinnedDto> categoryPinnedDtoList = categoryService.getPinnedCategory();
+        model.addAttribute("categories", categoryPinnedDtoList);
+
+//        List<Product> productList = productService.getAllProducts();
+//        model.addAttribute("products", productList);
         return "index";
     }
 

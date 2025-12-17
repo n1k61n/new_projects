@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface UserService {
     boolean registerUser(RegisterDto registerDto);
     Optional<User> findByEmail(String email);
+
+    boolean verifyUser(String token);
 }

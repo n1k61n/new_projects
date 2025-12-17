@@ -1,5 +1,7 @@
 package com.example.fruitables.services;
 
+import java.util.StringTokenizer;
+
 public interface EmailService {
-    void sendSimplMessage(String to, String subject, String text);
+    void sendEmail(String to, String token);
 }

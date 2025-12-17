@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 @Configuration
 @RequiredArgsConstructor
-public class CustomUserDetailService implements  UserDetailsService{
+public class CustomUserDetailService implements  UserDetailsService {
 
     private final UserService userService;
 

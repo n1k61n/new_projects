@@ -34,17 +34,21 @@ public class User implements UserDetails {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "account_non_expired")
-    private boolean accountNonExpired = true;
+    @Column(name = "account_non_expired" , columnDefinition = "boolean default false")
+    private boolean accountNonExpired ;
 
-    @Column(name = "account_non_locked")
-    private boolean accountNonLocked = true;
+    @Column(name = "account_non_locked", columnDefinition = "boolean default false")
+    private boolean accountNonLocked ;
 
-    @Column(name = "credentials_non_expired")
-    private boolean credentialsNonExpired = true;
+    @Column(name = "credentials_non_expired", columnDefinition = "boolean default false")
+    private boolean credentialsNonExpired;
 
-    @Column(name = "enabled")
-    private boolean enabled = false;
+    @Column(name = "enabled", columnDefinition = "boolean default false")
+    private boolean enabled;
+
+    @Column(name = "verified", columnDefinition = "boolean default false")
+    private boolean verified;
+    private String verificationToken;
 
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

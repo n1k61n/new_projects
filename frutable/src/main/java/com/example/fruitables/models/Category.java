@@ -30,9 +30,8 @@ public class Category {
     @Column(nullable = false, unique = true)
     private String name;
 
-    private String description;
+    @Column(name = "is_pinned", columnDefinition = "boolean default true")
+    private boolean pinned;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    private List<Product> products = new ArrayList<>();
 
 }

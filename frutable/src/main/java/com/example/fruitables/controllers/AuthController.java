@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Slf4j
 
@@ -53,6 +54,21 @@ public class AuthController {
     @GetMapping("/forgot-password")
     public String forgot() {
         return "auth/forgot-password";
+    }
+
+
+    @GetMapping("/confirm")
+    public String confirmRegistration(@RequestParam("token") String token) {
+        // 1. Tokeni bazada yoxlayın (UserService vasitəsilə)
+        boolean isVerified = userService.verifyUser(token);
+
+        if (isVerified) {
+            // Əgər token düzgündürsə, uğurlu səhifəyə göndər
+            return "auth/registration-success";
+        } else {
+            // Əgər token səhvdirsə, xəta səhifəsinə və ya login-ə yönləndir
+            return "redirect:/login?error=invalid-token";
+        }
     }
 
 }

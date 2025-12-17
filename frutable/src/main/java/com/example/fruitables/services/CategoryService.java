@@ -2,6 +2,7 @@ package com.example.fruitables.services;
 
 import com.example.fruitables.dtos.category.CategoryCreateDto;
 import com.example.fruitables.dtos.category.CategoryDto;
+import com.example.fruitables.dtos.category.CategoryPinnedDto;
 import com.example.fruitables.dtos.category.CategoryUpdateDto;
 import com.example.fruitables.models.Category;
 
@@ -19,4 +20,6 @@ public interface CategoryService {
     boolean removeCategory(Long id);
 
     Category getCategoryById(Long categoryId);
+
+    List<CategoryPinnedDto> getPinnedCategory();
 }
