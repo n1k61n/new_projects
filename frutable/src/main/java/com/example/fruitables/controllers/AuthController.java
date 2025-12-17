@@ -28,9 +28,6 @@ public class AuthController {
         return "auth/login";
     }
 
-
-
-
     @GetMapping("/register")
     public String register(Model model) {
         model.addAttribute("registerDto", new RegisterDto());
@@ -49,24 +46,17 @@ public class AuthController {
         return "redirect:/login";
     }
 
-
-
     @GetMapping("/forgot-password")
     public String forgot() {
         return "auth/forgot-password";
     }
 
-
     @GetMapping("/confirm")
     public String confirmRegistration(@RequestParam("token") String token) {
-        // 1. Tokeni bazada yoxlayın (UserService vasitəsilə)
         boolean isVerified = userService.verifyUser(token);
-
         if (isVerified) {
-            // Əgər token düzgündürsə, uğurlu səhifəyə göndər
             return "auth/registration-success";
         } else {
-            // Əgər token səhvdirsə, xəta səhifəsinə və ya login-ə yönləndir
             return "redirect:/login?error=invalid-token";
         }
     }
