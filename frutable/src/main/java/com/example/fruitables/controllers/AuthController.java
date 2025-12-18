@@ -1,17 +1,20 @@
 package com.example.fruitables.controllers;
 
 
+import com.example.fruitables.dtos.auth.AuthResponseDto;
 import com.example.fruitables.dtos.auth.RegisterDto;
 import com.example.fruitables.services.UserService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Slf4j
 
@@ -28,6 +31,7 @@ public class AuthController {
         return "auth/login";
     }
 
+
     @GetMapping("/register")
     public String register(Model model) {
         model.addAttribute("registerDto", new RegisterDto());
@@ -35,30 +39,67 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String register(@Valid RegisterDto registerDto, BindingResult result, Model model) {
+    public String register(@Valid RegisterDto registerDto, BindingResult result, Model model, HttpSession session) {
         if (result.hasErrors()) {
             model.addAttribute("registerDto", registerDto);
             return "auth/register";
         }
-        log.info(String.valueOf(registerDto));
+
+        if(userService.isEmailExist(registerDto.getEmail())){
+            result.rejectValue("email", "error.email", "Bu email artiq movcuddur");
+            model.addAttribute("registerDto", registerDto);
+            return "auth/register";
+        }
+
         userService.registerUser(registerDto);
-        model.addAttribute("msg", "User register successfully!");
-        return "redirect:/login";
+        session.setAttribute("pendingEmail", registerDto.getEmail());
+        return "redirect:/verify-otp";
     }
+
+    @GetMapping("/verify-otp")
+    public String confirmRegistration(HttpSession session, Model model) {
+        String email = (String) session.getAttribute("pendingEmail");
+        if (email == null) {
+            return "redirect:/register";
+        }
+        AuthResponseDto dto = new AuthResponseDto();
+        dto.setEmail(email);
+        model.addAttribute("authResponseDto", dto);
+        return "auth/verify-otp";
+    }
+
+    @PostMapping("/verify-otp")
+    public String verifyOtp(AuthResponseDto authResponseDto) {
+        // Логика проверки OTP
+        log.info("Received OTP: {}", authResponseDto.getOtp());
+        boolean isVerified = userService.verifyUser(authResponseDto);
+        if (isVerified) {
+            return "auth/registration-success";
+        } else {
+            return "redirect:/login?error=invalid-token";
+        }
+    }
+
+    //    @GetMapping("/confirm")
+//    public String confirmRegistration(@RequestParam("token") String token) {
+//        boolean isVerified = userService.verifyUser(token);
+//        if (isVerified) {
+//            return "auth/registration-success";
+//        } else {
+//            return "redirect:/login?error=invalid-token";
+//        }
+//    }
+
 
     @GetMapping("/forgot-password")
     public String forgot() {
         return "auth/forgot-password";
     }
 
-    @GetMapping("/confirm")
-    public String confirmRegistration(@RequestParam("token") String token) {
-        boolean isVerified = userService.verifyUser(token);
-        if (isVerified) {
-            return "auth/registration-success";
-        } else {
-            return "redirect:/login?error=invalid-token";
-        }
+
+    @GetMapping("/debug-auth")
+    public String debugAuth(Authentication authentication) {
+        return authentication.getAuthorities().toString();
     }
 
 }

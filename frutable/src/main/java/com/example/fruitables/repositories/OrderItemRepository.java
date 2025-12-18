@@ -1,9 +1,10 @@
 package com.example.fruitables.repositories;
 
-import com.example.fruitables.models.CartItem;
+import com.example.fruitables.models.OrderItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CartItemRrepository extends JpaRepository<CartItem, Long> {
+public interface OrderItemRepository extends JpaRepository<OrderItem, Long> {
 }
+

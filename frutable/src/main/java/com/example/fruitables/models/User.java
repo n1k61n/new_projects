@@ -34,20 +34,19 @@ public class User implements UserDetails {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "account_non_expired" , columnDefinition = "boolean default false")
+    @Column(name = "account_non_expired")
     private boolean accountNonExpired ;
 
-    @Column(name = "account_non_locked", columnDefinition = "boolean default false")
+    @Column(name = "account_non_locked")
     private boolean accountNonLocked ;
 
-    @Column(name = "credentials_non_expired", columnDefinition = "boolean default false")
+    @Column(name = "credentials_non_expired")
     private boolean credentialsNonExpired;
 
-    @Column(name = "enabled", columnDefinition = "boolean default false")
+    @Column(name = "enabled")
     private boolean enabled;
 
-    @Column(name = "verified", columnDefinition = "boolean default false")
-    private boolean verified;
+    @Column(name = "verification_token")
     private String verificationToken;
 
     @JsonIgnore

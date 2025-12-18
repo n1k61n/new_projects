@@ -17,8 +17,8 @@ public class EmailServiceImpl implements EmailService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("noreply@baeldung.com");
 
-        String body = "Salam hesabi aktivlesdirmek ucun bu linke klikleyin " + "http://localhost:8080/confirm?token=" + token;
-
+//        String body = "Salam hesabi aktivlesdirmek ucun bu linke klikleyin " + "http://localhost:8080/confirm?token=" + token;
+        String body = "Salam hesabi aktivlesdirmek ucun bu linke klikleyin " + token;
         message.setTo(to);
         message.setSubject("Hesabın Təsdiqlənməsi");
         message.setText(body);

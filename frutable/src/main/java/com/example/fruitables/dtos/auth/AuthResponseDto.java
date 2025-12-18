@@ -1,15 +1,13 @@
 package com.example.fruitables.dtos.auth;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class AuthResponseDto {
-    private String token;
-    private long expiresIn;
+    private String email;
+    private String otp;
+//    private long expiresIn;
 }

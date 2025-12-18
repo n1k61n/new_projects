@@ -1,10 +1,10 @@
 package com.example.fruitables.repositories;
 
-import com.example.fruitables.models.Cart;
+import com.example.fruitables.models.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CartRrepository extends JpaRepository<Cart, Long> {
+public interface OrderRepository extends JpaRepository<Order, Long> {
 }
 

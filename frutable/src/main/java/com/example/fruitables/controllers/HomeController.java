@@ -25,9 +25,6 @@ public class HomeController {
     public String home(Model model){
         List<CategoryPinnedDto> categoryPinnedDtoList = categoryService.getPinnedCategory();
         model.addAttribute("categories", categoryPinnedDtoList);
-
-//        List<Product> productList = productService.getAllProducts();
-//        model.addAttribute("products", productList);
         return "index";
     }
 
