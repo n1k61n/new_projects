@@ -14,6 +14,5 @@ public class CategoryDto {
     private Long id;
     private String name;
     private boolean pinned;
-    private String description;
 }
 

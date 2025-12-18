@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login - Coffo</title>
+    <link rel="stylesheet" type="text/css" href="/front/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="/auth/login.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+<div class="login-container">
+    <div class="login-header">
+        <i class="fa fa-coffee"></i>
+        <h2>Daxil Ol</h2>
+        <p>Coffo ailəsinə xoş gəlmisiniz</p>
+    </div>
+
+    <div class="login-body">
+        <!-- Xəta mesajı -->
+        <div th:if="${param.error}" class="alert alert-danger">
+            <i class="fa fa-exclamation-circle"></i> Email və ya şifrə səhvdir!
+        </div>
+
+        <!-- Logout mesajı -->
+        <div th:if="${param.logout}" class="alert alert-success">
+            <i class="fa fa-check-circle"></i> Uğurla çıxış etdiniz!
+        </div>
+
+        <form th:action="@{/login}" method="post">
+            <div class="form-group">
+                <label for="username">Email</label>
+                <div class="input-group">
+                    <i class="fa fa-envelope"></i>
+                    <input type="email" class="form-control" id="username" name="username"
+                           placeholder="Email ünvanınızı daxil edin" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Şifrə</label>
+                <div class="input-group">
+                    <i class="fa fa-lock"></i>
+                    <input type="password" class="form-control" id="password" name="password"
+                           placeholder="Şifrənizi daxil edin" required>
+                </div>
+            </div>
+
+            <div class="remember-forgot">
+                <label>
+                    <input type="checkbox" name="remember-me">
+                    Məni xatırla
+                </label>
+                <a href="#">Şifrəni unutdum?</a>
+            </div>
+
+            <button type="submit" class="btn-login">
+                <i class="fa fa-sign-in"></i> Daxil Ol
+            </button>
+        </form>
+
+        <div class="divider">
+            <span>və ya</span>
+        </div>
+
+        <div class="register-link">
+            Hesabınız yoxdur? <a href="/register">Qeydiyyatdan keçin</a>
+        </div>
+
+        <div class="back-home">
+            <a href="/">
+                <i class="fa fa-arrow-left"></i> Ana səhifəyə qayıt
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

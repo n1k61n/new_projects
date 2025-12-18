@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Register - Coffo</title>
+    <link rel="stylesheet" type="text/css" href="/front/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="/auth/register.css" rel="stylesheet" type="text/css">
+
+
+</head>
+<body>
+<div class="register-container">
+    <div class="register-header">
+        <i class="fa fa-user-plus"></i>
+        <h2>Qeydiyyat</h2>
+        <p>Coffo ailəsinə qoşulun</p>
+    </div>
+
+    <div class="register-body">
+        <!-- Xəta mesajı -->
+        <div th:if="${error}" class="alert alert-danger">
+            <i class="fa fa-exclamation-circle"></i> <span th:text="${error}"></span>
+        </div>
+
+        <!-- Uğur mesajı -->
+        <div th:if="${success}" class="alert alert-success">
+            <i class="fa fa-check-circle"></i> <span th:text="${success}"></span>
+        </div>
+
+        <form th:action="@{/register}" method="post" th:object="${user}">
+            <div class="row">
+                <div class="form-group">
+                    <label for="firstName">Ad</label>
+                    <div class="input-group">
+                        <i class="fa fa-user"></i>
+                        <input type="text" class="form-control" id="firstName" th:field="*{firstName}"
+                               placeholder="Adınız" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName">Soyad</label>
+                    <div class="input-group">
+                        <i class="fa fa-user"></i>
+                        <input type="text" class="form-control" id="lastName" th:field="*{lastName}"
+                               placeholder="Soyadınız" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <div class="input-group">
+                    <i class="fa fa-envelope"></i>
+                    <input type="email" class="form-control" id="email" th:field="*{email}"
+                           placeholder="Email ünvanınız" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Telefon</label>
+                <div class="input-group">
+                    <i class="fa fa-phone"></i>
+                    <input type="tel" class="form-control" id="phone" th:field="*{phone}"
+                           placeholder="+994 XX XXX XX XX">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Şifrə</label>
+                <div class="input-group">
+                    <i class="fa fa-lock"></i>
+                    <input type="password" class="form-control" id="password" th:field="*{password}"
+                           placeholder="Şifrə (minimum 6 simvol)" required minlength="6">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Şifrəni təsdiqlə</label>
+                <div class="input-group">
+                    <i class="fa fa-lock"></i>
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+                           placeholder="Şifrəni təkrar daxil edin" required minlength="6">
+                </div>
+            </div>
+
+            <div class="terms">
+                <input type="checkbox" id="terms" required>
+                <label for="terms">
+                    <a href="#">İstifadə şərtləri</a> və <a href="#">Məxfilik siyasəti</a> ilə razıyam
+                </label>
+            </div>
+
+            <button type="submit" class="btn-register">
+                <i class="fa fa-check"></i> Qeydiyyatdan Keç
+            </button>
+        </form>
+
+        <div class="divider">
+            <span>və ya</span>
+        </div>
+
+        <div class="login-link">
+            Artıq hesabınız var? <a href="/login">Daxil olun</a>
+        </div>
+
+        <div class="back-home">
+            <a href="/">
+                <i class="fa fa-arrow-left"></i> Ana səhifəyə qayıt
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

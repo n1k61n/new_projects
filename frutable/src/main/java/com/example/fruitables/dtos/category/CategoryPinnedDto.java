@@ -13,4 +13,5 @@ import lombok.Setter;
 public class CategoryPinnedDto {
     private Long id;
     private String name;
+    private boolean pinned;
 }

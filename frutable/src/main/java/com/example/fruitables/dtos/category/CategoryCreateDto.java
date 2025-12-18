@@ -11,5 +11,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CategoryCreateDto {
     private String name;
-    private String description;
+    private boolean pinned;
 }
