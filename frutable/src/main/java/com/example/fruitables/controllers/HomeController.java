@@ -30,7 +30,6 @@ public class HomeController {
         model.addAttribute("categories", categoryPinnedDtoList);
         model.addAttribute("sliderProducts", productSliderDtoList);
 
-
         return "index";
     }
 
