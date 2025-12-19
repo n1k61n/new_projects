@@ -1,6 +1,7 @@
 package com.example.fruitables.dtos.product;
 
 import com.example.fruitables.dtos.category.CategoryDto;
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,4 +22,6 @@ public class ProductDashboardDto {
     private int stock;
     private String imageUrl;
     private CategoryDto category;
+    private boolean pinned;
+    private boolean slider;
 }

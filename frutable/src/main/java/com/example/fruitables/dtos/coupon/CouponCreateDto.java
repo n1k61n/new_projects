@@ -16,6 +16,7 @@ public class CouponCreateDto {
     private String code;
     private BigDecimal discount;
     private Integer usageLimit;
+    private int usageCount;
     private boolean active;
     private LocalDateTime expiryDate;
 }

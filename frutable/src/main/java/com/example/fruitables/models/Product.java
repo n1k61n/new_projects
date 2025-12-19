@@ -30,11 +30,14 @@ public class Product {
     @Column(precision = 12, scale = 2)
     private BigDecimal discount;
     private int stock;
+    @Column(name = "image_url")
     private String imageUrl;
+    @Column(name = "seo_url")
     private String seoUrl;
 
     @Column(columnDefinition = "TEXT")
     private String description;
+    @Column(name = "short_description")
     private String shortDescription;
 
     @ManyToOne
@@ -45,4 +48,13 @@ public class Product {
 
     @OneToMany
     private List<Comment> comments;
+
+    @Column(name = "is_pinned", columnDefinition = "boolean default false")
+    private boolean pinned;
+    @Column(name = "is_slider", columnDefinition = "boolean default false")
+    private boolean slider;
+
+    @Column(name = "slider_index", columnDefinition = "int default 0")
+    private int sliderIndex;
+
 }

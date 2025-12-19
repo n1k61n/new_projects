@@ -42,7 +42,9 @@
                         <th scope="col">Barcode</th>
                         <th scope="col">Price</th>
                         <th scope="col">Discount</th>
-                        <th scope="col">Stockz</th>
+                        <th scope="col">Stock</th>
+                        <th scope="col">Is Pinned</th>
+                        <th scope="col">Is Slider</th>
                         <th scope="col">Image Url</th>
                         <th scope="col">Category Name</th>
                         <th scope="col">Action</th>
@@ -56,11 +58,14 @@
                         <td th:text="${product.price}"></td>
                         <td th:text="${product.discount}"></td>
                         <td th:text="${product.stock}"></td>
+                        <td th:text="${product.isPinned() ? 'Yes' : 'No'}"></td>
+                        <td th:text="${product.isSlider() ? 'Yes' : 'No'}"></td>
 
                         <td>
                             <a href="${product.imageUrl}"></a>
                         </td>
                         <td th:text="${product.category.name}"></td>
+
                         <td>
                             <a class="btn btn-primary" th:href="'/dashboard/product/update/'+${product.id}">Edit</a>
                             <a class="btn btn-primary" th:onclick="'removeProduct('+${product.id} + ')'">Delete</a>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:layout="http://www.w3.org/1999/xhtml"
-      layout:decorate="~{dashboard/layout.html}">
+      layout:decorate="~{dashboard/layout.html}" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
 
@@ -33,6 +33,38 @@
             <!-- Begin Page Content -->
             <div layout:fragment="content" class="container-fluid">
 
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Yeni Kupon Əlavə Et</h6>
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            <div class="form-group">
+                                <label for="code">code</label>
+                                <input id="code" th:value=${coupon.code} name="code" type="text" class="form-control" placeholder="code" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="discount">discount</label>
+                                <input id="discount" th:value=${coupon.discount} name="discount" type="number" class="form-control" placeholder="discount" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="usageLimit">usageLimit</label>
+                                <input id="usageLimit"  th:value=${coupon.usageLimit} name="usageLimit" type="number" class="form-control" placeholder="usageLimit" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="active">active</label>
+                                <input id="active" th:checked="${coupon.isActive}" name="active" type="checkbox" placeholder="active" >
+                            </div>
+                            <div class="form-group">
+                                <label for="expiryDate">expiryDate:</label>
+                                <input id="expiryDate"  th:value=${coupon.expiryDate} name="expiryDate" type="datetime-local" class="form-control" placeholder="expiryDate" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary" value="Create">
+                                Kuponu Yadda Saxla
+                            </button>
+                        </form>
+                    </div>
+                </div>
 
 
             </div>

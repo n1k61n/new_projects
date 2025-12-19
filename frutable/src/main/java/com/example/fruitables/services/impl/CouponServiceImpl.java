@@ -60,4 +60,13 @@ public class CouponServiceImpl implements CouponService {
             return false;
         }
     }
+
+    @Override
+    public boolean removeCoupon(Long id) {
+        if(couponRepository.existsById(id)){
+            couponRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 }

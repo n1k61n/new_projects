@@ -53,4 +53,11 @@ public class CouponController {
         couponService.updateCoupon(id, couponUpdateDto);
         return "redirect:/dashboard/coupon";
     }
+
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable Long id){
+        boolean result = couponService.removeCoupon(id);
+        return "redirect:/dashboard/category";
+    }
+
 }

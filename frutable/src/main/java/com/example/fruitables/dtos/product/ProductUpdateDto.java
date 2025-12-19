@@ -21,4 +21,6 @@ public class ProductUpdateDto {
     private String description;
     private String shortDescription;
     private Long categoryId;
+    private boolean pinned;
+    private boolean slider;
 }

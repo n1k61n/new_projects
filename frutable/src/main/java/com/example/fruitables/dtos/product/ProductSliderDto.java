@@ -12,16 +12,12 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductCreateDto {
+public class ProductSliderDto {
+    private Long id;
     private String name;
-    private String barcode;
     private BigDecimal price;
     private BigDecimal discount;
-    private int stock;
     private String imageUrl;
-    private String description;
+    private CategoryDto category;
     private String shortDescription;
-    private Long categoryId;
-    private boolean pinned;
-    private boolean slider;
 }
