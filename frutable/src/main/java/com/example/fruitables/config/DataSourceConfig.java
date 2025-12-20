@@ -36,6 +36,7 @@ public class DataSourceConfig {
 
         Map<String, Object> properties = new HashMap<>();
         properties.put("hibernate.hbm2ddl.auto", "update"); // ключевая настройка
+        properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
         em.setJpaPropertyMap(properties);
 
         return em;

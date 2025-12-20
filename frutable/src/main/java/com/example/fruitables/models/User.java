@@ -46,8 +46,9 @@ public class User implements UserDetails {
     @Column(name = "enabled",  columnDefinition = "boolean default false")
     private boolean enabled;
 
-    @Column(name = "verification_token",  columnDefinition = "boolean default false")
-    private String verificationToken;
+    @Column(name = "verification_token")
+    private String verificationToken ;
+
 
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

@@ -23,7 +23,7 @@ public class Product {
     @Column(nullable = false)
     private String name;
 
-    @Column(unique = true, length = 10)
+    @Column(unique = true, length = 20)
     private String barcode;
     @Column(precision = 12, scale = 2)
     private BigDecimal price;
