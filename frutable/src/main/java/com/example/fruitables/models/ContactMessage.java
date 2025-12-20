@@ -22,8 +22,8 @@ public class ContactMessage {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String message; // Your Message
 
-    @Column(name = "message_read", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
-    private boolean messaageRead;
+    @Column(name = "is_read", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
+    private boolean isRead;
 
     private LocalDateTime createdAt = LocalDateTime.now();
 }

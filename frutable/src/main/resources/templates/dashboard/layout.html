@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:layout="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -213,7 +213,9 @@
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-envelope fa-fw"></i>
                             <!-- Counter - Messages -->
-                            <span class="badge badge-danger badge-counter">7</span>
+                            <span th:text="${messages.size()}"
+                                  th:classappend="${messages.size()==0} ? 'bg-secondary' : 'badge-danger'"
+                                  class="badge badge-counter">7</span>
                         </a>
                         <!-- Dropdown - Messages -->
                         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -221,47 +223,25 @@
                             <h6 class="dropdown-header">
                                 Message Center
                             </h6>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="dropdown-list-image mr-3">
-                                    <img class="rounded-circle" src="/dashboard/img/undraw_profile_1.svg"
-                                         alt="...">
-                                    <div class="status-indicator bg-success"></div>
-                                </div>
+<!--                            <a th:each="message : ${messages}" th:href="@{/messages/read/{id}(id=${message.id})}" class="dropdown-item d-flex align-items-center">-->
+<!--                                <div class="dropdown-list-image mr-3">-->
+<!--                                    <img class="rounded-circle" src="/dashboard/img/undraw_profile_1.svg"-->
+<!--                                         alt="...">-->
+<!--                                    <div class="status-indicator bg-success"></div>-->
+<!--                                </div>-->
+<!--                                <div class="font-weight-bold">-->
+<!--                                    <div th:text="${message.message}" class="text-truncate">Hi there! I am wondering if you can help me with a-->
+<!--                                        problem I've been having.</div>-->
+<!--                                    <div th:text="${message.name}" class="small text-gray-500">Emily Fowler · 58m</div>-->
+<!--                                </div>-->
+<!--                            </a>-->
+                            <a th:each="message : ${messages}"
+                               th:href="@{/dashboard/messages/read-and-redirect/{id}(id=${message.id})}"
+                               target="_blank"
+                               class="dropdown-item d-flex align-items-center">
                                 <div class="font-weight-bold">
-                                    <div class="text-truncate">Hi there! I am wondering if you can help me with a
-                                        problem I've been having.</div>
-                                    <div class="small text-gray-500">Emily Fowler · 58m</div>
-                                </div>
-                            </a>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="dropdown-list-image mr-3">
-                                    <img class="rounded-circle" src="/dashboard/img/undraw_profile_2.svg"
-                                         alt="...">
-                                    <div class="status-indicator"></div>
-                                </div>
-                            </a>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="dropdown-list-image mr-3">
-                                    <img class="rounded-circle" src="/dashboard/img/undraw_profile_3.svg"
-                                         alt="...">
-                                    <div class="status-indicator bg-warning"></div>
-                                </div>
-                                <div>
-                                    <div class="text-truncate">Last month's report looks great, I am very happy with
-                                        the progress so far, keep up the good work!</div>
-                                    <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-                                </div>
-                            </a>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="dropdown-list-image mr-3">
-                                    <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
-                                         alt="...">
-                                    <div class="status-indicator bg-success"></div>
-                                </div>
-                                <div>
-                                    <div class="text-truncate">Am I a good boy? The reason I ask is because someone
-                                        told me that people say this to all dogs, even if they aren't good...</div>
-                                    <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                                    <div th:text="${message.message}" class="text-truncate">Mesaj mətni</div>
+                                    <div th:text="${message.name}" class="small text-gray-500">Ad Soyad</div>
                                 </div>
                             </a>
                             <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
@@ -352,7 +332,7 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="/login">Logout</a>
+                <a class="btn btn-primary" href="/">Logout</a>
             </div>
         </div>
     </div>

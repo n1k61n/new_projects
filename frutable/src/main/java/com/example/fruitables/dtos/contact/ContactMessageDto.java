@@ -1,13 +1,12 @@
 package com.example.fruitables.dtos.contact;
 
-
-import jakarta.persistence.Column;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
-public class ContactMessageCreateDto {
+public class ContactMessageDto {
+    private Long id;
     private String name;
     private String email;
     private String message;

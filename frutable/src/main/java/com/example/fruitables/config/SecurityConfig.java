@@ -14,6 +14,7 @@ public class SecurityConfig {
          http
                 .csrf(c -> c.disable())
                 .authorizeHttpRequests(auth -> {
+//                    auth.requestMatchers("/dashboard/**").hasAuthority("ADMIN");
                     auth.requestMatchers("/dashboard/**").hasRole("ADMIN");
                     auth.anyRequest().permitAll();
                 })
