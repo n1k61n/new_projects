@@ -22,10 +22,10 @@ public class User implements UserDetails {
     private Long id;
 
     @Column(name = "first_name" ,length = 50)
-    private String name;
+    private String firstName;
 
     @Column(name = "last_name", length = 50)
-    private String surname;
+    private String lastName;
 
     @Column(name = "email", nullable = false, unique = true, length = 50)
     private String email;
@@ -48,6 +48,9 @@ public class User implements UserDetails {
 
     @Column(name = "verification_token")
     private String verificationToken ;
+
+    @Column(name = "image_url")
+    private String imageUrl;
 
 
     @JsonIgnore

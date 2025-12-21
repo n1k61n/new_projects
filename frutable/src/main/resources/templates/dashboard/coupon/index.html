@@ -54,7 +54,8 @@
                         <td th:text="${coupon.discount}"></td>
                         <td th:text="${coupon.usageCount} + '/' + ${coupon.usageLimit}"></td>
                         <td>
-                            <a href="" th:class="${coupon.active} ? 'btn btn-success' : 'btn btn-danger'"></a>
+                            <span th:class="${coupon.isActive() ? 'text-success' : 'text-danger'}"><i class="fas fa-circle" style="font-size: 12px;"></i></span>
+                            <span class="ml-1" th:text="${coupon.isActive() ? 'Aktiv' : 'Passiv'}"></span>
                         </td>
                         <td th:text="${coupon.expiryDate}"></td>
                         <td>

@@ -46,14 +46,14 @@
                                     <form class="user" method="post"  th:object="${registerDto}">
                                         <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                                <input th:field="*{name}"  type="text" class="form-control form-control-user" id="exampleFirstName"
+                                                <input th:field="*{firstName}"  type="text" class="form-control form-control-user" id="exampleFirstName"
                                                        placeholder="First Name">
-                                                <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                                                <div class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
                                             </div>
                                             <div class="col-sm-6">
-                                                <input th:field="*{surname}" type="text" class="form-control form-control-user" id="exampleLastName"
+                                                <input th:field="*{lastName}" type="text" class="form-control form-control-user" id="exampleLastName"
                                                        placeholder="Last Name">
-                                                <div class="text-danger" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></div>
+                                                <div class="text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
                                             </div>
                                         </div>
                                         <div class="form-group">

@@ -2,6 +2,7 @@ package com.example.fruitables.services.impl;
 
 import com.example.fruitables.dtos.auth.AuthResponseDto;
 import com.example.fruitables.dtos.auth.RegisterDto;
+import com.example.fruitables.dtos.auth.UserProfileDto;
 import com.example.fruitables.models.Role;
 import com.example.fruitables.models.User;
 import com.example.fruitables.repositories.RoleRepository;
@@ -15,9 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -33,8 +32,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean registerUser(RegisterDto registerDto) {
-        Optional<User> existingUser = userRepository.findByEmail(registerDto.getEmail());
-        if (existingUser.isPresent()) {
+        User existingUser = userRepository.findByEmail(registerDto.getEmail());
+        if (existingUser != null) {
             return false;
         }
         User newUser = modelMapper.map(registerDto, User.class);
@@ -76,17 +75,21 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    @Override
-    public Optional<User> findByEmail(String email) {
-        return userRepository.findByEmail(email);
+
+    public User findByEmail(String email) {
+        User user = userRepository.findByEmail(email); // Və ya .orElseThrow()
+
+        if (user == null) return null;
+
+        return user;
     }
 
     public boolean verifyUser(AuthResponseDto authResponseDto) {
         // Bazadan bu tokenə sahib istifadəçini tap
-        Optional<User> userOpt = userRepository.findByEmail(authResponseDto.getEmail());
+        User userOpt = userRepository.findByEmail(authResponseDto.getEmail());
 
-        if (userOpt.isPresent()) {
-            User user = userOpt.get();
+        if (userOpt != null) {
+            User user = userOpt;
             if (user.getVerificationToken() != null && user.getVerificationToken().equals(authResponseDto.getOtp())) {
                 user.setEnabled(true); // Hesabı aktivləşdir
                 user.setVerificationToken(null); // Tokeni təmizlə (bir dəfəlik istifadə üçün)
@@ -101,5 +104,23 @@ public class UserServiceImpl implements UserService {
     public boolean isEmailExist(String email) {
         return userRepository.existsByEmail(email);
     }
+
+    @Override
+    public boolean updateProfile(UserProfileDto profileDto) {
+        try {
+            User updateUser = userRepository.findByEmail(profileDto.getEmail());
+            updateUser.setFirstName(profileDto.getFirstName());
+            updateUser.setLastName(profileDto.getLastName());
+            if(!profileDto.getPassword().equals(""))
+                updateUser.setPassword(passwordEncoder.encode(profileDto.getPassword()));
+            if(profileDto.getImageUrl() != null)
+                updateUser.setImageUrl(profileDto.getImageUrl());
+            userRepository.save(updateUser);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 
 }

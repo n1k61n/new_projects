@@ -69,4 +69,9 @@ public class CouponServiceImpl implements CouponService {
         }
         return false;
     }
+
+    @Override
+    public long countActiveCoupons() {
+        return couponRepository.countByActiveTrue();
+    }
 }

@@ -58,8 +58,15 @@
                         <td th:text="${product.price}"></td>
                         <td th:text="${product.discount}"></td>
                         <td th:text="${product.stock}"></td>
-                        <td th:text="${product.isPinned() ? 'Yes' : 'No'}"></td>
-                        <td th:text="${product.isSlider() ? 'Yes' : 'No'}"></td>
+                        <td>
+                            <span th:class="${product.isPinned() ? 'text-success' : 'text-danger'}"><i class="fas fa-circle" style="font-size: 12px;"></i></span>
+                            <span class="ml-1" th:text="${product.isPinned() ? 'Aktiv' : 'Passiv'}"></span>
+                        </td>
+                        <td>
+                            <span th:class="${product.isSlider() ? 'text-success' : 'text-danger'}"><i class="fas fa-circle" style="font-size: 12px;"></i></span>
+                            <span class="ml-1" th:text="${product.isSlider() ? 'Aktiv' : 'Passiv'}"></span>
+                        </td>
+
 
                         <td>
                             <a href="${product.imageUrl}"></a>

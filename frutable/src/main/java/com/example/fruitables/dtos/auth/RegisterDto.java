@@ -18,10 +18,10 @@ import lombok.Setter;
 public class RegisterDto {
     @NotBlank(message = "Name cannot be empty")
     @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters")
-    private String name;
+    private String firstName;
     @NotBlank(message = "Surname cannot be empty")
     @Size(min = 3, max = 50, message = "Surname must be between 3 and 50 characters")
-    private String surname;
+    private String lastName;
     @NotBlank(message = "Email cannot be empty")
     @Size(min = 5, max = 50, message = "Email must not exceed 100 characters")
     @Email(message = "Invalid email format")

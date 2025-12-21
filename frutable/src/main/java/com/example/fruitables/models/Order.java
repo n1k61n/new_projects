@@ -1,5 +1,6 @@
 package com.example.fruitables.models;
 
+import com.example.fruitables.enums.OrderStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,4 +31,7 @@ public class Order {
     private LocalDateTime orderDate;
     
     private BigDecimal totalPrice;
+
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
 }

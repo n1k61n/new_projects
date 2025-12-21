@@ -47,7 +47,11 @@
                         <tr th:each="category, i : ${categories}">
                             <th scope="row" th:text="${i.index+1}"></th>
                             <td th:text="${category.name}"></td>
-                            <td th:text="${category.isPinned() ? 'Yes' : 'No'}"></td>
+                            <td>
+                                <span th:class="${category.isPinned() ? 'text-success' : 'text-danger'}"><i class="fas fa-circle" style="font-size: 12px;"></i></span>
+                                <span class="ml-1" th:text="${category.isPinned() ? 'Aktiv' : 'Passiv'}"></span>
+                            </td>
+
                             <td>
                                 <a class="btn btn-primary" th:href="'/dashboard/category/update/'+${category.id}">Edit</a>
                                 <a class="btn btn-primary" th:onclick="'removeCategory('+${category.id} + ')'">Delete</a>

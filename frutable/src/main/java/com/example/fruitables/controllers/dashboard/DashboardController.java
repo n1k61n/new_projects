@@ -1,17 +1,22 @@
 package com.example.fruitables.controllers.dashboard;
 
-
-import com.example.fruitables.dtos.contact.ContactMessageDto;
-import com.example.fruitables.dtos.contact.ContactMessageReadDto;
-import com.example.fruitables.models.ContactMessage;
-import com.example.fruitables.services.ContactMessageService;
+import com.example.fruitables.dtos.auth.UserProfileDto;
+import com.example.fruitables.dtos.contact.MessageDto;
+import com.example.fruitables.dtos.contact.MessageReadDto;
+import com.example.fruitables.dtos.order.OrderDto;
+import com.example.fruitables.models.Coupon;
+import com.example.fruitables.models.User;
+import com.example.fruitables.services.CouponService;
+import com.example.fruitables.services.MessageService;
+import com.example.fruitables.services.OrderService;
+import com.example.fruitables.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 
@@ -20,42 +25,58 @@ import java.util.List;
 @RequestMapping("/dashboard")
 public class DashboardController {
 
-
-    private final ContactMessageService contactMessageService;
-
-
+    private final MessageService messageService;
+    private final UserService userService;
+    private final ModelMapper modelMapper;
+    private final OrderService orderService;
+    private final CouponService couponService;
 
     @GetMapping
     public String index(Model model){
-        List<ContactMessageReadDto> unReadMessages = contactMessageService.getContactMessages();
+        List<MessageReadDto> unReadMessages = messageService.getMessages();
         model.addAttribute("messages", unReadMessages);
+
+        long totalOrders = orderService.countTotalOrders();
+        double totalRevenue = orderService.calculateTotalRevenue();
+        long activeCoupons = couponService.countActiveCoupons();
+
+        // Model-ə əlavə edirik
+        model.addAttribute("totalOrders", totalOrders);
+        model.addAttribute("totalRevenue", totalRevenue);
+        model.addAttribute("activeCoupons", activeCoupons);
         return "dashboard/index";
     }
 
-
     @GetMapping("/messages/read-and-redirect/{id}")
     public String readAndRedirect(@PathVariable Long id) {
-        // 1. Mesajı tapırıq və oxundu edirik
-//        ContactMessage message = contactMessageService.findById(id);
-//        contactMessageService.markAsRead(id);
-//
-        ContactMessageDto contactMessageDto = contactMessageService.findByIdAndMarkAsRead(id);
-        // 2. Gmail-də birbaşa admin@gmail.com-a yazmaq üçün link hazırlayırıq
-        // Bu link birbaşa Gmail-in "Yaz" (Compose) pəncərəsini açacaq
-        String gmailLink = "https://mail.google.com/mail/?view=cm&fs=1&to=" + contactMessageDto.getEmail() +
-                "&su=Cavab: Tecili";
-
+        MessageDto messageDto = messageService.findByIdAndMarkAsRead(id);
+        String gmailLink = "https://mail.google.com/mail/?view=cm&fs=1&to=" + messageDto.getEmail() +
+                "&su=Cavab: Tecili" + "&body=" + messageDto.getMessage();
         return "redirect:" + gmailLink;
     }
 
 
-
-    @GetMapping("/dashboard")
-    public String dashboard() {
-        return "dashboard";
+    @GetMapping("/admin-profile")
+    public String showProfile(Model model, Principal principal) {
+        String email = principal.getName();
+        User admin =  userService.findByEmail(email);
+        if (admin == null) {
+            return "redirect:/dashboard?error=admin_not_found";
+        }
+        UserProfileDto userProfileDto = modelMapper.map(admin, UserProfileDto.class);
+        model.addAttribute("adminProfile", userProfileDto);
+        return "dashboard/admin-profile";
     }
 
 
+    @PostMapping("/admin-profile")
+    public String updateProfile(@ModelAttribute("adminProfile") UserProfileDto profileDto) {
+        boolean  result = userService.updateProfile(profileDto);
+        if(result)
+            return "redirect:admin-profile?success";
+        else
+            return "redirect:admin-profile?error";
+    }
 }
 
 

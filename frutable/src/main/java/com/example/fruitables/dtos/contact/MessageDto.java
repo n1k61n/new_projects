@@ -5,7 +5,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class ContactMessageReadDto {
+public class MessageDto {
     private Long id;
     private String name;
     private String email;
@@ -13,4 +13,3 @@ public class ContactMessageReadDto {
     private boolean messaageRead;
     private LocalDateTime createdAt;
 }
-
