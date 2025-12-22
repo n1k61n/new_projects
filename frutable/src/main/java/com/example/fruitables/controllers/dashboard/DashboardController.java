@@ -1,11 +1,8 @@
 package com.example.fruitables.controllers.dashboard;
 
-import com.example.fruitables.dtos.auth.UserProfileDto;
-import com.example.fruitables.dtos.contact.MessageDto;
-import com.example.fruitables.dtos.contact.MessageReadDto;
-import com.example.fruitables.dtos.order.OrderDto;
-import com.example.fruitables.models.Coupon;
-import com.example.fruitables.models.User;
+import com.example.fruitables.dtos.message.MessageDto;
+import com.example.fruitables.dtos.message.MessageReadDto;
+import com.example.fruitables.dtos.toolbar.UserProfileDto;
 import com.example.fruitables.services.CouponService;
 import com.example.fruitables.services.MessageService;
 import com.example.fruitables.services.OrderService;
@@ -33,14 +30,10 @@ public class DashboardController {
 
     @GetMapping
     public String index(Model model){
-        List<MessageReadDto> unReadMessages = messageService.getMessages();
-        model.addAttribute("messages", unReadMessages);
-
         long totalOrders = orderService.countTotalOrders();
         double totalRevenue = orderService.calculateTotalRevenue();
         long activeCoupons = couponService.countActiveCoupons();
 
-        // Model-ə əlavə edirik
         model.addAttribute("totalOrders", totalOrders);
         model.addAttribute("totalRevenue", totalRevenue);
         model.addAttribute("activeCoupons", activeCoupons);
@@ -59,11 +52,7 @@ public class DashboardController {
     @GetMapping("/admin-profile")
     public String showProfile(Model model, Principal principal) {
         String email = principal.getName();
-        User admin =  userService.findByEmail(email);
-        if (admin == null) {
-            return "redirect:/dashboard?error=admin_not_found";
-        }
-        UserProfileDto userProfileDto = modelMapper.map(admin, UserProfileDto.class);
+        UserProfileDto userProfileDto = userService.getUserProfile(email);
         model.addAttribute("adminProfile", userProfileDto);
         return "dashboard/admin-profile";
     }

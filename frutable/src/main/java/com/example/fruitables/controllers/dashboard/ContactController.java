@@ -1,6 +1,6 @@
 package com.example.fruitables.controllers.dashboard;
 
-import com.example.fruitables.dtos.contact.MessageCreateDto;
+import com.example.fruitables.dtos.message.MessageCreateDto;
 import com.example.fruitables.services.MessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

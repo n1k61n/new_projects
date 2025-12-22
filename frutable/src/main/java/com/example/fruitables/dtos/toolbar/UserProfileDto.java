@@ -1,4 +1,4 @@
-package com.example.fruitables.dtos.auth;
+package com.example.fruitables.dtos.toolbar;
 
 import lombok.Data;
 

@@ -1,9 +1,9 @@
 package com.example.fruitables.services;
 
 
-import com.example.fruitables.dtos.contact.MessageCreateDto;
-import com.example.fruitables.dtos.contact.MessageDto;
-import com.example.fruitables.dtos.contact.MessageReadDto;
+import com.example.fruitables.dtos.message.MessageCreateDto;
+import com.example.fruitables.dtos.message.MessageDto;
+import com.example.fruitables.dtos.message.MessageReadDto;
 
 import java.util.List;
 

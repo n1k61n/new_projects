@@ -1,7 +1,6 @@
-package com.example.fruitables.dtos.contact;
+package com.example.fruitables.dtos.message;
 
 
-import jakarta.persistence.Column;
 import lombok.Data;
 
 import java.time.LocalDateTime;

@@ -19,22 +19,13 @@ public class CustomUserDetailService implements  UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        // 1. Əvvəlcə DTO-nu al
         User findUser = userService.findByEmail(email);
-
-        // 2. Əgər DTO null-dırsa, ModelMapper-ə keçmədən xəta at
         if (findUser == null) {
             throw new UsernameNotFoundException("İstifadəçi tapılmadı: " + email);
         }
-
-        // 3. İndi təhlükəsiz şəkildə map edə bilərsən
-//        User findUser = modelMapper.map(user, User.class);
-
-        // 4. Əvvəlki xətanın (No roles) qarşısını almaq üçün rolları yoxla
         if (findUser.getRoles() == null || findUser.getRoles().isEmpty()) {
             throw new InternalAuthenticationServiceException("İstifadəçinin rolu yoxdur!");
         }
-
         return findUser;
     }
 

@@ -12,18 +12,11 @@ import java.util.List;
 
 @Data
 public class OrderDto {
-
-//    <th>Sifariş ID</th>
     private Long id;
-// <th>Müştəri</th>
     private User user;
-// <th>Məbləğ</th>
     private BigDecimal totalPrice;
-
     private List<OrderItem> orderItems;
-//  <th>Status</th>
     private OrderStatus status;
-//
     private LocalDateTime orderDate;
 
 }

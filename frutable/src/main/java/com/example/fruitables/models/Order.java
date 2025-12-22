@@ -21,17 +21,12 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @ManyToOne
     private User user;
-
     @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems;
-
     private LocalDateTime orderDate;
-    
     private BigDecimal totalPrice;
-
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 }

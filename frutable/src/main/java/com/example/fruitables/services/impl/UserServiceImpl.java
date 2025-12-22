@@ -2,7 +2,8 @@ package com.example.fruitables.services.impl;
 
 import com.example.fruitables.dtos.auth.AuthResponseDto;
 import com.example.fruitables.dtos.auth.RegisterDto;
-import com.example.fruitables.dtos.auth.UserProfileDto;
+import com.example.fruitables.dtos.toolbar.UserNameDto;
+import com.example.fruitables.dtos.toolbar.UserProfileDto;
 import com.example.fruitables.models.Role;
 import com.example.fruitables.models.User;
 import com.example.fruitables.repositories.RoleRepository;
@@ -76,12 +77,10 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    public User findByEmail(String email) {
+    public UserProfileDto getUserProfile(String email) {
         User user = userRepository.findByEmail(email); // Və ya .orElseThrow()
-
         if (user == null) return null;
-
-        return user;
+        return modelMapper.map(user, UserProfileDto.class);
     }
 
     public boolean verifyUser(AuthResponseDto authResponseDto) {
@@ -120,6 +119,20 @@ public class UserServiceImpl implements UserService {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    @Override
+    public UserNameDto getCurrentAdmin() {
+        User user =  userRepository.findByRoleName("ROLE_ADMIN");
+        if(user == null) return null;
+        return modelMapper.map(user, UserNameDto.class);
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        User user = userRepository.findByEmail(email);
+        if (user == null) return null;
+        return user;
     }
 
 

@@ -1,8 +1,8 @@
 package com.example.fruitables.services.impl;
 
-import com.example.fruitables.dtos.contact.MessageCreateDto;
-import com.example.fruitables.dtos.contact.MessageDto;
-import com.example.fruitables.dtos.contact.MessageReadDto;
+import com.example.fruitables.dtos.message.MessageCreateDto;
+import com.example.fruitables.dtos.message.MessageDto;
+import com.example.fruitables.dtos.message.MessageReadDto;
 import com.example.fruitables.models.Message;
 import com.example.fruitables.repositories.MessageRepository;
 import com.example.fruitables.services.MessageService;

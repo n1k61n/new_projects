@@ -1,4 +1,4 @@
-package com.example.fruitables.dtos.contact;
+package com.example.fruitables.dtos.message;
 
 import lombok.Data;
 
