@@ -25,9 +25,9 @@ public class HomeController {
     @GetMapping("/")
     public String home(Model model){
         List<CategoryPinnedDto> categoryPinnedDtoList = categoryService.getPinnedCategory();
-        List<ProductSliderDto> productSliderDtoList = productService.getSilderProducts();
-
         model.addAttribute("categories", categoryPinnedDtoList);
+
+        List<ProductSliderDto> productSliderDtoList = productService.getSilderProducts();
         model.addAttribute("sliderProducts", productSliderDtoList);
 
         return "index";
@@ -68,8 +68,4 @@ public class HomeController {
         return "cart";
     }
 
-    @GetMapping("/shop-detail")
-    public String shopDetail(){
-        return "shop-detail";
-    }
 }

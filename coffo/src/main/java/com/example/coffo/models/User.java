@@ -21,10 +21,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", nullable = false)
-    private String name;
-    @Column(name = "surname", nullable = false)
-    private String surname;
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
 
     @Email(message = "email duzgun deyil")
     @Column(name = "email", nullable = false, unique = true)
@@ -39,4 +39,14 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+
+    @Column(name = "enabled", columnDefinition = "boolean default false")
+    private boolean enabled;
+    @Column(name = "account_non_expired", columnDefinition = "boolean default false")
+    private boolean accountNonExpired;
+    @Column(name = "credentials_non_expired", columnDefinition = "boolean default false")
+    private boolean credentialsNonExpired;
+    @Column(name = "account_non_locked", columnDefinition = "boolean default false")
+    private boolean accountNonLocked;
+
 }

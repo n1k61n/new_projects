@@ -14,13 +14,13 @@ public class Message {
     private Long id;
 
     @Column(nullable = false, length = 50)
-    private String name; // Your Name
+    private String name;
 
     @Column(nullable = false, length = 100)
-    private String email; // Enter Your Email
+    private String email;
 
     @Column(nullable = false, columnDefinition = "TEXT")
-    private String message; // Your Message
+    private String message;
 
     @Column(name = "is_read", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
     private boolean isRead;

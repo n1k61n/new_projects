@@ -8,9 +8,9 @@ import lombok.Data;
 @Data
 public class RegisterDto {
     @NotEmpty(message = "Ad sahesi bos ola bilmez")
-    private String  name;
+    private String  firstName;
     @NotEmpty(message = "Soyad sahesi bos ola bilmez")
-    private String surname;
+    private String lastName;
     @NotEmpty(message = "Email sahesi bos ola bilmez")
     @Email(message = "Duzgun email formati daxil edin")
     private String email;

@@ -20,23 +20,20 @@ public class UserController {
 
     @GetMapping("/login")
     public String login(){
-        return "auth/login";
+        return "login";
     }
 
     @GetMapping("/register")
     public String register(Model model) {
         model.addAttribute("registerDto", new RegisterDto());
-        return "auth/register";
+        return "register";
     }
 
     @PostMapping("/register")
     public String registerUser(@ModelAttribute("registerDto") @Valid RegisterDto registerDto, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "auth/register";
+            return "register";
         }
-        // Логика сохранения пользователя
         return "redirect:/login";
     }
-
-
 }
