@@ -26,25 +26,6 @@ public class SecurityConfig {
 
 
 
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//         http
-//                .csrf(c -> c.disable())
-//                .authorizeHttpRequests(auth -> {
-//                    auth.requestMatchers("/dashboard/**").hasRole("ADMIN");
-//                    auth.requestMatchers( "/*", "/dashboard/**", "/front/**", "/verify-otp", "/login", "/register").permitAll();
-//                    auth.anyRequest().authenticated();
-//                })
-//                .formLogin((form) -> {
-//                    form.loginPage("/login");
-//                    form.failureUrl("/login?error=true");
-//                    form.usernameParameter("email");
-//                    form.passwordParameter("password");
-//                    form.permitAll();
-//                 });
-//         return http.build();
-//    }
-
     @Bean
     public AuthenticationSuccessHandler customSuccessHandler() {
         return (request, response, authentication) -> {
@@ -68,7 +49,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> {
                     // Sıralama önəmlidir: Dar icazələr yuxarıda, genişlər aşağıda
                     auth.requestMatchers("/dashboard/**").hasRole("ADMIN");
-                    auth.requestMatchers("/", "/front/**", "/verify-otp", "/login", "/register").permitAll();
+                    auth.requestMatchers("/*", "/front/**").permitAll();
                     auth.requestMatchers("/profile").authenticated(); // Giriş tələb olunur
                     auth.anyRequest().authenticated();
                 })

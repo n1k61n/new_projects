@@ -8,14 +8,14 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Slf4j
-
 @Controller
 @RequiredArgsConstructor
 public class AuthController {
@@ -75,34 +75,15 @@ public class AuthController {
         log.info("Received OTP: {}", authResponseDto.getOtp());
         boolean isVerified = userService.verifyUser(authResponseDto);
         if (isVerified) {
-            return "auth/registration-success";
+            return "auth/login";
         } else {
             return "redirect:/login?error=invalid-token";
         }
     }
 
-    //    @GetMapping("/confirm")
-//    public String confirmRegistration(@RequestParam("token") String token) {
-//        boolean isVerified = userService.verifyUser(token);
-//        if (isVerified) {
-//            return "auth/registration-success";
-//        } else {
-//            return "redirect:/login?error=invalid-token";
-//        }
-//    }
-
-
-
-
     @GetMapping("/forgot-password")
     public String forgot() {
         return "auth/forgot-password";
-    }
-
-
-    @GetMapping("/debug-auth")
-    public String debugAuth(Authentication authentication) {
-        return authentication.getAuthorities().toString();
     }
 
 }

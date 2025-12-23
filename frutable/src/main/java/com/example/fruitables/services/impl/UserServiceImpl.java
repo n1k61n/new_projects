@@ -10,12 +10,14 @@ import com.example.fruitables.repositories.RoleRepository;
 import com.example.fruitables.repositories.UserRepository;
 import com.example.fruitables.services.EmailService;
 import com.example.fruitables.services.UserService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -34,16 +36,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean registerUser(RegisterDto registerDto) {
-        User existingUser = userRepository.findByEmail(registerDto.getEmail());
-        if (existingUser != null) {
+        // 1. İstifadəçi yoxlaması
+        if (userRepository.findByEmail(registerDto.getEmail()) != null) {
             return false;
         }
+
+        // 2. Map və şifrələmə
         User newUser = modelMapper.map(registerDto, User.class);
-        String encodedPassword = passwordEncoder.encode(registerDto.getPassword());
-        newUser.setPassword(encodedPassword);
+        newUser.setPassword(passwordEncoder.encode(registerDto.getPassword()));
 
 
-        //yeni token teyin edirik;
+//        yeni token teyin edirik;
 //        String token = UUID.randomUUID().toString();
 
         String token = String.valueOf((int) (Math.random() * 1000000));
@@ -51,17 +54,27 @@ public class UserServiceImpl implements UserService {
         Date date = new Date();
         newUser.setTokenExpiryDate(new Date(date.getTime() + 300000));
 
-        Role userRole = new Role();
-        if(userRepository.findById(1L).isEmpty()) {
-            userRole.setName("ROLE_ADMIN");
+//        Role userRole = new Role();
+//        if(userRepository.findById(1L).isEmpty()) {
+//            userRole.setName("ROLE_ADMIN");
+//        }
+//        else {
+//            userRole.setName("ROLE_USER");
+//        }
+//        Set<Role> roles = new HashSet<>();
+//        roles.add(userRole);
+//        newUser.setRoles(roles);
 
-        }
-        else {
-            userRole.setName("ROLE_USER");
-        }
-        Set<Role> roles = new HashSet<>();
-        roles.add(userRole);
-        newUser.setRoles(roles);
+        // 4. Rol təyini
+        String roleName = (userRepository.count() == 0) ? "ROLE_ADMIN" : "ROLE_USER";
+        Role userRole = roleRepository.findByName(roleName)
+                .orElseGet(() -> {
+                    Role newRole = new Role();
+                    newRole.setName(roleName);
+                    return roleRepository.save(newRole);
+                });
+
+        newUser.setRoles(new HashSet<>(Collections.singletonList(userRole)));
 
         try {
             roleRepository.save(userRole);
@@ -76,6 +89,7 @@ public class UserServiceImpl implements UserService {
             return false;
         }
     }
+
 
 
     public UserProfileDto getUserProfile(String email) {
@@ -109,18 +123,35 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional // Verilənlər bazası əməliyyatının bütövlüyü üçün vacibdir
     public boolean updateProfile(UserProfileDto profileDto) {
         try {
-            User updateUser = userRepository.findByEmail(profileDto.getEmail());
-            updateUser.setFirstName(profileDto.getFirstName());
-            updateUser.setLastName(profileDto.getLastName());
-            if(!profileDto.getPassword().equals(""))
-                updateUser.setPassword(passwordEncoder.encode(profileDto.getPassword()));
-            if(profileDto.getImageUrl() != null)
-                updateUser.setImageUrl(profileDto.getImageUrl());
-            userRepository.save(updateUser);
+            User user = userRepository.findByEmail(profileDto.getEmail());
+
+            if (user == null) {
+                return false; // İstifadəçi tapılmasa xəta qaytar
+            }
+
+            // Ad və Soyad yeniləmə
+            user.setFirstName(profileDto.getFirstName());
+            user.setLastName(profileDto.getLastName());
+
+            // Şifrə yoxlaması: Yalnız boş deyilsə və null deyilsə yenilə
+            if (profileDto.getPassword() != null && !profileDto.getPassword().trim().isEmpty()) {
+                user.setPassword(passwordEncoder.encode(profileDto.getPassword()));
+            }
+
+            // Şəkil yeniləmə
+            if (profileDto.getImageUrl() != null && !profileDto.getImageUrl().isEmpty()) {
+                user.setImageUrl(profileDto.getImageUrl());
+            }
+
+            userRepository.save(user);
             return true;
         } catch (Exception e) {
+            // Loglamaq yaxşı olar:
+            //log.error("Update error: ", e);
+            e.printStackTrace();
             return false;
         }
     }
@@ -138,6 +169,4 @@ public class UserServiceImpl implements UserService {
         if (user == null) return null;
         return user;
     }
-
-
 }
