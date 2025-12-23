@@ -2,8 +2,8 @@ package com.example.fruitables.services.impl;
 
 import com.example.fruitables.dtos.auth.AuthResponseDto;
 import com.example.fruitables.dtos.auth.RegisterDto;
-import com.example.fruitables.dtos.toolbar.UserNameDto;
-import com.example.fruitables.dtos.toolbar.UserProfileDto;
+import com.example.fruitables.dtos.auth.UserNameDto;
+import com.example.fruitables.dtos.auth.UserProfileDto;
 import com.example.fruitables.models.Role;
 import com.example.fruitables.models.User;
 import com.example.fruitables.repositories.RoleRepository;
@@ -16,6 +16,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -47,13 +48,13 @@ public class UserServiceImpl implements UserService {
 
         String token = String.valueOf((int) (Math.random() * 1000000));
         newUser.setVerificationToken(token);
+        Date date = new Date();
+        newUser.setTokenExpiryDate(new Date(date.getTime() + 300000));
 
         Role userRole = new Role();
         if(userRepository.findById(1L).isEmpty()) {
             userRole.setName("ROLE_ADMIN");
-            newUser.setAccountNonExpired(true);
-            newUser.setAccountNonLocked(true);
-            newUser.setCredentialsNonExpired(true);
+
         }
         else {
             userRole.setName("ROLE_USER");
@@ -90,8 +91,11 @@ public class UserServiceImpl implements UserService {
         if (userOpt != null) {
             User user = userOpt;
             if (user.getVerificationToken() != null && user.getVerificationToken().equals(authResponseDto.getOtp())) {
-                user.setEnabled(true); // Hesabı aktivləşdir
-                user.setVerificationToken(null); // Tokeni təmizlə (bir dəfəlik istifadə üçün)
+                user.setEnabled(true);
+                user.setAccountNonExpired(true);
+                user.setAccountNonLocked(true);
+                user.setCredentialsNonExpired(true);
+                user.setVerificationToken(null);
                 userRepository.save(user);
                 return true;
             }

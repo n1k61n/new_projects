@@ -14,23 +14,25 @@ public class SecurityConfig {
 
 
 
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // CSRF qorumasını söndürmək (ehtiyaca görə)
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/**").permitAll() // Hər kəsə açıq
-                        .requestMatchers("/dashboard/**").hasRole("ADMIN") // Yalnız Admin üçün
+                        .requestMatchers("/**").permitAll()
+                        .requestMatchers("/dashboard/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
-                .formLogin(form -> form.permitAll()) // Giriş formunu aktiv edir
-                .logout(logout -> logout.permitAll()); // Çıxış imkanı verir
+                .formLogin(form -> {
+                    form.loginPage("/login");
+                    form.loginProcessingUrl("/perform_login");
+                    form.defaultSuccessUrl("/home", true);
+                    form.permitAll();
+                })
+                .logout(logout -> logout.permitAll());
 
         return http.build();
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 }

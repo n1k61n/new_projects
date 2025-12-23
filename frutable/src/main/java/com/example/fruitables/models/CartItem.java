@@ -19,17 +19,17 @@ public class CartItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private Product product;
-
-    @Column(precision = 12, scale = 2)
-    private BigDecimal amount;
-
-    @Column(precision = 12, scale = 2)
-    private BigDecimal percent;
-
-    @ManyToOne
-    private Cart cart;
-
-    private Integer quantity;
+//    @ManyToOne
+//    private Product product;
+//
+//    @Column(precision = 12, scale = 2)
+//    private BigDecimal amount;
+//
+//    @Column(precision = 12, scale = 2)
+//    private BigDecimal percent;
+//
+//    @ManyToOne
+//    private Cart cart;
+//
+//    private Integer quantity;
 }

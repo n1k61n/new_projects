@@ -1,7 +1,7 @@
 package com.example.fruitables.controllers.dashboard;
 
 import com.example.fruitables.dtos.message.MessageReadDto;
-import com.example.fruitables.dtos.toolbar.UserNameDto;
+import com.example.fruitables.dtos.auth.UserNameDto;
 import com.example.fruitables.services.MessageService;
 import com.example.fruitables.services.UserService;
 import lombok.RequiredArgsConstructor;

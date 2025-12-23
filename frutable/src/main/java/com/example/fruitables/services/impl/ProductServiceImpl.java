@@ -87,6 +87,11 @@ public class ProductServiceImpl implements ProductService {
         if(products.isEmpty()) return List.of();
         return products.stream().map(product -> modelMapper.map(product, ProductSliderDto.class)).toList();
     }
+
+    @Override
+    public Product getProductById(Long productId) {
+        return productRepository.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Product", productId));
+    }
 }
 
 

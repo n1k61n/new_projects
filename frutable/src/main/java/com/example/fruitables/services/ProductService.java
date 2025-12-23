@@ -22,5 +22,7 @@ public interface ProductService {
     List<Product> getAllProducts();
 
     List<ProductSliderDto> getSilderProducts();
+
+    Product getProductById(Long productId);
 }
 

@@ -1,20 +1,17 @@
 package com.example.fruitables.controllers.dashboard;
 
 import com.example.fruitables.dtos.message.MessageDto;
-import com.example.fruitables.dtos.message.MessageReadDto;
-import com.example.fruitables.dtos.toolbar.UserProfileDto;
+import com.example.fruitables.dtos.auth.UserProfileDto;
 import com.example.fruitables.services.CouponService;
 import com.example.fruitables.services.MessageService;
 import com.example.fruitables.services.OrderService;
 import com.example.fruitables.services.UserService;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.List;
 
 
 @Controller
@@ -24,7 +21,6 @@ public class DashboardController {
 
     private final MessageService messageService;
     private final UserService userService;
-    private final ModelMapper modelMapper;
     private final OrderService orderService;
     private final CouponService couponService;
 

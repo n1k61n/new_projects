@@ -1,31 +1,95 @@
 package com.example.fruitables.config;
 
+import com.example.fruitables.security.CustomUserDetailService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 
 @Configuration
+@EnableMethodSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
+
+    @Autowired
+    private  CustomUserDetailService userDetailService;
+    private final PasswordEncoder passwordEncoder;
+
+
+
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//         http
+//                .csrf(c -> c.disable())
+//                .authorizeHttpRequests(auth -> {
+//                    auth.requestMatchers("/dashboard/**").hasRole("ADMIN");
+//                    auth.requestMatchers( "/*", "/dashboard/**", "/front/**", "/verify-otp", "/login", "/register").permitAll();
+//                    auth.anyRequest().authenticated();
+//                })
+//                .formLogin((form) -> {
+//                    form.loginPage("/login");
+//                    form.failureUrl("/login?error=true");
+//                    form.usernameParameter("email");
+//                    form.passwordParameter("password");
+//                    form.permitAll();
+//                 });
+//         return http.build();
+//    }
+
+    @Bean
+    public AuthenticationSuccessHandler customSuccessHandler() {
+        return (request, response, authentication) -> {
+            var authorities = authentication.getAuthorities();
+
+            // Rolun adını yoxlayırıq (Spring RolePrefix olaraq ROLE_ istifadə edir)
+            String redirectUrl = authorities.stream()
+                    .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))
+                    ? "/dashboard"  // Adminsə bura
+                    : "/";     // Usersə (və ya başqa rolsa) bura
+
+            response.sendRedirect(redirectUrl);
+        };
+    }
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-         http
+        http
                 .csrf(c -> c.disable())
                 .authorizeHttpRequests(auth -> {
-//                    auth.requestMatchers("/dashboard/**").hasAuthority("ADMIN");
+                    // Sıralama önəmlidir: Dar icazələr yuxarıda, genişlər aşağıda
                     auth.requestMatchers("/dashboard/**").hasRole("ADMIN");
-                    auth.anyRequest().permitAll();
+                    auth.requestMatchers("/", "/front/**", "/verify-otp", "/login", "/register").permitAll();
+                    auth.requestMatchers("/profile").authenticated(); // Giriş tələb olunur
+                    auth.anyRequest().authenticated();
                 })
-                .formLogin((form) -> {
-                    form.defaultSuccessUrl("/dashboard", true);
+                .formLogin(form -> {
                     form.loginPage("/login");
                     form.failureUrl("/login?error=true");
                     form.usernameParameter("email");
                     form.passwordParameter("password");
+                    // YENİ: Custom handler-i bura əlavə edirik
+                    form.successHandler(customSuccessHandler());
                     form.permitAll();
-                 });
-         return http.build();
+                    form.failureHandler((request, response, exception) -> {
+                        System.out.println("Login xətası: " + exception.getMessage());
+                        response.sendRedirect("/login?error=true");
+                    });
+                });
+        return http.build();
+    }
+
+
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailService).passwordEncoder(passwordEncoder);
     }
 }

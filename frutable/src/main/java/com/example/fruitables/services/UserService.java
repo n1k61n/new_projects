@@ -2,8 +2,8 @@ package com.example.fruitables.services;
 
 import com.example.fruitables.dtos.auth.AuthResponseDto;
 import com.example.fruitables.dtos.auth.RegisterDto;
-import com.example.fruitables.dtos.toolbar.UserNameDto;
-import com.example.fruitables.dtos.toolbar.UserProfileDto;
+import com.example.fruitables.dtos.auth.UserNameDto;
+import com.example.fruitables.dtos.auth.UserProfileDto;
 import com.example.fruitables.models.User;
 
 

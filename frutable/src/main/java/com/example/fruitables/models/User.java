@@ -30,6 +30,8 @@ public class User implements UserDetails {
     @Column(name = "email", nullable = false, unique = true, length = 50)
     private String email;
 
+    private String phone;
+
     @JsonIgnore
     @Column(name = "password", nullable = false)
     private String password;
@@ -48,22 +50,26 @@ public class User implements UserDetails {
 
     @Column(name = "verification_token")
     private String verificationToken ;
+    private Date tokenExpiryDate;
 
     @Column(name = "image_url")
     private String imageUrl;
 
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Order> orders = new ArrayList<>();
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private List<Order> orders = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
-            name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "users", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "roles", referencedColumnName = "id"))
     private Set<Role> roles = new HashSet<>();
 
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Cart> carts;
 
 
     @Override

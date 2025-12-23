@@ -3,6 +3,9 @@ package com.example.fruitables.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,6 +18,7 @@ public class Role {
     private Long id;
     private String name;
 
-    public Role(String user) {
-    }
+    @ManyToMany(mappedBy = "roles")
+    private List<User> users = new ArrayList<>();
+
 }

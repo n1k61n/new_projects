@@ -22,7 +22,7 @@ public class HomeController {
     private final CategoryService categoryService;
 
 
-    @GetMapping("/")
+    @GetMapping()
     public String home(Model model){
         List<CategoryPinnedDto> categoryPinnedDtoList = categoryService.getPinnedCategory();
         model.addAttribute("categories", categoryPinnedDtoList);
@@ -45,10 +45,6 @@ public class HomeController {
     }
 
 
-    @GetMapping("/404")
-    public String error(){
-        return "404";
-    }
 
 
 
