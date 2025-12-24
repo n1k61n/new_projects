@@ -2,6 +2,7 @@ package com.example.coffo.controllers;
 
 import com.example.coffo.DTOs.UserDTO.RegisterDto;
 import com.example.coffo.services.UserService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -30,10 +31,15 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute("registerDto") @Valid RegisterDto registerDto, BindingResult result, Model model) {
-        if (result.hasErrors()) {
+    public String registerUser(@Valid RegisterDto registerDto, BindingResult bindingResult, Model model) {
+        if (!bindingResult.hasErrors()) {
+            model.addAttribute("registerDto", registerDto);
             return "register";
         }
-        return "redirect:/login";
+        boolean result = userService.registerUser(registerDto);
+        if(result)
+            return "redirect:/login";
+        else
+            return "redirect:/register";
     }
 }
