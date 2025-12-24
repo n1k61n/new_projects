@@ -12,7 +12,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/dashboard/comment")
-public class CommentController {
+public class CommentDashboardController {
 
     @GetMapping
     public String index(Model model){

@@ -2,10 +2,11 @@ package com.example.fruitables.services.impl;
 
 import com.example.fruitables.dtos.auth.AuthResponseDto;
 import com.example.fruitables.dtos.auth.RegisterDto;
-import com.example.fruitables.dtos.auth.UserNameDto;
-import com.example.fruitables.dtos.auth.UserProfileDto;
+import com.example.fruitables.dtos.user.UserNameDto;
+import com.example.fruitables.dtos.user.UserProfileDto;
 import com.example.fruitables.models.Role;
 import com.example.fruitables.models.User;
+import com.example.fruitables.payloads.RegisterPayload;
 import com.example.fruitables.repositories.RoleRepository;
 import com.example.fruitables.repositories.UserRepository;
 import com.example.fruitables.services.EmailService;
@@ -20,7 +21,6 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -35,36 +35,20 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public boolean registerUser(RegisterDto registerDto) {
+    public RegisterPayload registerUser(RegisterDto registerDto) {
         // 1. İstifadəçi yoxlaması
         if (userRepository.findByEmail(registerDto.getEmail()) != null) {
-            return false;
+            return  new RegisterPayload(null, null, 400, "Bu adli istifadeci artiq movcuddur!");
         }
 
         // 2. Map və şifrələmə
         User newUser = modelMapper.map(registerDto, User.class);
         newUser.setPassword(passwordEncoder.encode(registerDto.getPassword()));
 
-
-//        yeni token teyin edirik;
-//        String token = UUID.randomUUID().toString();
-
         String token = String.valueOf((int) (Math.random() * 1000000));
         newUser.setVerificationToken(token);
         Date date = new Date();
         newUser.setTokenExpiryDate(new Date(date.getTime() + 300000));
-
-//        Role userRole = new Role();
-//        if(userRepository.findById(1L).isEmpty()) {
-//            userRole.setName("ROLE_ADMIN");
-//        }
-//        else {
-//            userRole.setName("ROLE_USER");
-//        }
-//        Set<Role> roles = new HashSet<>();
-//        roles.add(userRole);
-//        newUser.setRoles(roles);
-
         // 4. Rol təyini
         String roleName = (userRepository.count() == 0) ? "ROLE_ADMIN" : "ROLE_USER";
         Role userRole = roleRepository.findByName(roleName)
@@ -80,13 +64,11 @@ public class UserServiceImpl implements UserService {
             roleRepository.save(userRole);
             userRepository.save(newUser);
             emailService.sendEmail(newUser.getEmail(), token);
-            return true;
+            return new RegisterPayload(token, newUser.getEmail(), 200, "User register successfuly");
         } catch (DataIntegrityViolationException e) {
-            System.err.println("Qeydiyyat zamanı məlumat bazası bütövlüyü pozuntusu: " + e.getMessage());
-            return false;
+            return new RegisterPayload(null, null, 400, "Qeydiyyat zamanı məlumat bazası bütövlüyü pozuntusu: " + e.getMessage());
         } catch (Exception e) {
-            System.err.println("Gözlənilməyən xəta: " + e.getMessage());
-            return false;
+            return new RegisterPayload(null, null, 400, "Gözlənilməyən xəta: " + e.getMessage());
         }
     }
 
@@ -135,6 +117,7 @@ public class UserServiceImpl implements UserService {
             // Ad və Soyad yeniləmə
             user.setFirstName(profileDto.getFirstName());
             user.setLastName(profileDto.getLastName());
+            user.setPhone(profileDto.getPhone());
 
             // Şifrə yoxlaması: Yalnız boş deyilsə və null deyilsə yenilə
             if (profileDto.getPassword() != null && !profileDto.getPassword().trim().isEmpty()) {

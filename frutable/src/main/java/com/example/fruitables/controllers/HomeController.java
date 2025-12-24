@@ -2,6 +2,7 @@ package com.example.fruitables.controllers;
 
 
 import com.example.fruitables.dtos.category.CategoryPinnedDto;
+import com.example.fruitables.dtos.product.ProductPinnedDto;
 import com.example.fruitables.dtos.product.ProductSliderDto;
 import com.example.fruitables.services.CategoryService;
 import com.example.fruitables.services.ProductService;
@@ -22,13 +23,17 @@ public class HomeController {
     private final CategoryService categoryService;
 
 
+
     @GetMapping()
-    public String home(Model model){
+    public String home(Model model) {
         List<CategoryPinnedDto> categoryPinnedDtoList = categoryService.getPinnedCategory();
         model.addAttribute("categories", categoryPinnedDtoList);
 
         List<ProductSliderDto> productSliderDtoList = productService.getSilderProducts();
         model.addAttribute("sliderProducts", productSliderDtoList);
+
+        List<ProductPinnedDto> allProducts = productService.getAllProducts();
+        model.addAttribute("allProducts", allProducts);
 
         return "index";
     }
@@ -59,9 +64,5 @@ public class HomeController {
         return "contact";
     }
 
-    @GetMapping("/cart")
-    public String cart(){
-        return "cart";
-    }
 
 }

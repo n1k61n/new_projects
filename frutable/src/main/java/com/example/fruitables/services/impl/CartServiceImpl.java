@@ -1,6 +1,7 @@
 package com.example.fruitables.services.impl;
 
 import com.example.fruitables.dtos.cart.AddToCartDto;
+import com.example.fruitables.dtos.product.ProductDto;
 import com.example.fruitables.models.Cart;
 import com.example.fruitables.models.Product;
 import com.example.fruitables.models.User;
@@ -11,6 +12,7 @@ import com.example.fruitables.services.CartService;
 import com.example.fruitables.services.ProductService;
 import com.example.fruitables.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,10 +22,11 @@ public class CartServiceImpl implements CartService {
     private final CartRepository cartRepository;
     private final UserService userService;
     private final ProductService productService;
+    private final ModelMapper modelMapper;
 
 
     @Override
-    public Result addToCart(String email, AddToCartDto addToCartDto) {
+    public Result addProductToCart(String email, AddToCartDto addToCartDto) {
         Cart findCart = cartRepository.findByProductId(addToCartDto.getProductId());
 
         if(findCart != null){
@@ -33,7 +36,8 @@ public class CartServiceImpl implements CartService {
         }
 
         User user = userService.findByEmail(email);
-        Product product = productService.getProductById(addToCartDto.getProductId());
+        ProductDto productDto = productService.getProductById(addToCartDto.getProductId());
+        Product product = modelMapper.map(productDto, Product.class);
 
         Cart cart = new Cart();
         cart.setUser(user);
@@ -41,6 +45,20 @@ public class CartServiceImpl implements CartService {
         cart.setProduct(product);
         cartRepository.save(cart);
         return new Result(true);
+    }
+
+    @Override
+    public void deleteItem(String username, Long productId) {
+    }
+
+    @Override
+    public void increaseQuantity(String username, Long productId) {
+
+    }
+
+    @Override
+    public void decreaseQuantity(String username, Long productId) {
+
     }
 
 

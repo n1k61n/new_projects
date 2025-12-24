@@ -1,7 +1,7 @@
 package com.example.fruitables.controllers.dashboard;
 
 import com.example.fruitables.dtos.message.MessageDto;
-import com.example.fruitables.dtos.auth.UserProfileDto;
+import com.example.fruitables.dtos.user.UserProfileDto;
 import com.example.fruitables.services.CouponService;
 import com.example.fruitables.services.MessageService;
 import com.example.fruitables.services.OrderService;

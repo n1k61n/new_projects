@@ -22,7 +22,7 @@ public class SecurityConfig {
 
     @Autowired
     private  CustomUserDetailService userDetailService;
-    private final PasswordEncoder passwordEncoder;
+    private  final PasswordEncoder passwordEncoder;
 
 
 
@@ -47,25 +47,32 @@ public class SecurityConfig {
         http
                 .csrf(c -> c.disable())
                 .authorizeHttpRequests(auth -> {
-                    // Sıralama önəmlidir: Dar icazələr yuxarıda, genişlər aşağıda
                     auth.requestMatchers("/dashboard/**").hasRole("ADMIN");
+                    auth.requestMatchers("/profile/**").authenticated();
                     auth.requestMatchers("/*", "/front/**").permitAll();
-                    auth.requestMatchers("/profile").authenticated(); // Giriş tələb olunur
                     auth.anyRequest().authenticated();
                 })
                 .formLogin(form -> {
                     form.loginPage("/login");
+                    form.defaultSuccessUrl("/", false);
                     form.failureUrl("/login?error=true");
                     form.usernameParameter("email");
                     form.passwordParameter("password");
-                    // YENİ: Custom handler-i bura əlavə edirik
                     form.successHandler(customSuccessHandler());
                     form.permitAll();
                     form.failureHandler((request, response, exception) -> {
                         System.out.println("Login xətası: " + exception.getMessage());
                         response.sendRedirect("/login?error=true");
                     });
-                });
+                })
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/")
+                        .invalidateHttpSession(true)
+                        .clearAuthentication(true)
+                        .deleteCookies("JSESSIONID")
+                        .permitAll()
+                );
         return http.build();
     }
 

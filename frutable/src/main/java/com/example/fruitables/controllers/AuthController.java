@@ -3,6 +3,7 @@ package com.example.fruitables.controllers;
 
 import com.example.fruitables.dtos.auth.AuthResponseDto;
 import com.example.fruitables.dtos.auth.RegisterDto;
+import com.example.fruitables.payloads.RegisterPayload;
 import com.example.fruitables.services.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -40,19 +41,20 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String register(@Valid RegisterDto registerDto, BindingResult result, Model model, HttpSession session) {
-        if (result.hasErrors()) {
+    public String register(@Valid RegisterDto registerDto, BindingResult bindingResult, Model model, HttpSession session) {
+        if (bindingResult.hasErrors()) {
             model.addAttribute("registerDto", registerDto);
             return "auth/register";
         }
 
         if(userService.isEmailExist(registerDto.getEmail())){
-            result.rejectValue("email", "error.email", "Bu email artiq movcuddur");
+            bindingResult.rejectValue("email", "error.email", "Bu email artiq movcuddur");
             model.addAttribute("registerDto", registerDto);
             return "auth/register";
         }
 
-        userService.registerUser(registerDto);
+        RegisterPayload result = userService.registerUser(registerDto);
+        String resultMessage = "otp?email=" + result.getEmail() + "&token=" + result.getToken();
         session.setAttribute("pendingEmail", registerDto.getEmail());
         return "redirect:/verify-otp";
     }

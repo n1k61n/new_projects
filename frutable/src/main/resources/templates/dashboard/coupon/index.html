@@ -52,7 +52,7 @@
                         <th th:text="${i.index+1}" scope="row"></th>
                         <td th:text="${coupon.code}"></td>
                         <td th:text="${coupon.discount}"></td>
-                        <td th:text="${coupon.usageCount} + '/' + ${coupon.usageLimit}"></td>
+                        <td th:text="${coupon.usageCount == null ? 0 : coupon.usageCount + '/' + coupon.usageLimit}"></td>
                         <td>
                             <span th:class="${coupon.isActive() ? 'text-success' : 'text-danger'}"><i class="fas fa-circle" style="font-size: 12px;"></i></span>
                             <span class="ml-1" th:text="${coupon.isActive() ? 'Aktiv' : 'Passiv'}"></span>

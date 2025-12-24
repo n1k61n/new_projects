@@ -5,7 +5,14 @@ import com.example.fruitables.models.Cart;
 import com.example.fruitables.payloads.results.Result;
 
 public interface CartService {
-    Result addToCart(String email, AddToCartDto addToCartDto);
+    Result addProductToCart(String email, AddToCartDto addToCartDto);
+
+    void deleteItem(String username, Long productId);
+
+    void increaseQuantity(String username, Long productId);
+
+    void decreaseQuantity(String username, Long productId);
+
 
 }
 

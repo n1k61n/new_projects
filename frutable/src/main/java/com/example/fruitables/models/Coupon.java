@@ -22,7 +22,7 @@ public class Coupon {
     private String code;
     private BigDecimal discount;
     private Integer usageLimit;
-    private int usageCount;
+    private Integer usageCount;
     private boolean active;
     private LocalDateTime expiryDate;
 

@@ -1,4 +1,4 @@
-package com.example.fruitables.dtos.auth;
+package com.example.fruitables.dtos.user;
 
 import lombok.Data;
 
@@ -8,6 +8,7 @@ public class UserProfileDto {
     private String firstName;
     private String lastName;
     private String password;
+    private String confirmPassword;
     private String email;
     private String phone;
     private String imageUrl;
