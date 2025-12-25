@@ -276,8 +276,9 @@ button {
 }
 
 .login_bt {
-    width: 210px;
+    width: auto;
     margin-top: 28px;
+    float: left;
 }
 
 .login_bt ul {
@@ -294,6 +295,21 @@ button {
 }
 
 .login_bt li a:hover {
+    color: #f01c1c;
+}
+
+.search_icon {
+    float: left;
+    margin-top: 28px;
+    margin-left: 20px;
+}
+
+.search_icon a {
+    font-size: 18px;
+    color: #fefefd;
+}
+
+.search_icon a:hover {
     color: #f01c1c;
 }
 
@@ -1088,4 +1104,37 @@ textarea#comment.update_mail::placeholder {
     background-image: url("/front/images/banner-bg.png");
     background-size: cover;
     background-position: center;
+}
+
+/* Dropdown menu styling */
+.dropdown-menu {
+    background-color: #2b1a12; /* Match header background */
+    border: none;
+    border-radius: 0;
+    margin-top: 10px;
+    position: absolute; /* Ensure it floats correctly */
+    z-index: 1000; /* Ensure it's on top */
+}
+
+.dropdown-item {
+    color: #fefefd;
+    font-size: 16px;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    float: none !important; /* Override float from .login_bt li a */
+    display: block; /* Ensure it takes full width */
+}
+
+.login_bt li .dropdown-item {
+    padding: 10px 20px; /* Reset padding */
+}
+
+.dropdown-item:hover, .dropdown-item:focus {
+    background-color: #f01c1c; /* Match hover color */
+    color: #fefefd;
+}
+
+/* Ensure the user name link looks like other links */
+.login_bt li.dropdown a.dropdown-toggle {
+    padding-right: 0; /* Adjust padding if needed */
 }

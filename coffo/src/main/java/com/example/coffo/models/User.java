@@ -2,10 +2,7 @@ package com.example.coffo.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,8 +12,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Setter
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -45,14 +41,18 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    @Column(name = "enabled", columnDefinition = "boolean default false")
-    private boolean enabled;
-    @Column(name = "account_non_expired", columnDefinition = "boolean default false")
-    private boolean accountNonExpired;
-    @Column(name = "credentials_non_expired", columnDefinition = "boolean default false")
-    private boolean credentialsNonExpired;
-    @Column(name = "account_non_locked", columnDefinition = "boolean default false")
-    private boolean accountNonLocked;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Order> orders;
+
+
+    @Column(name = "enabled")
+    private boolean enabled = true;
+    @Column(name = "account_non_expired")
+    private boolean accountNonExpired = true;
+    @Column(name = "credentials_non_expired")
+    private boolean credentialsNonExpired = true;
+    @Column(name = "account_non_locked")
+    private boolean accountNonLocked = true;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -63,4 +63,7 @@ public class User implements UserDetails {
     public String getUsername() {
         return this.email;
     }
+
+
+
 }

@@ -30,13 +30,13 @@
             <i class="fa fa-check-circle"></i> <span th:text="${success}"></span>
         </div>
 
-        <form th:action="@{/register}" method="post" th:object="${registerDto}">
+        <form  method="post" th:object="${registerDto}">
             <div class="row">
                 <div class="form-group">
                     <label for="firstName">Ad</label>
                     <div class="input-group">
                         <i class="fa fa-user"></i>
-                        <input type="text" class="form-control" id="firstName" th:field="*{firstName}"
+                        <input type="text" class="form-control" name="firstName"  id="firstName" th:field="*{firstName}"
                                placeholder="Adınız" required>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                     <label for="lastName">Soyad</label>
                     <div class="input-group">
                         <i class="fa fa-user"></i>
-                        <input type="text" class="form-control" id="lastName" th:field="*{lastName}"
+                        <input type="text" class="form-control" name="lastName" id="lastName" th:field="*{lastName}"
                                placeholder="Soyadınız" required>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                 <label for="email">Email</label>
                 <div class="input-group">
                     <i class="fa fa-envelope"></i>
-                    <input type="email" class="form-control" id="email" th:field="*{email}"
+                    <input type="email" class="form-control" name="email" id="email" th:field="*{email}"
                            placeholder="Email ünvanınız" required>
                 </div>
             </div>
@@ -64,7 +64,7 @@
                 <label for="phone">Telefon</label>
                 <div class="input-group">
                     <i class="fa fa-phone"></i>
-                    <input type="tel" class="form-control" id="phone" th:field="*{phone}"
+                    <input type="tel" class="form-control" name="phone" id="phone" th:field="*{phone}"
                            placeholder="+994 XX XXX XX XX">
                 </div>
             </div>
@@ -73,7 +73,7 @@
                 <label for="password">Şifrə</label>
                 <div class="input-group">
                     <i class="fa fa-lock"></i>
-                    <input type="password" class="form-control" id="password" th:field="*{password}"
+                    <input type="password" class="form-control" name="password" id="password"
                            placeholder="Şifrə (minimum 6 simvol)" required minlength="6">
                 </div>
             </div>

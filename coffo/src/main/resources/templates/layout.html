@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:layout="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <!-- basic -->
     <meta charset="utf-8">
@@ -62,10 +62,28 @@
                 <form class="form-inline my-2 my-lg-0">
                     <div class="login_bt">
                         <ul>
-                            <li><a href="login"><span class="user_icon"><i aria-hidden="true" class="fa fa-user"></i></span>Login</a>
+                            <li sec:authorize="isAnonymous()">
+                                <a href="login"><span class="user_icon"><i aria-hidden="true" class="fa fa-user"></i></span>Login</a>
                             </li>
-                            <li><a href="#"><i aria-hidden="true" class="fa fa-search"></i></a></li>
+                            <li sec:authorize="isAuthenticated()" class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <span class="user_icon"><i aria-hidden="true" class="fa fa-user"></i></span>
+                                    <span sec:authentication="principal.firstName">User</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right grow-in" aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="/profile">
+                                        Profile
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="/logout">
+                                        Logout
+                                    </a>
+                                </div>
+                            </li>
                         </ul>
+                    </div>
+                    <div class="search_icon">
+                        <a href="#"><i aria-hidden="true" class="fa fa-search"></i></a>
                     </div>
                 </form>
             </div>
@@ -135,7 +153,6 @@
 <script src="/front/js/jquery.min.js"></script>
 <script src="/front/js/popper.min.js"></script>
 <script src="/front/js/bootstrap.bundle.min.js"></script>
-<script src="/front/js/jquery-3.0.0.min.js"></script>
 <script src="/front/js/plugin.js"></script>
 <!-- sidebar -->
 <script src="/front/js/jquery.mCustomScrollbar.concat.min.js"></script>

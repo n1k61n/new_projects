@@ -1,15 +1,18 @@
 package com.example.fruitables.controllers;
 
 import com.example.fruitables.dtos.cart.AddToCartDto;
+import com.example.fruitables.dtos.cart.CartItemDto;
 import com.example.fruitables.payloads.results.Result;
 import com.example.fruitables.services.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -20,9 +23,11 @@ public class BasketController {
 
     @GetMapping("/my-basket")
     @PreAuthorize("isAuthenticated()")
-    public String myBasket(Principal principal){
+    public String myBasket(Principal principal, Model model){
         String email = principal.getName();
 
+        List<CartItemDto> cartItems =   cartService.getCart(email);
+        model.addAttribute("basket", cartItems);
 
         return "basket/my-basket";
     }
