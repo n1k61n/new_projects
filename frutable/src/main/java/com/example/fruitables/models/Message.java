@@ -22,6 +22,8 @@ public class Message {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String message;
 
+    private User user;
+
     @Column(name = "is_read", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
     private boolean isRead;
 

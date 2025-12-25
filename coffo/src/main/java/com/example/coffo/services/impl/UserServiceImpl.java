@@ -1,16 +1,13 @@
 package com.example.coffo.services.impl;
 
 import com.example.coffo.DTOs.UserDTO.RegisterDto;
-import com.example.coffo.models.Role;
+import com.example.coffo.enums.Role;
 import com.example.coffo.models.User;
 import com.example.coffo.payloads.RegisterPayload;
-import com.example.coffo.repositories.RoleRepository;
 import com.example.coffo.repositories.UserRepository;
 import com.example.coffo.services.UserService;
-import jakarta.validation.constraints.Email;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +21,6 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
-    private final RoleRepository roleRepository;
 
 
     @Override
@@ -38,25 +34,13 @@ public class UserServiceImpl implements UserService {
             return new RegisterPayload(null, registerDto.getEmail(), 400, "Sifreler eyni deyil");
         }
 
-        String roleName = (userRepository.count() == 0) ? "ROLE_ADMIN" : "ROLE_USER";
-        Role userRole = roleRepository.findByName(roleName)
-                .orElseGet(() -> {
-                    Role newRole = new Role();
-                    newRole.setName(roleName);
-                    return roleRepository.save(newRole);
-                });
+        Role userRole = (userRepository.count() == 0) ? Role.ADMIN : Role.USER;
 
         User newUser = modelMapper.map(registerDto, User.class);
         newUser.setPassword(passwordEncoder.encode(registerDto.getPassword()));
         newUser.setRoles(new HashSet<>(Collections.singletonList(userRole)));
 
-
-
-        roleRepository.save(userRole);
         userRepository.save(newUser);
-
-
-
 
         return new RegisterPayload(null, newUser.getEmail(), 200, "Ugurla qeydiyyatdan kecdiniz");
     }

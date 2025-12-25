@@ -6,7 +6,7 @@ import lombok.Getter;
 public enum OrderStatus {
     PENDING("Gözləyir"),
     PROCESSING("Hazırlanır"),
-    SHIPPED("Yoldadır"),      // Xətanı aradan qaldıran sətir
+    SHIPPED("Yoldadır"),
     DELIVERED("Çatdırıldı"),
     COMPLETED("Tamamlandı"),
     CANCELLED("Ləğv edildi");
