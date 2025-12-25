@@ -4,6 +4,7 @@ import com.example.fruitables.dtos.message.MessageCreateDto;
 import com.example.fruitables.services.MessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class ContactController {
 
     private final MessageService messageService;
+
+
 
 
 
