@@ -59,16 +59,11 @@ public class User implements UserDetails {
     private String imageUrl;
 
 
-//    @JsonIgnore
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    private List<Order> orders = new ArrayList<>();
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Order> orders = new ArrayList<>();
 
-//    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    @JoinTable(
-//            name = "user_role",
-//            joinColumns = @JoinColumn(name = "users", referencedColumnName = "id"),
-//            inverseJoinColumns = @JoinColumn(name = "roles", referencedColumnName = "id"))
-//    private Set<Role> roles = new HashSet<>();
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinTable(
             name = "user_role",

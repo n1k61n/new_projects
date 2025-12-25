@@ -67,8 +67,8 @@ public class CartServiceImpl implements CartService {
     @Override
     public List<CartItemDto> getCart(String email) {
         User user = userService.findByEmail(email);
-//        List<Cart> cartList = cartRepository.findByUser(user);
-        return List.of();
+        List<Cart> cartList = cartRepository.findByUserId(user.getId());
+        return cartList.stream().map(cart -> modelMapper.map(cart, CartItemDto.class)).toList();
     }
 
 

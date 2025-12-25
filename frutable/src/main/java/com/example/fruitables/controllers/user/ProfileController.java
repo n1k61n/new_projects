@@ -1,4 +1,4 @@
-package com.example.fruitables.controllers;
+package com.example.fruitables.controllers.user;
 
 import com.example.fruitables.dtos.user.UserProfileDto;
 import com.example.fruitables.services.UserService;

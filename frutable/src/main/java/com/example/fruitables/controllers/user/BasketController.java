@@ -1,4 +1,4 @@
-package com.example.fruitables.controllers;
+package com.example.fruitables.controllers.user;
 
 import com.example.fruitables.dtos.cart.AddToCartDto;
 import com.example.fruitables.dtos.cart.CartItemDto;
@@ -9,7 +9,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 import java.util.List;

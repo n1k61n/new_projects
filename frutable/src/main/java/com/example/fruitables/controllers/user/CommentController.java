@@ -1,4 +1,4 @@
-package com.example.fruitables.controllers;
+package com.example.fruitables.controllers.user;
 
 import com.example.fruitables.dtos.comment.CommentDto;
 import com.example.fruitables.dtos.product.ProductDto;

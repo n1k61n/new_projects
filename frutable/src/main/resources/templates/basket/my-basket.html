@@ -48,14 +48,14 @@
                     <tr th:each="item : ${basket}" th:if="${item != null}">
                         <th scope="row">
                             <div class="d-flex align-items-center">
-                                <img th:src="${item.imageUrl}" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
+                                <img th:src="${item.product.imageUrl}" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
                             </div>
                         </th>
                         <td>
-                            <p th:text="${item.name}" class="mb-0 mt-4">Awesome Brocoli</p>
+                            <p th:text="${item.product.name}" class="mb-0 mt-4">Awesome Brocoli</p>
                         </td>
                         <td>
-                            <p th:each="${item.price} + ' $'" class="mb-0 mt-4">2.99 $</p>
+                            <p th:text="${item.product.price != null ? item.product.price : 0} + ' $'" class="mb-0 mt-4">2.99 $</p>
                         </td>
                         <td>
                             <div class="input-group quantity mt-4" style="width: 100px;">
@@ -64,7 +64,7 @@
                                         <i class="fa fa-minus"></i>
                                     </button>
                                 </div>
-                                <input type="text" class="form-control form-control-sm text-center border-0" value="1">
+                                <input type="text" class="form-control form-control-sm text-center border-0" th:value="${item.quantity}">
                                 <div class="input-group-btn">
                                     <button class="btn btn-sm btn-plus rounded-circle bg-light border">
                                         <i class="fa fa-plus"></i>
@@ -73,7 +73,7 @@
                             </div>
                         </td>
                         <td>
-                            <p  th:each="${item.price * item.quantity} + ' $'" class="mb-0 mt-4">2.99 $</p>
+                            <p  th:text="${(item.product.price != null ? item.product.price : 0) * (item.quantity != null ? item.quantity : 0)} + ' $'" class="mb-0 mt-4">2.99 $</p>
                         </td>
                         <td>
                             <button class="btn btn-md rounded-circle bg-light border mt-4" >
