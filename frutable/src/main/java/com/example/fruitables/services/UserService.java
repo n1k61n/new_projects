@@ -2,6 +2,7 @@ package com.example.fruitables.services;
 
 import com.example.fruitables.dtos.auth.AuthResponseDto;
 import com.example.fruitables.dtos.auth.RegisterDto;
+import com.example.fruitables.dtos.contact.ContactDto;
 import com.example.fruitables.dtos.user.UserNameDto;
 import com.example.fruitables.dtos.user.UserProfileDto;
 import com.example.fruitables.models.User;
@@ -22,4 +23,6 @@ public interface UserService {
 
 
     User findByEmail(String email);
+
+    ContactDto getContact(String name);
 }

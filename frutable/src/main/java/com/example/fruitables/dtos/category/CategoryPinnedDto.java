@@ -1,7 +1,7 @@
 package com.example.fruitables.dtos.category;
 
 
-import com.example.fruitables.dtos.product.ProductPinnedDto;
+import com.example.fruitables.models.Product;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,5 +19,5 @@ public class CategoryPinnedDto {
     private String name;
     private boolean pinned;
 
-    private List<ProductPinnedDto> products = new ArrayList<>();
+    private List<Product> products = new ArrayList<>();
 }

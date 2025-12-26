@@ -27,7 +27,7 @@ public class CommentController {
 
     @PostMapping("/add-comment")
     public String addComment(@RequestParam Long productId, @RequestParam String content, Principal principal) {
-        if (principal == null) return "redirect:/login"; // Login olmayıbsa
+        if (principal == null) return "redirect:/login";
 
         CommentDto comment = new CommentDto();
         comment.setComment(content);

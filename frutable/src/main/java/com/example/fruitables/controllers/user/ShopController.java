@@ -26,7 +26,7 @@ public class ShopController {
 
 
     @GetMapping("/shop-detail/{id}")
-    @Transactional(readOnly = true) // Bunu əlavə edin
+    @Transactional(readOnly = true)
     public String getProductDetail(@PathVariable("id") Long id, Model model, Principal principal) {
         ProductDto product = productService.getProductById(id);
         model.addAttribute("product", product);

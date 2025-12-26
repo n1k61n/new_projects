@@ -44,7 +44,7 @@ public class SecurityConfig {
                 .csrf(c -> c.disable())
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/dashboard/**").hasRole("ADMIN");
-                    auth.requestMatchers("/*", "/front/**").permitAll();
+                    auth.requestMatchers("/*", "/front/**", "/shop-detail/**").permitAll();
                     auth.anyRequest().authenticated();
                 })
                 .formLogin(form -> {

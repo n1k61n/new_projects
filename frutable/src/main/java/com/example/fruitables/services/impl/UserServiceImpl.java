@@ -2,6 +2,7 @@ package com.example.fruitables.services.impl;
 
 import com.example.fruitables.dtos.auth.AuthResponseDto;
 import com.example.fruitables.dtos.auth.RegisterDto;
+import com.example.fruitables.dtos.contact.ContactDto;
 import com.example.fruitables.dtos.user.UserNameDto;
 import com.example.fruitables.dtos.user.UserProfileDto;
 import com.example.fruitables.models.Role;
@@ -151,5 +152,16 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByEmail(email);
         if (user == null) return null;
         return user;
+    }
+
+    @Override
+    public ContactDto getContact(String name) {
+        User user = userRepository.findByEmail(name);
+        if (user == null) return new ContactDto();
+        ContactDto contactDto = new ContactDto();
+        contactDto.setName(user.getFirstName());
+        contactDto.setEmail(user.getEmail());
+        return contactDto;
+
     }
 }
