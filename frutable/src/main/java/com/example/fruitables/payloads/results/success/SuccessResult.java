@@ -4,10 +4,10 @@ import com.example.fruitables.payloads.results.Result;
 
 public class SuccessResult extends Result {
     public SuccessResult(boolean success) {
-        super(success);
+        super(true);
     }
 
     public SuccessResult(boolean success, String message) {
-        super(success, message);
+        super(true, message);
     }
 }

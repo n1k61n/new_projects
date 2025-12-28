@@ -73,7 +73,7 @@ public class User implements UserDetails {
 
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Cart> carts;
+    private List<Cart> carts = new ArrayList<>();
 
 
     @Override

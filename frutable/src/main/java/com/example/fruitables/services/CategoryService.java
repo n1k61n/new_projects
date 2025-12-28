@@ -5,7 +5,6 @@ import com.example.fruitables.dtos.category.CategoryDto;
 import com.example.fruitables.dtos.category.CategoryPinnedDto;
 import com.example.fruitables.dtos.category.CategoryUpdateDto;
 import com.example.fruitables.models.Category;
-import org.jspecify.annotations.Nullable;
 
 import java.util.List;
 

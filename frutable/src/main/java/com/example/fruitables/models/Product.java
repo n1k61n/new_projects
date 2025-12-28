@@ -25,8 +25,7 @@ public class Product {
 
     @Column(unique = true, length = 20)
     private String barcode;
-    @Column(precision = 12, scale = 2)
-    private BigDecimal price;
+    private Double price;
     @Column(precision = 12, scale = 2)
     private BigDecimal discount;
     private int stock;

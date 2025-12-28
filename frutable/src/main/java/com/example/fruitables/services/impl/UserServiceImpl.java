@@ -2,6 +2,7 @@ package com.example.fruitables.services.impl;
 
 import com.example.fruitables.dtos.auth.AuthResponseDto;
 import com.example.fruitables.dtos.auth.RegisterDto;
+import com.example.fruitables.dtos.cart.CartUserDto;
 import com.example.fruitables.dtos.contact.ContactDto;
 import com.example.fruitables.dtos.user.UserNameDto;
 import com.example.fruitables.dtos.user.UserProfileDto;
@@ -164,4 +165,5 @@ public class UserServiceImpl implements UserService {
         return contactDto;
 
     }
+
 }
