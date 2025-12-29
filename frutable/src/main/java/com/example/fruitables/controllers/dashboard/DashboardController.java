@@ -30,6 +30,7 @@ public class DashboardController {
         model.addAttribute("totalOrders", totalOrders);
         model.addAttribute("totalRevenue", totalRevenue);
         model.addAttribute("activeCoupons", activeCoupons);
+
         return "dashboard/index";
     }
 
