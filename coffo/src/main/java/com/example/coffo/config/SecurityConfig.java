@@ -24,7 +24,7 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/login", "/front/**", "/register", "/about", "/contact", "/coffees", "/shop", "/blog", "/index").permitAll()
+                        .requestMatchers("/*", "/front/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> {
@@ -38,7 +38,6 @@ public class SecurityConfig {
                 .logout(logout -> logout
                         .logoutSuccessUrl("/")
                         .permitAll());
-
         return http.build();
     }
 

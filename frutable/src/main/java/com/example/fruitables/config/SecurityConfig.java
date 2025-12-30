@@ -41,25 +41,22 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(c -> c.disable())
+                .csrf(csrf -> csrf.disable()) // API və JWT üçün disable edilir
                 .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers("/dashboard/**").hasRole("ADMIN");
-                    auth.requestMatchers("/*", "/front/**", "/shop-detail/**").permitAll();
+                    auth.requestMatchers("/dashboard/**").hasRole("ADMIN"); // Bazada ROLE_ADMIN olmalıdır
+                    auth.requestMatchers( "/front/**", "/*").permitAll();
                     auth.anyRequest().authenticated();
                 })
-                .formLogin(form -> {
-                    form.loginPage("/login");
-                    form.defaultSuccessUrl("/", false);
-                    form.failureUrl("/login?error=true");
-                    form.usernameParameter("email");
-                    form.passwordParameter("password");
-                    form.successHandler(customSuccessHandler());
-                    form.permitAll();
-                    form.failureHandler((request, response, exception) -> {
-                        System.out.println("Login xətası: " + exception.getMessage());
-                        response.sendRedirect("/login?error=true");
-                    });
-                })
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .loginProcessingUrl("/verify-otp")
+                        .defaultSuccessUrl("/", false)
+                        .failureUrl("/login?error=true")
+                        .usernameParameter("email")
+                        .passwordParameter("password")
+                        .successHandler(customSuccessHandler())
+                        .permitAll()
+                )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/")
