@@ -13,8 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Slf4j
 @Controller
@@ -75,16 +77,17 @@ public class AuthController {
     }
 
     @PostMapping("/verify-otp")
-    public String verifyOtp(AuthResponseDto authResponseDto) {
-        // Логика проверки OTP
-        log.info("Received OTP: {}", authResponseDto.getOtp());
+    public String verifyOtp(AuthResponseDto authResponseDto, RedirectAttributes redirectAttributes) {
+        log.info("OTP yoxlanılır: Email = {}, Kod = {}", authResponseDto.getEmail(), authResponseDto.getOtp());
         boolean isVerified = userService.verifyUser(authResponseDto);
         if (isVerified) {
             return "redirect:/login?verified";
         } else {
-            return "redirect:/login?error=invalid-token";
+            redirectAttributes.addFlashAttribute("error", "Daxil edilən OTP kod yanlışdır və ya vaxtı bitib.");
+            return "redirect:/verify-otp?error&email=" + authResponseDto.getEmail();
         }
     }
+
 
     @GetMapping("/forgot-password")
     public String forgot() {
