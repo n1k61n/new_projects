@@ -2,14 +2,12 @@ package com.example.fruitables.services.impl;
 
 import com.example.fruitables.dtos.auth.AuthResponseDto;
 import com.example.fruitables.dtos.auth.RegisterDto;
-import com.example.fruitables.dtos.cart.CartUserDto;
 import com.example.fruitables.dtos.contact.ContactDto;
 import com.example.fruitables.dtos.user.UserNameDto;
 import com.example.fruitables.dtos.user.UserProfileDto;
-import com.example.fruitables.models.Role;
+import com.example.fruitables.enums.Role;
 import com.example.fruitables.models.User;
 import com.example.fruitables.payloads.RegisterPayload;
-import com.example.fruitables.repositories.RoleRepository;
 import com.example.fruitables.repositories.UserRepository;
 import com.example.fruitables.services.EmailService;
 import com.example.fruitables.services.UserService;
@@ -31,7 +29,6 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
-    private final RoleRepository roleRepository;
     private final EmailService emailService;
 
 
@@ -52,18 +49,10 @@ public class UserServiceImpl implements UserService {
         Date date = new Date();
         newUser.setTokenExpiryDate(new Date(date.getTime() + 300000));
         // 4. Rol təyini
-        String roleName = (userRepository.count() == 0) ? "ROLE_ADMIN" : "ROLE_USER";
-        Role userRole = roleRepository.findByName(roleName)
-                .orElseGet(() -> {
-                    Role newRole = new Role();
-                    newRole.setName(roleName);
-                    return roleRepository.save(newRole);
-                });
-
-        newUser.setRoles(new HashSet<>(Collections.singletonList(userRole)));
+        Role role = (userRepository.count() == 0) ? Role.ROLE_ADMIN : Role.ROLE_USER;
+        newUser.setRoles(new HashSet<>(Collections.singletonList(role)));
 
         try {
-            roleRepository.save(userRole);
             userRepository.save(newUser);
             emailService.sendEmail(newUser.getEmail(), token);
             return new RegisterPayload(token, newUser.getEmail(), 200, "User register successfuly");

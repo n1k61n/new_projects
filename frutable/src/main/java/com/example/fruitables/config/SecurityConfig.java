@@ -1,18 +1,15 @@
 package com.example.fruitables.config;
 
 import com.example.fruitables.security.CustomUserDetailService;
-import com.example.fruitables.security.JwtFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
 @Configuration
@@ -23,7 +20,6 @@ public class SecurityConfig {
     @Autowired
     private  CustomUserDetailService userDetailService;
     private  final PasswordEncoder passwordEncoder;
-    private final JwtFilter jwtFilter;
 
 
 
@@ -51,16 +47,9 @@ public class SecurityConfig {
                     auth.requestMatchers("/login", "/register", "/logout", "/front/**", "/shop-detail/**", "/").permitAll();
                     auth.anyRequest().authenticated();
                 })
-                // Əgər həm JWT, həm Form Login varsa, tam Stateless etmək Form Login-i sındıra bilər.
-                // Amma sırf API-dirsə, STATELESS qalmalıdır və formLogin silinməlidir.
-//                .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-
-                // JWT filtri
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .loginProcessingUrl("/login") // Formun "action" hissəsi bura baxmalıdır
+                        .loginProcessingUrl("/verify-otp") // Formun "action" hissəsi bura baxmalıdır
                         .defaultSuccessUrl("/", false)
                         .failureUrl("/login?error=true")
                         .usernameParameter("email")
@@ -73,7 +62,7 @@ public class SecurityConfig {
                         .logoutSuccessUrl("/")
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)
-                        .deleteCookies("JSESSIONID", "JWT_TOKEN_COOKIE_NAME") // Əgər tokeni cookie-də saxlayırsınızsa
+                        .deleteCookies("JSESSIONID")
                         .permitAll()
                 );
 

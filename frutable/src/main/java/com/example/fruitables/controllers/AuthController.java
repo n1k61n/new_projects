@@ -26,9 +26,12 @@ public class AuthController {
 
 
     @GetMapping("/login")
-    public String login(@RequestParam(value = "error", required = false) String error, Model model) {
+    public String login(@RequestParam(value = "error", required = false) String error, @RequestParam(value = "verified", required = false) String verified, Model model) {
         if (error != null ) {
             model.addAttribute("loginError", "Melumat sehvdir");
+        }
+        if (verified != null) {
+            model.addAttribute("verificationSuccess", "Hesabınız uğurla təsdiqləndi. Daxil ola bilərsiniz.");
         }
         return "auth/login";
     }
@@ -77,7 +80,7 @@ public class AuthController {
         log.info("Received OTP: {}", authResponseDto.getOtp());
         boolean isVerified = userService.verifyUser(authResponseDto);
         if (isVerified) {
-            return "auth/login";
+            return "redirect:/login?verified";
         } else {
             return "redirect:/login?error=invalid-token";
         }
