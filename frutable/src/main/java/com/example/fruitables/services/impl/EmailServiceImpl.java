@@ -15,12 +15,11 @@ public class EmailServiceImpl implements EmailService {
     private final JavaMailSender mailSender;
 
     @Override
-//    @RabbitListener(queues = RabbitMQConfig.QUEUE)
+    @RabbitListener(queues = RabbitMQConfig.QUEUE)
     public void sendEmail(String to, String token) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("noreply@baeldung.com");
 
-//        String body = "Salam hesabi aktivlesdirmek ucun bu linke klikleyin " + "http://localhost:8080/confirm?token=" + token;
         String body = "Salam hesabi aktivlesdirmek ucun bu tokeni kopyalayin " + token;
         message.setTo(to);
         message.setSubject("Hesabın Təsdiqlənməsi");
