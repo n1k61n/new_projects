@@ -49,7 +49,7 @@ public class SecurityConfig {
                 })
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .loginProcessingUrl("/verify-otp") // Formun "action" hissəsi bura baxmalıdır
+                        .loginProcessingUrl("/verify-otp")
                         .defaultSuccessUrl("/", false)
                         .failureUrl("/login?error=true")
                         .usernameParameter("email")
