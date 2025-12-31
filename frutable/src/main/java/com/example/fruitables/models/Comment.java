@@ -20,7 +20,7 @@ public class Comment {
     private Long id;
 
     private String comment;
-    private Integer rating;
+    private Integer rating ;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
@@ -30,5 +30,6 @@ public class Comment {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 }

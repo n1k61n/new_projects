@@ -1,9 +1,6 @@
 package com.example.fruitables.services;
 
-import com.example.fruitables.dtos.product.ProductCreateDto;
-import com.example.fruitables.dtos.product.ProductDashboardDto;
-import com.example.fruitables.dtos.product.ProductSliderDto;
-import com.example.fruitables.dtos.product.ProductUpdateDto;
+import com.example.fruitables.dtos.product.*;
 import com.example.fruitables.models.Product;
 
 import java.util.List;
@@ -19,10 +16,14 @@ public interface ProductService {
 
     boolean removeCategory(Long id);
 
-    List<Product> getAllProducts();
+    List<ProductPinnedDto> getAllProducts();
 
     List<ProductSliderDto> getSilderProducts();
 
-    Product getProductById(Long productId);
+    ProductDto getProductById(Long productId);
+
+    List<ProductDto> getRelatedProducts(Long categoryId, Long id);
+
+    ProductDto getById(Long productId);
 }
 

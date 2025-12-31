@@ -5,11 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -22,28 +19,9 @@ public class SecurityConfig {
 
     @Autowired
     private  CustomUserDetailService userDetailService;
-    private final PasswordEncoder passwordEncoder;
+    private  final PasswordEncoder passwordEncoder;
 
 
-
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//         http
-//                .csrf(c -> c.disable())
-//                .authorizeHttpRequests(auth -> {
-//                    auth.requestMatchers("/dashboard/**").hasRole("ADMIN");
-//                    auth.requestMatchers( "/*", "/dashboard/**", "/front/**", "/verify-otp", "/login", "/register").permitAll();
-//                    auth.anyRequest().authenticated();
-//                })
-//                .formLogin((form) -> {
-//                    form.loginPage("/login");
-//                    form.failureUrl("/login?error=true");
-//                    form.usernameParameter("email");
-//                    form.passwordParameter("password");
-//                    form.permitAll();
-//                 });
-//         return http.build();
-//    }
 
     @Bean
     public AuthenticationSuccessHandler customSuccessHandler() {
@@ -60,36 +38,33 @@ public class SecurityConfig {
         };
     }
 
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(c -> c.disable())
+                .csrf(csrf -> csrf.disable()) // API və JWT üçün disable edilir
                 .authorizeHttpRequests(auth -> {
-                    // Sıralama önəmlidir: Dar icazələr yuxarıda, genişlər aşağıda
-                    auth.requestMatchers("/dashboard/**").hasRole("ADMIN");
-                    auth.requestMatchers("/", "/front/**", "/verify-otp", "/login", "/register").permitAll();
-                    auth.requestMatchers("/profile").authenticated(); // Giriş tələb olunur
+                    auth.requestMatchers("/dashboard/**").hasRole("ADMIN"); // Bazada ROLE_ADMIN olmalıdır
+                    auth.requestMatchers( "/front/**", "/*").permitAll();
                     auth.anyRequest().authenticated();
                 })
-                .formLogin(form -> {
-                    form.loginPage("/login");
-                    form.failureUrl("/login?error=true");
-                    form.usernameParameter("email");
-                    form.passwordParameter("password");
-                    // YENİ: Custom handler-i bura əlavə edirik
-                    form.successHandler(customSuccessHandler());
-                    form.permitAll();
-                    form.failureHandler((request, response, exception) -> {
-                        System.out.println("Login xətası: " + exception.getMessage());
-                        response.sendRedirect("/login?error=true");
-                    });
-                });
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .loginProcessingUrl("/verify-otp")
+                        .defaultSuccessUrl("/", false)
+                        .failureUrl("/login?error=true")
+                        .usernameParameter("email")
+                        .passwordParameter("password")
+                        .successHandler(customSuccessHandler())
+                        .permitAll()
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/")
+                        .invalidateHttpSession(true)
+                        .clearAuthentication(true)
+                        .deleteCookies("JSESSIONID")
+                        .permitAll()
+                );
         return http.build();
-    }
-
-
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailService).passwordEncoder(passwordEncoder);
     }
 }

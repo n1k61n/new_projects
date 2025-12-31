@@ -17,6 +17,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     boolean existsByEmail(String email);
 
-    @Query(value = "SELECT u.* FROM users u JOIN roles r ON u.id = r.id WHERE r.name = :roleName LIMIT 1", nativeQuery = true)
+    @Query(value = "SELECT u.* FROM users u JOIN user_role ur ON u.id = ur.user_id WHERE ur.role_name = :roleName LIMIT 1", nativeQuery = true)
     User findByRoleName(@Param("roleName") String roleName);
 }

@@ -1,9 +1,6 @@
 package com.example.fruitables.services.impl;
 
-import com.example.fruitables.dtos.product.ProductCreateDto;
-import com.example.fruitables.dtos.product.ProductDashboardDto;
-import com.example.fruitables.dtos.product.ProductSliderDto;
-import com.example.fruitables.dtos.product.ProductUpdateDto;
+import com.example.fruitables.dtos.product.*;
 import com.example.fruitables.exceptions.ResourceNotFoundException;
 import com.example.fruitables.models.Product;
 import com.example.fruitables.repositories.ProductRepository;
@@ -77,8 +74,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
+    public List<ProductPinnedDto> getAllProducts() {
+        return productRepository.findAll().stream().map(product -> modelMapper.map(product, ProductPinnedDto.class)).toList();
     }
 
     @Override
@@ -89,9 +86,29 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product getProductById(Long productId) {
-        return productRepository.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Product", productId));
+    public ProductDto getProductById(Long productId) {
+        Product product = productRepository.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Product", productId));
+        return modelMapper.map(product, ProductDto.class);
     }
+
+    @Override
+    public List<ProductDto> getRelatedProducts(Long categoryId, Long id) {
+        List<Product> products = productRepository.findByCategoryIdAndIdNot(categoryId, id);
+        if(products.isEmpty()) return List.of();
+        return products.stream().map(product -> modelMapper.map(product, ProductDto.class)).toList();
+    }
+
+    @Override
+    public ProductDto getById(Long productId) {
+        Optional<Product> optionalProduct = productRepository.findById(productId);
+        if (optionalProduct.isPresent()) {
+            Product product = optionalProduct.get();
+            return modelMapper.map(product, ProductDto.class);
+        }
+        return null;
+    }
+
+
 }
 
 

@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login - Coffo</title>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css"  href="/front/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-    <link href="css/login.css" rel="stylesheet" type="text/css">
+    <link  href="/front/css/login.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -29,12 +29,12 @@
             <i class="fa fa-check-circle"></i> Uğurla çıxış etdiniz!
         </div>
 
-        <form th:action="@{/login}" method="post">
+        <form  method="post">
             <div class="form-group">
-                <label for="username">Email</label>
+                <label for="email">Email</label>
                 <div class="input-group">
                     <i class="fa fa-envelope"></i>
-                    <input type="email" class="form-control" id="username" name="username"
+                    <input type="email" class="form-control" id="email" name="email"
                            placeholder="Email ünvanınızı daxil edin" required>
                 </div>
             </div>

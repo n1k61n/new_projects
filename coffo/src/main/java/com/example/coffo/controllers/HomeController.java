@@ -1,9 +1,6 @@
 package com.example.coffo.controllers;
 
-
-import com.example.coffo.DTOs.responce.AboutResponceDTO;
 import com.example.coffo.DTOs.responce.TestimonialResponceDTO;
-
 import com.example.coffo.services.TestimonialService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -12,8 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
-
-import static org.apache.logging.log4j.util.LambdaUtil.getAll;
 
 
 @Controller

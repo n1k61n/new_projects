@@ -1,9 +1,7 @@
 package com.example.fruitables.controllers.dashboard;
 
-import com.example.fruitables.dtos.message.MessageDto;
-import com.example.fruitables.dtos.auth.UserProfileDto;
+import com.example.fruitables.dtos.user.UserProfileDto;
 import com.example.fruitables.services.CouponService;
-import com.example.fruitables.services.MessageService;
 import com.example.fruitables.services.OrderService;
 import com.example.fruitables.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +17,6 @@ import java.security.Principal;
 @RequestMapping("/dashboard")
 public class DashboardController {
 
-    private final MessageService messageService;
     private final UserService userService;
     private final OrderService orderService;
     private final CouponService couponService;
@@ -35,15 +32,6 @@ public class DashboardController {
         model.addAttribute("activeCoupons", activeCoupons);
         return "dashboard/index";
     }
-
-    @GetMapping("/messages/read-and-redirect/{id}")
-    public String readAndRedirect(@PathVariable Long id) {
-        MessageDto messageDto = messageService.findByIdAndMarkAsRead(id);
-        String gmailLink = "https://mail.google.com/mail/?view=cm&fs=1&to=" + messageDto.getEmail() +
-                "&su=Cavab: Tecili" + "&body=" + messageDto.getMessage();
-        return "redirect:" + gmailLink;
-    }
-
 
     @GetMapping("/admin-profile")
     public String showProfile(Model model, Principal principal) {
@@ -63,5 +51,3 @@ public class DashboardController {
             return "redirect:admin-profile?error";
     }
 }
-
-

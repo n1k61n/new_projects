@@ -1,9 +1,6 @@
 package com.example.fruitables.services.impl;
 
-import com.example.fruitables.dtos.category.CategoryCreateDto;
-import com.example.fruitables.dtos.category.CategoryDto;
-import com.example.fruitables.dtos.category.CategoryPinnedDto;
-import com.example.fruitables.dtos.category.CategoryUpdateDto;
+import com.example.fruitables.dtos.category.*;
 import com.example.fruitables.exceptions.ResourceNotFoundException;
 import com.example.fruitables.models.Category;
 import com.example.fruitables.repositories.CategoryRepository;
@@ -90,6 +87,20 @@ public class CategoryServiceImpl implements CategoryService {
         List<Category> categories = categoryRepository.findByPinnedTrue();
         if(!categories.isEmpty()){
             return categories.stream().map(category -> modelMapper.map(category, CategoryPinnedDto.class)).toList();
+        }
+        return List.of();
+    }
+
+    @Override
+    public  List<CategoryDto> getAllCategoriesWithCount() {
+        return categoryRepository.findAll().stream().map(category -> modelMapper.map(category, CategoryDto.class)).toList();
+    }
+
+    @Override
+    public List<CategoryDto> getAllCategories() {
+        List<Category> categoryCountLists = categoryRepository.findAll();
+        if (!categoryCountLists.isEmpty()) {
+            return categoryCountLists.stream().map(category -> modelMapper.map(category, CategoryDto.class)).toList();
         }
         return List.of();
     }

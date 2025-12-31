@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Register - Coffo</title>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/front/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-    <link href="css/register.css" rel="stylesheet" type="text/css">
+    <link href="/front/css/register.css" rel="stylesheet" type="text/css">
 
 
 </head>
@@ -30,24 +30,26 @@
             <i class="fa fa-check-circle"></i> <span th:text="${success}"></span>
         </div>
 
-        <form th:action="@{/register}" method="post" th:object="${registerDto}">
+        <form  method="post" th:object="${registerDto}">
             <div class="row">
                 <div class="form-group">
                     <label for="firstName">Ad</label>
                     <div class="input-group">
                         <i class="fa fa-user"></i>
-                        <input type="text" class="form-control" id="firstName" th:field="*{firstName}"
+                        <input type="text" class="form-control" name="firstName"  id="firstName" th:field="*{firstName}"
                                placeholder="Adınız" required>
                     </div>
+                        <small class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></small>
                 </div>
 
                 <div class="form-group">
                     <label for="lastName">Soyad</label>
                     <div class="input-group">
                         <i class="fa fa-user"></i>
-                        <input type="text" class="form-control" id="lastName" th:field="*{lastName}"
+                        <input type="text" class="form-control" name="lastName" id="lastName" th:field="*{lastName}"
                                placeholder="Soyadınız" required>
                     </div>
+                        <small class="text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></small>
                 </div>
             </div>
 
@@ -55,10 +57,22 @@
                 <label for="email">Email</label>
                 <div class="input-group">
                     <i class="fa fa-envelope"></i>
-                    <input type="email" class="form-control" id="email" th:field="*{email}"
+                    <input type="email" class="form-control" name="email" id="email" th:field="*{email}"
                            placeholder="Email ünvanınız" required>
                 </div>
+                    <small class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
             </div>
+
+            <div class="form-group">
+                <label for="phone">Telefon</label>
+                <div class="input-group">
+                    <i class="fa fa-phone"></i>
+                    <input type="tel" class="form-control" name="phone" id="phone" th:field="*{phone}"
+                           placeholder="+994 XX XXX XX XX">
+                </div>
+                    <small class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></small>
+            </div>
+
             <div class="form-group">
                 <label for="password">Şifrə</label>
                 <div class="input-group">
@@ -68,24 +82,16 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="phone">Telefon</label>
-                <div class="input-group">
-                    <i class="fa fa-phone"></i>
-                    <input type="tel" class="form-control" id="phone" th:field="*{phone}"
-                           placeholder="+994 XX XXX XX XX">
-                </div>
-            </div>
-
 
             <div class="form-group">
                 <label for="confirmPassword">Şifrəni təsdiqlə</label>
                 <div class="input-group">
                     <i class="fa fa-lock"></i>
-                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+                    <input type="password" class="form-control" id="confirmPassword" th:field="*{confirmPassword}"
                            placeholder="Şifrəni təkrar daxil edin" required minlength="6">
                 </div>
             </div>
+
 
             <div class="terms">
                 <input type="checkbox" id="terms" required>

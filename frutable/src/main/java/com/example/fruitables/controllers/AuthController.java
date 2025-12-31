@@ -3,19 +3,22 @@ package com.example.fruitables.controllers;
 
 import com.example.fruitables.dtos.auth.AuthResponseDto;
 import com.example.fruitables.dtos.auth.RegisterDto;
+import com.example.fruitables.payloads.RegisterPayload;
 import com.example.fruitables.services.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Slf4j
-
 @Controller
 @RequiredArgsConstructor
 public class AuthController {
@@ -25,9 +28,12 @@ public class AuthController {
 
 
     @GetMapping("/login")
-    public String login(@RequestParam(value = "error", required = false) String error, Model model) {
+    public String login(@RequestParam(value = "error", required = false) String error, @RequestParam(value = "verified", required = false) String verified, Model model) {
         if (error != null ) {
             model.addAttribute("loginError", "Melumat sehvdir");
+        }
+        if (verified != null) {
+            model.addAttribute("verificationSuccess", "Hesabınız uğurla təsdiqləndi. Daxil ola bilərsiniz.");
         }
         return "auth/login";
     }
@@ -40,19 +46,20 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String register(@Valid RegisterDto registerDto, BindingResult result, Model model, HttpSession session) {
-        if (result.hasErrors()) {
+    public String register(@Valid RegisterDto registerDto, BindingResult bindingResult, Model model, HttpSession session) {
+        if (bindingResult.hasErrors()) {
             model.addAttribute("registerDto", registerDto);
             return "auth/register";
         }
 
         if(userService.isEmailExist(registerDto.getEmail())){
-            result.rejectValue("email", "error.email", "Bu email artiq movcuddur");
+            bindingResult.rejectValue("email", "error.email", "Bu email artiq movcuddur");
             model.addAttribute("registerDto", registerDto);
             return "auth/register";
         }
 
-        userService.registerUser(registerDto);
+        RegisterPayload result = userService.registerUser(registerDto);
+        String resultMessage = "otp?email=" + result.getEmail() + "&token=" + result.getToken();
         session.setAttribute("pendingEmail", registerDto.getEmail());
         return "redirect:/verify-otp";
     }
@@ -70,39 +77,21 @@ public class AuthController {
     }
 
     @PostMapping("/verify-otp")
-    public String verifyOtp(AuthResponseDto authResponseDto) {
-        // Логика проверки OTP
-        log.info("Received OTP: {}", authResponseDto.getOtp());
+    public String verifyOtp(AuthResponseDto authResponseDto, RedirectAttributes redirectAttributes) {
+        log.info("OTP yoxlanılır: Email = {}, Kod = {}", authResponseDto.getEmail(), authResponseDto.getOtp());
         boolean isVerified = userService.verifyUser(authResponseDto);
         if (isVerified) {
-            return "auth/registration-success";
+            return "redirect:/login?verified";
         } else {
-            return "redirect:/login?error=invalid-token";
+            redirectAttributes.addFlashAttribute("error", "Daxil edilən OTP kod yanlışdır və ya vaxtı bitib.");
+            return "redirect:/verify-otp?error&email=" + authResponseDto.getEmail();
         }
     }
-
-    //    @GetMapping("/confirm")
-//    public String confirmRegistration(@RequestParam("token") String token) {
-//        boolean isVerified = userService.verifyUser(token);
-//        if (isVerified) {
-//            return "auth/registration-success";
-//        } else {
-//            return "redirect:/login?error=invalid-token";
-//        }
-//    }
-
-
 
 
     @GetMapping("/forgot-password")
     public String forgot() {
         return "auth/forgot-password";
-    }
-
-
-    @GetMapping("/debug-auth")
-    public String debugAuth(Authentication authentication) {
-        return authentication.getAuthorities().toString();
     }
 
 }

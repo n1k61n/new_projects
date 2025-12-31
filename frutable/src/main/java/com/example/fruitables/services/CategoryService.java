@@ -22,4 +22,9 @@ public interface CategoryService {
     Category getCategoryById(Long categoryId);
 
     List<CategoryPinnedDto> getPinnedCategory();
+
+    List<CategoryDto> getAllCategoriesWithCount();
+
+
+    List<CategoryDto> getAllCategories();
 }

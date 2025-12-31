@@ -1,13 +1,10 @@
 package com.example.coffo.models;
 
+import com.example.coffo.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -15,8 +12,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -39,28 +36,38 @@ public class User implements UserDetails {
 
     private String phone;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     private Set<Role> roles = new HashSet<>();
 
-    @Column(name = "enabled", columnDefinition = "boolean default false")
-    private boolean enabled;
-    @Column(name = "account_non_expired", columnDefinition = "boolean default false")
-    private boolean accountNonExpired;
-    @Column(name = "credentials_non_expired", columnDefinition = "boolean default false")
-    private boolean credentialsNonExpired;
-    @Column(name = "account_non_locked", columnDefinition = "boolean default false")
-    private boolean accountNonLocked;
+
+
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Order> orders;
+
+
+    @Column(name = "enabled")
+    private boolean enabled = true;
+    @Column(name = "account_non_expired")
+    private boolean accountNonExpired = true;
+    @Column(name = "credentials_non_expired")
+    private boolean credentialsNonExpired = true;
+    @Column(name = "account_non_locked")
+    private boolean accountNonLocked = true;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).toList();
+        return roles;
     }
 
     @Override
     public String getUsername() {
         return this.email;
     }
+
+
+
 }

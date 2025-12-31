@@ -2,13 +2,16 @@ package com.example.fruitables.services;
 
 import com.example.fruitables.dtos.auth.AuthResponseDto;
 import com.example.fruitables.dtos.auth.RegisterDto;
-import com.example.fruitables.dtos.auth.UserNameDto;
-import com.example.fruitables.dtos.auth.UserProfileDto;
+import com.example.fruitables.dtos.cart.CartUserDto;
+import com.example.fruitables.dtos.contact.ContactDto;
+import com.example.fruitables.dtos.user.UserNameDto;
+import com.example.fruitables.dtos.user.UserProfileDto;
 import com.example.fruitables.models.User;
+import com.example.fruitables.payloads.RegisterPayload;
 
 
 public interface UserService {
-    boolean registerUser(RegisterDto registerDto);
+    RegisterPayload registerUser(RegisterDto registerDto);
     UserProfileDto getUserProfile(String email);
 
     boolean verifyUser(AuthResponseDto authResponseDto);
@@ -21,4 +24,8 @@ public interface UserService {
 
 
     User findByEmail(String email);
+
+    ContactDto getContact(String name);
+
+
 }
