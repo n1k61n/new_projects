@@ -2,6 +2,7 @@ package com.example.fruitables.dtos.comment;
 
 import com.example.fruitables.models.Product;
 import com.example.fruitables.models.User;
+import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
@@ -22,4 +23,5 @@ public class CommentDto {
     private User user;
     private LocalDateTime createdAt;
     private Integer rating;
+    private Boolean active;
 }

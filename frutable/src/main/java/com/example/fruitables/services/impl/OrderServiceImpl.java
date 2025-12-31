@@ -1,6 +1,5 @@
 package com.example.fruitables.services.impl;
 
-import ch.qos.logback.classic.spi.IThrowableProxy;
 import com.example.fruitables.dtos.order.CartSummaryDTO;
 import com.example.fruitables.dtos.order.OrderDto;
 import com.example.fruitables.enums.CartStatus;
@@ -15,6 +14,7 @@ import com.example.fruitables.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -37,13 +37,12 @@ public class OrderServiceImpl  implements OrderService {
 
     @Override
     public double calculateTotalRevenue() {
-//        Double total = orderRepository.sumTotalPriceByStatus(OrderStatus.COMPLETED);
-//        return total == null ? 0.0 : total;
         Double result = orderRepository.calculateTotalByStatus(OrderStatus.COMPLETED);
         return (result != null) ? result : 0.0;
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<OrderDto> findAllOrders() {
         if (orderRepository.findAll().isEmpty()) {
             return List.of();

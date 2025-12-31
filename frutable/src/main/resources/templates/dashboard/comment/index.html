@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:layout="http://www.w3.org/1999/xhtml"
-      layout:decorate="~{dashboard/layout.html}">
+      layout:decorate="~{dashboard/layout.html}" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
 
@@ -34,6 +34,85 @@
             <div layout:fragment="content" class="container-fluid">
 
 
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Müştəri Şərhləri</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>
+                                        <a th:href="@{'/dashboard/comment?sortField=id&sortDir=' + ${reverseSortDir}}">
+                                            <i th:if="${sortField == 'id'}" th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"></i>
+                                            ID
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <a th:href="@{'/dashboard/comment?sortField=user.firstName&sortDir=' + ${reverseSortDir}}">
+                                            <i th:if="${sortField == 'user.firstName'}" th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"></i>
+                                            İstifadəçi
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <a th:href="@{'/dashboard/comment?sortField=product.name&sortDir=' + ${reverseSortDir}}">
+                                            <i th:if="${sortField == 'product.name'}" th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"></i>
+                                            Məhsul
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <a th:href="@{'/dashboard/comment?sortField=rating&sortDir=' + ${reverseSortDir}}">
+                                            <i th:if="${sortField == 'rating'}" th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"></i>
+                                            Reytinq
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <a th:href="@{'/dashboard/comment?sortField=comment&sortDir=' + ${reverseSortDir}}">
+                                            <i th:if="${sortField == 'comment'}" th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"></i>
+                                            Şərh
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <a th:href="@{'/dashboard/comment?sortField=createdAt&sortDir=' + ${reverseSortDir}}">
+                                            <i th:if="${sortField == 'createdAt'}" th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"></i>
+                                            Tarix
+                                        </a>
+                                    </th>
+                                    <th>Əməliyyatlar</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="comment : ${comments}">
+                                    <td th:text="${comment.id}">1</td>
+                                    <td>
+                                        <span th:text="${comment.user.firstName + ' ' + comment.user.lastName}">Ad Soyad</span><br>
+                                        <small class="text-muted" th:text="${comment.user.email}">email@example.com</small>
+                                    </td>
+                                    <td th:text="${comment.product.name}">Məhsul Adı</td>
+                                    <td>
+                                        <span th:each="i : ${#numbers.sequence(1, comment.rating)}">⭐</span>
+                                    </td>
+                                    <td>
+                                        <span th:text="${#strings.abbreviate(comment.comment, 50)}">Şərh mətni...</span>
+                                    </td>
+                                    <td th:text="${#temporals.format(comment.createdAt, 'dd-MM-yyyy HH:mm')}">31-12-2025</td>
+                                    <td>
+                                        <a th:href="@{/dashboard/comment/view/{id}(id=${comment.id})}" class="btn btn-info btn-sm">
+                                            <i class="fas fa-eye"></i> Bax
+                                        </a>
+                                        <form th:action="@{/dashboard/comment/delete/{id}(id=${comment.id})}" method="post" style="display:inline;">
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Silmək istədiyinizə əminsiniz?')">
+                                                <i class="fas fa-trash"></i> Sil
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
 
             </div>
             <!-- /.container-fluid -->

@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 
 @Controller
 @RequiredArgsConstructor
-public class CommentController {
+public class UserCommentController {
 
     private final CommentService commentService;
     private final ProductService productService;

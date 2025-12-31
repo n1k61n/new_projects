@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 @ControllerAdvice(basePackages = "com.example.fruitables.controllers.dashboard")
 @RequiredArgsConstructor
-public class GlobalDashboardControllerAdvice {
+public class GlobalControllerAdvice {
 
     private final UserService userService;
 

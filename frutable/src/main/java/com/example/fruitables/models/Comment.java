@@ -20,7 +20,9 @@ public class Comment {
     private Long id;
 
     private String comment;
-    private Integer rating ;
+    private int rating;
+
+    private boolean active = false; // Şərh saytda görünsün ya yox?
 
     @ManyToOne
     @JoinColumn(name = "product_id")
