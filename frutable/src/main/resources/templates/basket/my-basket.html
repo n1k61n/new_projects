@@ -108,28 +108,34 @@
                 <div class="col-8"></div>
                 <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
                     <div class="bg-light rounded">
-                        <form th:action="@{/basket/checkout}" method="post">
-                           <div class="p-4">
+                        <form th:action="@{/basket/checkout}" th:object="${cartSummary}" method="post">
+                            <div class="p-4">
+                                <h1 class="display-6 mb-4">Cart <span class="fw-normal">Total</span></h1>
 
-                            <h1 class="display-6 mb-4">Cart <span class="fw-normal">Total</span></h1>
-                            <div class="d-flex justify-content-between mb-4">
-                                <h5 class="mb-0 me-4">Subtotal:</h5>
-                                <p class="mb-0" th:text="${#numbers.formatDecimal(subtotal, 1, 2) + ' $'}">$96.00</p>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <h5 class="mb-0 me-4">Shipping</h5>
-                                <div class="">
-                                    <p class="mb-0">Flat rate: $3.00</p>
+                                <div class="d-flex justify-content-between mb-4">
+                                    <h5 class="mb-0 me-4">Subtotal:</h5>
+                                    <p class="mb-0" th:text="${#numbers.formatDecimal(subtotal, 1, 2) + ' $'}">$96.00</p>
+                                    <input type="hidden" name="subTotal" th:value="${subtotal}" />
+                                </div>
+
+                                <div class="d-flex justify-content-between">
+                                    <h5 class="mb-0 me-4">Shipping</h5>
+                                    <div>
+                                        <p class="mb-0">Flat rate: $3.00</p>
+                                        <input type="hidden" name="shipping" value="3.00" />
+                                    </div>
                                 </div>
                             </div>
-                            <p class="mb-0 text-end">Shipping to Ukraine.</p>
-                        </div>
-                              <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
-                            <h5 class="mb-0 ps-4 me-4">Total</h5>
-                            <p class="mb-0 pe-4" th:text="${#numbers.formatDecimal(total, 1, 2) + ' $'}">$99.00</p>
-                        </div>
 
-                            <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="submit">Proceed Checkout</button>
+                            <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
+                                <h5 class="mb-0 ps-4 me-4">Total</h5>
+                                <p class="mb-0 pe-4" th:text="${#numbers.formatDecimal(total, 1, 2) + ' $'}">$99.00</p>
+                                <input type="hidden" name="total" th:value="${total}" />
+                            </div>
+
+                            <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="submit">
+                                Proceed Checkout
+                            </button>
                         </form>
                     </div>
                 </div>

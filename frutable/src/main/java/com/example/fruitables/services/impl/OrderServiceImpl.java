@@ -72,7 +72,7 @@ public class OrderServiceImpl  implements OrderService {
         if (existUser != null) {
             Order order = new Order();
             order.setUser(existUser);
-            order.setTotalPrice(summary.getTotalPrice());
+            order.setTotalPrice(summary.getTotal());
             order.setOrderDate(LocalDate.now());
             order.setStatus(OrderStatus.SHIPPED);
             orderRepository.save(order);

@@ -75,12 +75,16 @@ public class BasketController {
 
 
     @PostMapping("/checkout")
-    public String proceedCheckout(@ModelAttribute("summary") CartSummaryDTO summary, Principal principal) {
-        // "Proceed Checkout" düyməsi sıxıldıqda icra olunacaq məntiq
+    public String proceedCheckout(@ModelAttribute("cartSummary") CartSummaryDTO summary, Principal principal) {
+        if (principal == null) {
+            return "redirect:/login";
+        }
+
         String userName = principal.getName();
         boolean result = orderService.createUserOrder(userName, summary);
+
         if(result)
-            return "redirect:/basket/my-basket";
+            return "redirect:/basket/my-basket?success=true";
         else
             return "redirect:/basket/my-basket?error=true";
     }

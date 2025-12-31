@@ -16,14 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CartSummaryDTO {
-    private Double subtotal;
+    private Double subTotal;
     private Double shipping;
-
-    private Long id;
-    private List<OrderItem> orderItems;
-    private LocalDate orderDate;
-    private Double totalPrice;
-    private OrderStatus status;
-
-
+    private Double total;
 }
