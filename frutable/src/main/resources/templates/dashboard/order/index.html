@@ -42,11 +42,36 @@
                             <table class="table table-bordered" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
-                                    <th>Sifariş ID</th>
-                                    <th>Müştəri</th>
-                                    <th>Sifariş vaxti</th>
-                                    <th>Məbləğ</th>
-                                    <th>Status</th>
+                                    <th>
+                                        <a th:href="@{'/dashboard/order?sortField=id&sortDir=' + ${reverseSortDir}}">
+                                            <i th:if="${sortField == 'id'}" th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"></i>
+                                            ID
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <a th:href="@{'/dashboard/order?sortField=user.firstName&sortDir=' + ${reverseSortDir}}">
+                                            <i th:if="${sortField == 'user.firstName'}" th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"></i>
+                                            İstifadəçi
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <a th:href="@{'/dashboard/order?sortField=orderDate&sortDir=' + ${reverseSortDir}}">
+                                            <i th:if="${sortField == 'orderDate'}" th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"></i>
+                                            Sifariş vaxtı
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <a th:href="@{'/dashboard/order?sortField=totalPrice&sortDir=' + ${reverseSortDir}}">
+                                            <i th:if="${sortField == 'totalPrice'}" th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"></i>
+                                            Məbləğ
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <a th:href="@{'/dashboard/order?sortField=status&sortDir=' + ${reverseSortDir}}">
+                                            <i th:if="${sortField == 'status'}" th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"></i>
+                                            Status
+                                        </a>
+                                    </th>
                                 </tr>
                                 </thead>
                                 <tbody>

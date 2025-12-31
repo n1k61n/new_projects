@@ -4,6 +4,7 @@ import com.example.fruitables.dtos.order.OrderDto;
 import com.example.fruitables.enums.OrderStatus;
 import com.example.fruitables.services.OrderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,10 +22,19 @@ public class OrderController {
     private final OrderService orderService;
 
     @GetMapping
-    public String index(Model model){
-        List<OrderDto> allOrderDtos = orderService.findAllOrders();
+    public String index(@RequestParam(defaultValue = "id") String sortField,
+            @RequestParam(defaultValue = "asc") String sortDir, Model model){
+
+        Sort sort = sortDir.equalsIgnoreCase("asc") ?
+                Sort.by(sortField).ascending() :
+                Sort.by(sortField).descending();
+
+        List<OrderDto> allOrderDtos = orderService.findAllOrders(sort);
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
         model.addAttribute("recentOrders", allOrderDtos);
         model.addAttribute("allStatuses", OrderStatus.values());
+        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
         return "dashboard/order/index";
     }
 

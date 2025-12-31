@@ -2,6 +2,7 @@ package com.example.fruitables.services;
 
 import com.example.fruitables.dtos.order.CartSummaryDTO;
 import com.example.fruitables.dtos.order.OrderDto;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ public interface OrderService {
 
     double calculateTotalRevenue();
 
-    List<OrderDto> findAllOrders();
+    List<OrderDto> findAllOrders(Sort sort);
 
     boolean updateOrderStatusById(Long orderId , String newStatus);
 

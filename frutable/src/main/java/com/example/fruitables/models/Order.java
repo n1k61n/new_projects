@@ -25,7 +25,7 @@ public class Order {
     @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems;
     private LocalDate orderDate;
-    private Double totalPrice;
+    private double totalPrice;
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 }

@@ -13,6 +13,7 @@ import com.example.fruitables.services.OrderService;
 import com.example.fruitables.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,11 +44,11 @@ public class OrderServiceImpl  implements OrderService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<OrderDto> findAllOrders() {
+    public List<OrderDto> findAllOrders(Sort sort) {
         if (orderRepository.findAll().isEmpty()) {
             return List.of();
         }
-        return orderRepository.findAll().stream().map(order -> modelMapper.map(order, OrderDto.class)).toList();
+        return orderRepository.findAll(sort).stream().map(order -> modelMapper.map(order, OrderDto.class)).toList();
     }
 
     @Override
