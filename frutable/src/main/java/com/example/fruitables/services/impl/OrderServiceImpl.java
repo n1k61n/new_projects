@@ -1,14 +1,22 @@
 package com.example.fruitables.services.impl;
 
+import ch.qos.logback.classic.spi.IThrowableProxy;
+import com.example.fruitables.dtos.order.CartSummaryDTO;
 import com.example.fruitables.dtos.order.OrderDto;
+import com.example.fruitables.enums.CartStatus;
 import com.example.fruitables.enums.OrderStatus;
+import com.example.fruitables.models.Cart;
 import com.example.fruitables.models.Order;
+import com.example.fruitables.models.User;
+import com.example.fruitables.repositories.CartRepository;
 import com.example.fruitables.repositories.OrderRepository;
 import com.example.fruitables.services.OrderService;
+import com.example.fruitables.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -17,7 +25,10 @@ import java.util.List;
 public class OrderServiceImpl  implements OrderService {
 
     private final OrderRepository orderRepository;
+    private final CartRepository cartRepository;
     private final ModelMapper modelMapper;
+    private final UserService userService;
+
 
     @Override
     public long countTotalOrders() {
@@ -34,7 +45,7 @@ public class OrderServiceImpl  implements OrderService {
 
     @Override
     public List<OrderDto> findAllOrders() {
-        if(orderRepository.findAll().isEmpty()){
+        if (orderRepository.findAll().isEmpty()) {
             return List.of();
         }
         return orderRepository.findAll().stream().map(order -> modelMapper.map(order, OrderDto.class)).toList();
@@ -53,6 +64,25 @@ public class OrderServiceImpl  implements OrderService {
         } catch (IllegalArgumentException e) {
             return false;
         }
+    }
+
+    @Override
+    public boolean createUserOrder(String userName, CartSummaryDTO summary) {
+        User existUser = userService.findByEmail(userName);
+        if (existUser != null) {
+            Order order = new Order();
+            order.setUser(existUser);
+            order.setTotalPrice(summary.getTotalPrice());
+            order.setOrderDate(LocalDate.now());
+            order.setStatus(OrderStatus.SHIPPED);
+            orderRepository.save(order);
+
+            Cart cart = cartRepository.findByUserAndStatus(existUser, CartStatus.OPEN).orElseThrow();
+            cart.setStatus(CartStatus.COMPLETED);
+            cartRepository.save(cart);
+            return true;
+        }
+        return false;
     }
 }
 

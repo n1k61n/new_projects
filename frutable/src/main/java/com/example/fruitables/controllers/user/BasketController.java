@@ -2,14 +2,13 @@ package com.example.fruitables.controllers.user;
 
 import com.example.fruitables.dtos.cart.AddToCartDto;
 import com.example.fruitables.dtos.cart.CartItemDto;
+import com.example.fruitables.dtos.order.CartSummaryDTO;
+import com.example.fruitables.dtos.order.OrderItemDTO;
 import com.example.fruitables.payloads.results.Result;
-import com.example.fruitables.payloads.results.error.ErrorResult;
-import com.example.fruitables.payloads.results.success.SuccessResult;
 import com.example.fruitables.services.CartService;
+import com.example.fruitables.services.OrderService;
 import com.example.fruitables.services.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +24,7 @@ public class BasketController {
 
     private final CartService cartService;
     private final UserService userService;
+    private final OrderService orderService;
 
     @GetMapping("/my-basket")
     @PreAuthorize("isAuthenticated()")
@@ -44,27 +44,14 @@ public class BasketController {
     @PostMapping("/add")
     @PreAuthorize("isAuthenticated()")
     public String addToCart(Principal principal, AddToCartDto addToCartDto){
-//        if(principal == null){
-//            return "redirect:/login";
-//        }
+        if(principal == null){
+            return "redirect:/login";
+        }
         String email = principal.getName();
         Result result = cartService.addProductToCart(email, addToCartDto);
 
         return "redirect:/basket/my-basket";
     }
-
-//    @PostMapping("/add")
-//    @PreAuthorize("isAuthenticated()")
-//    public ResponseEntity<Result> addToCart(Principal principal, AddToCartDto addToCartDto) {
-//        try {
-//            String name = principal.getName();
-//            Result result = cartService.addProductToCart(name, addToCartDto);
-//            return ResponseEntity.ok(new SuccessResult(true, "Məhsul səbətə əlavə edildi!"));
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-//                    .body(new ErrorResult(false, "Xəta baş verdi: " + e.getMessage()));
-//        }
-//    }
 
 
 
@@ -84,6 +71,18 @@ public class BasketController {
             cartService.decreaseQuantity(username, productId);
         }
         return "redirect:/basket/my-basket";
+    }
+
+
+    @PostMapping("/checkout")
+    public String proceedCheckout(@ModelAttribute("summary") CartSummaryDTO summary, Principal principal) {
+        // "Proceed Checkout" düyməsi sıxıldıqda icra olunacaq məntiq
+        String userName = principal.getName();
+        boolean result = orderService.createUserOrder(userName, summary);
+        if(result)
+            return "redirect:/basket/my-basket";
+        else
+            return "redirect:/basket/my-basket?error=true";
     }
 
 }

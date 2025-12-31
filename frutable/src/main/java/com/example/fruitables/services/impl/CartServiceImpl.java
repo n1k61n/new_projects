@@ -13,6 +13,7 @@ import com.example.fruitables.payloads.results.error.ErrorResult;
 import com.example.fruitables.payloads.results.success.SuccessResult;
 import com.example.fruitables.repositories.CartItemRepository;
 import com.example.fruitables.repositories.CartRepository;
+import com.example.fruitables.repositories.OrderRepository;
 import com.example.fruitables.services.CartService;
 import com.example.fruitables.services.ProductService;
 import com.example.fruitables.services.UserService;
@@ -35,6 +36,7 @@ public class CartServiceImpl implements CartService {
     private final UserService userService;
     private final ProductService productService;
     private final ModelMapper modelMapper;
+    private final OrderRepository orderRepository;
 
 
     @Override
