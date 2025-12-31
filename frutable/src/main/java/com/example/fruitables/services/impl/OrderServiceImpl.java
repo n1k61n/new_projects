@@ -84,5 +84,10 @@ public class OrderServiceImpl  implements OrderService {
         }
         return false;
     }
+
+    @Override
+    public long countOrderActive() {
+        return orderRepository.count();
+    }
 }
 

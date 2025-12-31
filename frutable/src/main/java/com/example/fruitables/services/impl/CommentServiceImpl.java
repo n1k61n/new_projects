@@ -46,6 +46,11 @@ public class CommentServiceImpl implements CommentService {
         return false;
     }
 
+    @Override
+    public long countComment() {
+        return commentRepository.count();
+    }
+
 
 }
 

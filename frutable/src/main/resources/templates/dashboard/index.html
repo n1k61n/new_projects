@@ -1,107 +1,138 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:layout="http://www.w3.org/1999/xhtml"
-      layout:decorate="~{dashboard/layout.html}" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{dashboard/layout.html}" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">SB Admin 2</title>
-
-
+    <title>Dashboard - SB Admin 2</title>
 </head>
 
-<body id="page-top">
+<body>
 
-<!-- Page Wrapper -->
-<div id="wrapper">
+<div layout:fragment="content" class="container-fluid">
 
+    <div class="row">
 
-
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
-
-        <!-- Main Content -->
-        <div id="content">
-
-
-
-            <!-- Begin Page Content -->
-            <div layout:fragment="content" class="container-fluid">
-
-
-                <div class="row">
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-primary shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                            Cəmi Qazanc
-                                        </div>
-                                        <div th:text="${'$' + #numbers.formatDecimal(totalRevenue, 1, 'COMMA', 2, 'POINT')}"
-                                             class="h5 mb-0 font-weight-bold text-gray-800">$0.00</div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card bg-custom-blue h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-uppercase mb-1">Cəmi Qazanc</div>
+                            <div class="h4 mb-0 font-weight-bold text-gray-800">$3,203.00</div>
+                            <div class="text-xs mt-2 text-success"><i class="fas fa-arrow-up"></i> +5% bu ay</div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon-shape shadow-sm">
+                                <i class="fas fa-dollar-sign text-primary"></i>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-success shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Sifarişlər</div>
-                                        <div th:text="${totalOrders}" class="h5 mb-0 font-weight-bold text-gray-800">0</div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-shopping-cart fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-info shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Aktiv Kuponlar</div>
-                                        <div th:text="${activeCoupons}" class="h5 mb-0 font-weight-bold text-gray-800">0</div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-ticket-alt fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
-
             </div>
-            <!-- /.container-fluid -->
-
         </div>
-        <!-- End of Main Content -->
 
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card bg-custom-green h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-uppercase mb-1">Sifarişlər</div>
+                            <div class="h4 mb-0 font-weight-bold text-gray-800" th:text="${orderCount}">13</div>
+                            <div class="text-xs mt-2 text-success"><i class="fas fa-plus"></i> Yeni sifariş</div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon-shape shadow-sm">
+                                <i class="fas fa-shopping-cart text-success"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card bg-custom-cyan h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-uppercase mb-1">Aktiv Kuponlar</div>
+                            <div class="h4 mb-0 font-weight-bold text-gray-800">4</div>
+                            <div class="text-xs mt-2 text-info">Hazırda aktiv</div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon-shape shadow-sm">
+                                <i class="fas fa-ticket-alt text-info"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card bg-custom-orange h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-uppercase mb-1">Gözləyən Şərhlər</div>
+                            <div class="h4 mb-0 font-weight-bold text-gray-800" th:text="${pendingComments}">7</div>
+                            <div class="text-xs mt-2 text-danger">Baxış gözləyir</div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon-shape shadow-sm">
+                                <i class="fas fa-comments text-warning"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- End of Content Wrapper -->
+
+    <div class="row">
+        <div class="col-xl-8 col-lg-7">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-white py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Gəlir Analizi (Aylıq)</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-area" style="height: 320px;">
+                        <canvas id="myAreaChart" th:data-earnings="${earningsData}"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-lg-5">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-white py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Məhsul Kateqoriyası</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-pie pt-4 pb-2" style="height: 250px;">
+                        <canvas id="myPieChart" th:data-categories="${categoryData}"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mb-4">
+                <div class="card-body text-center py-4">
+                    <h6 class="font-weight-bold text-primary mb-3">Sürətli Əməliyyatlar</h6>
+                    <a th:href="@{/dashboard/product/create}" class="btn btn-primary btn-circle btn-lg shadow-sm mx-1">
+                        <i class="fas fa-plus"></i>
+                    </a>
+                    <a th:href="@{/dashboard/coupon}" class="btn btn-info btn-circle btn-lg shadow-sm mx-1">
+                        <i class="fas fa-tag"></i>
+                    </a>
+                    <a th:href="@{/dashboard/order?status=PENDING}" class="btn btn-warning btn-circle btn-lg shadow-sm mx-1">
+                        <i class="fas fa-truck text-white"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
-<!-- End of Page Wrapper -->
-
 
 </body>
-
 </html>

@@ -11,5 +11,7 @@ public interface CommentService {
     List<CommentDto> findAll(Sort sort);
 
     boolean deleteComment(Long id);
+
+    long countComment();
 }
 

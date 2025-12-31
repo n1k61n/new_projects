@@ -16,6 +16,8 @@ public interface OrderService {
     boolean updateOrderStatusById(Long orderId , String newStatus);
 
     boolean createUserOrder(String userName, CartSummaryDTO summary);
+
+    long countOrderActive();
 }
 
 
