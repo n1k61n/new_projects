@@ -48,7 +48,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // API və JWT üçün disable edilir
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/dashboard/**").hasRole("ADMIN"); // Bazada ROLE_ADMIN olmalıdır
-                    auth.requestMatchers("/login", "/register", "/logout", "/front/**", "/shop-detail/**", "/").permitAll();
+                    auth.requestMatchers("/front/**", "/*").permitAll();
                     auth.anyRequest().authenticated();
                 })
                 // Əgər həm JWT, həm Form Login varsa, tam Stateless etmək Form Login-i sındıra bilər.
