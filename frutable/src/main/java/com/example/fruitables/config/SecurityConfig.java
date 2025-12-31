@@ -44,7 +44,8 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // API və JWT üçün disable edilir
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/dashboard/**").hasRole("ADMIN"); // Bazada ROLE_ADMIN olmalıdır
-                    auth.requestMatchers( "/front/**", "/*").permitAll();
+                    auth.requestMatchers("/front/**", "/*").permitAll();
+
                     auth.anyRequest().authenticated();
                 })
                 .formLogin(form -> form
