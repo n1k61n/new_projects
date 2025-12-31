@@ -45,4 +45,5 @@ public class UserServiceImpl implements UserService {
         return new RegisterPayload(null, newUser.getEmail(), 200, "Ugurla qeydiyyatdan kecdiniz");
     }
 
+
 }

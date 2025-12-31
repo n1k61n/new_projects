@@ -1,4 +1,5 @@
 package com.example.coffo.models;
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
@@ -33,7 +34,7 @@ public class Order {
     @Column(name="total_price")
     private Double totalPrice;
     @Column(name="order_date")
-    private LocalDateTime orderDate;
+    private Instant orderDate = Instant.now();
 
     @ManyToOne
     private User user;

@@ -1,5 +1,6 @@
 package com.example.fruitables.models;
 
+import com.example.fruitables.enums.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -64,11 +65,10 @@ public class User implements UserDetails {
     private List<Order> orders = new ArrayList<>();
 
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinTable(
-            name = "user_role",
-            joinColumns = @JoinColumn(name = "users", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "roles", referencedColumnName = "id"))
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role_name")
     private Set<Role> roles = new HashSet<>();
 
 
@@ -79,7 +79,7 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles.stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName()))
+                .map(role -> new SimpleGrantedAuthority(role.name()))
                 .toList();
     }
 

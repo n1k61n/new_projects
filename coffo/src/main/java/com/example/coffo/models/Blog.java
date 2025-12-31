@@ -1,5 +1,6 @@
 package com.example.coffo.models;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -29,5 +30,5 @@ public class Blog {
     @Column(name="image_url")
     private String imageUrl;
     @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    private Instant createdAt = Instant.now();
 }

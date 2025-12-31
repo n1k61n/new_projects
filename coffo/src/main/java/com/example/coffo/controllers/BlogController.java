@@ -6,8 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import javax.lang.model.element.ModuleElement;
-
 @Controller
 @RequiredArgsConstructor
 public class BlogController {
