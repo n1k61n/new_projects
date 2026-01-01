@@ -14,7 +14,7 @@ public interface ProductService {
 
     boolean updateProduct(Long id, ProductUpdateDto productUpdateDto);
 
-    boolean removeCategory(Long id);
+    boolean removeProduct(Long id);
 
     List<ProductPinnedDto> getAllProducts();
 

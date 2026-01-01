@@ -45,7 +45,7 @@ public class Product {
     @OneToMany
     private List<OrderItem> orderItems;
 
-    @OneToMany
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments;
 
     @Column(name = "is_pinned", columnDefinition = "boolean default false")

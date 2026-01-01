@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.security.spec.ECField;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,10 +61,8 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
-
-
     @Override
-    public boolean removeCategory(Long id) {
+    public boolean removeProduct(Long id) {
         if(productRepository.existsById(id)){
             productRepository.deleteById(id);
             return true;
@@ -107,8 +104,4 @@ public class ProductServiceImpl implements ProductService {
         }
         return null;
     }
-
-
 }
-
-
