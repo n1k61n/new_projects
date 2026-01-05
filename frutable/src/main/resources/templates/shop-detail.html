@@ -224,7 +224,7 @@
                 <div class="owl-carousel vegetable-carousel justify-content-center">
                     <div th:each="rel : ${relatedProducts}" class="border border-primary rounded position-relative vesitable-item">
                         <div class="vesitable-img">
-                            <a th:href="/shop-detail/{id}(id=${rel.id})">
+                            <a th:href="@{/shop-detail/{id}(id=${rel.id})}">
                                 <img th:src="${rel.imageUrl}" class="img-fluid w-100 rounded-top">
                             </a>
                         </div>
