@@ -49,6 +49,7 @@ public class SecurityConfig {
                 })
                 .formLogin(form -> {
                     form.loginPage("/login");
+                    form.loginProcessingUrl("/login");
                     form.defaultSuccessUrl("/", false);
                     form.failureUrl("/login?error=true");
                     form.usernameParameter("email");

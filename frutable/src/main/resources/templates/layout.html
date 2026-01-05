@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:layout="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.w3.org/1999/xhtml">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
@@ -76,21 +77,21 @@
                     </a>
 
                     <div class="my-auto">
-                        <a href="/login">
+                        <a sec:authorize="isAnonymous()" href="/login">
                             <i class="fas fa-user fa-2x text-primary"></i>
                         </a>
 
-                        <div  class="dropdown">
+                        <div sec:authorize="isAuthenticated()" class="dropdown">
                             <a href="#" class="dropdown-toggle d-flex align-items-center text-dark" data-bs-toggle="dropdown" style="text-decoration: none;">
                                 <i class="fas fa-user fa-2x text-success me-2"></i>
-                                <span class="fw-bold" >İstifadəçi</span>
+                                <span class="fw-bold" sec:authentication="name">İstifadəçi</span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end shadow border-0">
                                 <li><a class="dropdown-item" href="/profile">Profilim</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
-                                    <form href="/logout" method="post" class="m-0">
-                                        <button type="submit" class="dropdown-item text-danger">Çıxış</button>
+                                    <form th:action="@{/logout}" method="post" class="m-0">
+                                        <button type="submit" class="dropdown-item text-danger border-0 bg-transparent">Çıxış</button>
                                     </form>
                                 </li>
                             </ul>
