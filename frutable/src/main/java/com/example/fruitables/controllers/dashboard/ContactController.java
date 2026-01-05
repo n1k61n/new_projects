@@ -20,7 +20,6 @@ public class ContactController {
     private final ContactService contactService;
     private final UserService userService;
 
-
     @GetMapping("/contact")
     public String contact(Model model, Principal principal){
         if(principal != null) {
@@ -32,8 +31,6 @@ public class ContactController {
         }
         return "contact";
     }
-
-
 
     @PostMapping("/contact")
     public String createMessage(@ModelAttribute("contact")ContactDto contactDto, RedirectAttributes redirectAttributes) {

@@ -139,13 +139,13 @@
                                 <div class="row g-4">
                                     <div th:each="product : ${allProducts}" class="col-md-6 col-lg-4 col-xl-3">
                                         <div class="rounded position-relative fruite-item border border-secondary">
-                                            <a th:href="@{/shop-detail/{id}(id=${product.id})}">
+                                            <a href="/shop-detail/{id}(id=${product.id})">
                                                 <div class="fruite-img">
                                                     <img th:src="${product.imageUrl}" class="img-fluid w-100 rounded-top" alt="Product Image">
                                                 </div>
                                             </a>
 
-                                            <a th:href="@{/shop-detail/{id}(id=${product.id})}" class="text-decoration-none">
+                                            <a th:href="/shop-detail/{id}(id=${product.id})" class="text-decoration-none">
                                                 <h4 th:text="${product.name}" class="text-primary">Product Name</h4>
                                             </a>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Organic</div>
@@ -154,7 +154,7 @@
                                                 <p th:text="${product.shortDescription}">Short description</p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
                                                     <p th:text="${'$' + #numbers.formatDecimal(product.price, 1, 2) + ' / kg'}" class="text-dark fs-5 fw-bold mb-0">$0.00</p>
-                                                    <form th:action="@{/basket/add}" method="post">
+                                                    <form th:action="/basket/add" method="post">
                                                         <input type="hidden" name="productId" th:value="${product.id}">
                                                         <input type="hidden" name="quantity" value="1">
 
@@ -187,7 +187,7 @@
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
                                                     <p th:text="${'$' + product.price + ' / kg'}" class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
 
-                                                    <form th:action="@{/basket/add}" method="post">
+                                                    <form th:action="/basket/add" method="post">
                                                         <input type="hidden" name="productId" th:value="${product.id}">
                                                         <input type="hidden" name="quantity" value="1">
 
@@ -266,7 +266,7 @@
             <div class="owl-carousel vegetable-carousel justify-content-center">
                 <div th:each="slider : ${sliderProducts}" class="border border-primary rounded position-relative vesitable-item">
                     <div class="vesitable-img">
-                        <a th:href="@{/shop-detail/{id}(id=${slider.id})}">
+                        <a th:href="/shop-detail/{id}(id=${slider.id})">
                             <img th:src="${slider.imageUrl}" class="img-fluid w-100 rounded-top" alt="">
                         </a>
                     </div>
@@ -276,7 +276,7 @@
                         <p th:text="${slider.shortDescription}" >Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
                         <div class="d-flex justify-content-between flex-lg-wrap">
                             <p th:text="${'$' + #numbers.formatDecimal(slider.price, 1, 2) + ' / kg'}" class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                            <form th:action="@{/basket/add}" method="post">
+                            <form th:action="/basket/add" method="post">
                                 <input type="hidden" name="productId" th:value="${slider.id}">
                                 <input type="hidden" name="quantity" value="1">
                                 <button type="submit" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</button>
@@ -344,12 +344,12 @@
                                     <i class="fas fa-star"></i>
                                 </div>
                                 <h4 class="mb-3">3.12 $</h4>
-<!--                                <form th:action="@{/basket/add}" method="post">-->
-<!--                                    <input type="hidden" name="productId" th:value="${product.id}">-->
-<!--                                    <input type="hidden" name="quantity" value="1">-->
+                                <form th:action="/basket/add" method="post">
+                                    <input type="hidden" name="productId" th:value="${product.id}">
+                                    <input type="hidden" name="quantity" value="1">
                                 <button type="submit" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
                                 </button>
-<!--                                </form>-->
+                                </form>
                             </div>
                         </div>
                     </div>

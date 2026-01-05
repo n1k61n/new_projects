@@ -87,7 +87,7 @@ public class OrderServiceImpl  implements OrderService {
 
     @Override
     public long countOrderActive() {
-        return orderRepository.count();
+        return orderRepository.countActiveOrders();
     }
 }
 

@@ -28,7 +28,6 @@ public class CouponController {
         return "dashboard/coupon/index";
     }
 
-
     @GetMapping("/create")
     public String create(){
         return "dashboard/coupon/create";
@@ -39,7 +38,6 @@ public class CouponController {
         boolean result = couponService.createCoupon(couponCreateDto);
         return "redirect:/dashboard/coupon";
     }
-
 
     @GetMapping("/update/{id}")
     public String update (@PathVariable Long id, Model model){

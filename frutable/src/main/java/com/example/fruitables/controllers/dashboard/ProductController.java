@@ -45,7 +45,6 @@ public class ProductController {
         return "redirect:/dashboard/product";
     }
 
-
     @GetMapping("/update/{id}")
     public String update (@PathVariable Long id, Model model){
         ProductUpdateDto productUpdateDto = productService.getUpdateProduct(id);
@@ -63,7 +62,7 @@ public class ProductController {
 
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable Long id){
-        boolean result = productService.removeCategory(id);
+        boolean result = productService.removeProduct(id);
         return "redirect:/dashboard/category";
     }
 }

@@ -1,7 +1,6 @@
 package com.example.fruitables.controllers.dashboard;
 
 import com.example.fruitables.dtos.comment.CommentDto;
-import com.example.fruitables.dtos.coupon.CouponDto;
 import com.example.fruitables.services.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
@@ -23,7 +22,6 @@ public class CommentController {
                         @RequestParam(defaultValue = "asc") String sortDir,
                         Model model){
 
-        // Sıralama obyektini yaradırıq
         Sort sort = sortDir.equalsIgnoreCase("asc") ?
                 Sort.by(sortField).ascending() :
                 Sort.by(sortField).descending();

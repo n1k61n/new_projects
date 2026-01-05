@@ -31,16 +31,14 @@ public class ShopController {
         ProductDto product = productService.getProductById(id);
         model.addAttribute("product", product);
 
-        // Kateqoriyalar və sayları üçün
+
         List<CategoryDto> categories = categoryService.getAllCategories();
-        categories.forEach(cat -> cat.getProducts().size()); // Bu sətir siyahını zorla yükləyir
+        categories.forEach(cat -> cat.getProducts().size());
         model.addAttribute("categories", categories);
 
-        // Related Products (Eyni kateqoriyadan olan digər məhsullar)
         List<ProductDto> relatedProducts = productService.getRelatedProducts(product.getCategoryId(), id);
         model.addAttribute("relatedProducts", relatedProducts);
 
-        // Login olan istifadəçini tapmaq (Şərh hissəsi üçün)
         if (principal != null) {
             User user = userService.findByEmail(principal.getName());
             model.addAttribute("currentUser", user);

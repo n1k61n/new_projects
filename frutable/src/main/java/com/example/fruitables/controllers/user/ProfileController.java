@@ -35,7 +35,6 @@ public class ProfileController {
     public String updateProfile(@ModelAttribute("userProfile") UserProfileDto userProfileDto,
                                 RedirectAttributes redirectAttributes) {
 
-        // Şifrənin təkrarının yoxlanılması (opsional)
         if (userProfileDto.getPassword() != null && !userProfileDto.getPassword().equals(userProfileDto.getConfirmPassword())) {
             redirectAttributes.addFlashAttribute("errorMessage", "Şifrələr uyğun gəlmir!");
             return "redirect:/profile";

@@ -18,13 +18,9 @@ public class GlobalControllerAdvice {
     @ModelAttribute("adminName")
     public UserNameDto addAdminProfileToModel() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-        // Əgər istifadəçi login olmayıbsa və ya anonimdirsə bazaya getmə
         if (auth == null || !auth.isAuthenticated() || auth.getPrincipal().equals("anonymousUser")) {
             return new UserNameDto();
         }
-
-        // Bu metodun içində bazaya getmək əvəzinə auth.getName() istifadə edə bilərsiniz
         return userService.getCurrentAdmin();
     }
 }

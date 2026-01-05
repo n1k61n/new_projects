@@ -73,7 +73,6 @@ public class AuthController {
 
     @PostMapping("/verify-otp")
     public String verifyOtp(AuthResponseDto authResponseDto) {
-        // Логика проверки OTP
         log.info("Received OTP: {}", authResponseDto.getOtp());
         boolean isVerified = userService.verifyUser(authResponseDto);
         if (isVerified) {
