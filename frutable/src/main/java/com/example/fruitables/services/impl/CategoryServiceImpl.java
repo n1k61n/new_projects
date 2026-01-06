@@ -7,6 +7,7 @@ import com.example.fruitables.repositories.CategoryRepository;
 import com.example.fruitables.services.CategoryService;
 
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -28,20 +29,18 @@ public class CategoryServiceImpl implements CategoryService {
         if (!categories.isEmpty()) {
             return categories.stream()
                     .map(category -> modelMapper.map(category, CategoryDto.class))
-                    .collect(Collectors.toList()); // Stream nəticəsini List-ə çeviririk
+                    .collect(Collectors.toList());
         }
         return List.of();
     }
 
     @Override
+    @Transactional
     public boolean createCategory(CategoryCreateDto categoryCreateDto) {
-        try{
-            Category category =  modelMapper.map(categoryCreateDto, Category.class);
-            categoryRepository.save(category);
-            return true;
-        }catch(Exception e){
-            return false;
-        }
+        Category category = modelMapper.map(categoryCreateDto, Category.class);
+        category.setId(null);
+        categoryRepository.save(category);
+        return true;
     }
 
     @Override

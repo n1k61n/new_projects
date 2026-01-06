@@ -6,6 +6,7 @@ import com.example.fruitables.models.Product;
 import com.example.fruitables.repositories.ProductRepository;
 import com.example.fruitables.services.CategoryService;
 import com.example.fruitables.services.ProductService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -31,13 +32,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public boolean createProduct(ProductCreateDto productCreateDto) {
         try {
             Product product = modelMapper.map(productCreateDto, Product.class);
+            product.setId(null);
             productRepository.save(product);
             return true;
-        }catch (Exception e){
-            return false;
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
         }
     }
 
